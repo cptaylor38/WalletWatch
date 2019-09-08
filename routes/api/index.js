@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const userRoutes = require("./user");
+const userRoutes = require("./userRt");
 const livingRoutes = require("./livingRt");
 const travelRoutes = require("./travelRt");
 const healthRoutes = require("./healthRt");
