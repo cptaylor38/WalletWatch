@@ -8,4 +8,8 @@ router.use(function (req, res) {
     res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
 
+router.get('/profile', (req, res) => {
+    res.send(req.user);
+})
+
 module.exports = router;

@@ -8,7 +8,12 @@ const FACEBOOK = {
     clientSecret: process.env.FACEBOOK_APP_SECRET
 }
 
+const SESSION = {
+    cookieKey: process.env.SESSIONKey
+}
+
 module.exports = {
     GOOGLE,
-    FACEBOOK
+    FACEBOOK,
+    SESSION
 }
