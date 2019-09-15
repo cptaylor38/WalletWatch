@@ -1,2 +1,2 @@
-# WalletWatch
+# Penny
 Expense Tracker
