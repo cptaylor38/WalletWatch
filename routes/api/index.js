@@ -6,6 +6,8 @@ const healthRoutes = require("./healthRt");
 const leisureRoutes = require("./leisureRt");
 const financesRoutes = require("./financesRt");
 
+console.log('index.js of server api routes');
+
 router.use("/user", userRoutes);
 router.use("/living", livingRoutes);
 router.use("/travel", travelRoutes);

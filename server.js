@@ -48,7 +48,6 @@ passport.use(new GoogleStrategy({
     callbackURL: "/auth/google/callback"
 },
     (accessToken, refreshToken, profile, cb) => {
-        console.log(profile);
         User.findOne({ username: profile.displayName }).then(currentUser => {
             if (currentUser) {
                 if (currentUser.googleId !== profile.id) {
@@ -96,10 +95,11 @@ app.get("/user", (req, res) => {
 })
 
 app.get("/auth/logout", (req, res) => {
-    res.redirect("/");
+    req.logout();
+    res.redirect('/');
 })
 
-app.use("/", routes);
+app.use(routes);
 
 if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "client/build")));

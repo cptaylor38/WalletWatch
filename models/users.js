@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
     id: { type: String, unique: true },
+    salary: { type: Number, default: 0 },
     username: { type: String },
     googleId: { type: String },
     facebookId: { type: String },
@@ -35,11 +36,7 @@ const userSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: "Finances"
         }
-    ],
-    income:
-    {
-        type: Number
-    }
+    ]
 })
 
 

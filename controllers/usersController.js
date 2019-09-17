@@ -1,7 +1,9 @@
 const db = require("../models");
 
 module.exports = {
-    create: function (req, res) {
-        db.User.create(req.body, (err, res) => { if (err) throw err; console.log(res) });
+    updateSalary: function (req, res) {
+        console.log('updateSalary of usersController' + req)
+        db.User.findOneAndUpdate({ _id: req.body.id }, { salary: req.body.salary })
+            .then((updatedProfile) => console.log(updatedProfile));
     }
 };

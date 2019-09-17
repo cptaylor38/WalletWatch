@@ -13,7 +13,7 @@ function App() {
         <Route path='/profile' component={Profile} />
       </UserProvider>
 
-      <Route path='/' component={Home} />
+      <Route exact path='/' component={Home} />
 
     </Router>
   );

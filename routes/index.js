@@ -5,11 +5,9 @@ const apiRoutes = require("./api");
 router.use("/api", apiRoutes);
 
 router.use(function (req, res) {
-    res.sendFile(path.join(__dirname, "../client/build/index.html"));
+    console.log('not finding /api');
+    res.sendFile(path.join(__dirname, "../../client/build/index.html"));
 });
 
-router.get('/profile', (req, res) => {
-    res.send(req.user);
-})
 
 module.exports = router;
