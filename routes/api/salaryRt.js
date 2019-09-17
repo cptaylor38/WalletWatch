@@ -1,8 +1,10 @@
 const router = require("express").Router();
 const usersController = require("../../controllers/usersController");
 
+console.log('salaryRt reached');
+
 router
-    .route('/salary')
-    .post(usersController.updateSalary);
+    .route('/update')
+    .put(usersController.updateSalary);
 
 module.exports = router;

@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const userRoutes = require("./userRt");
+const salaryRoutes = require("./salaryRt");
 const livingRoutes = require("./livingRt");
 const travelRoutes = require("./travelRt");
 const healthRoutes = require("./healthRt");
@@ -8,7 +8,7 @@ const financesRoutes = require("./financesRt");
 
 console.log('index.js of server api routes');
 
-router.use("/user", userRoutes);
+router.use("/salary", salaryRoutes);
 router.use("/living", livingRoutes);
 router.use("/travel", travelRoutes);
 router.use("/health", healthRoutes);
