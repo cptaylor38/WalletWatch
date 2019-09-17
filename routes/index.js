@@ -5,7 +5,19 @@ const apiRoutes = require("./api");
 router.use("/api", apiRoutes);
 
 router.use(function (req, res) {
-    console.log('not finding' + req.path);
+    console.log(`
+    Path ${req.path}
+    Header ${req.header}
+    Protocol ${req.protocol}
+    Subdomains ${req.subdomains}
+    Hostname ${req.hostname}
+    Method ${req.method}
+    OriginalUrl ${req.originalUrl}
+    Params ${req.params}
+    Query ${req.query}
+    Body ${req.body}
+    `);
+
     res.sendFile(path.join(__dirname, "../../client/build/index.html"));
 });
 
