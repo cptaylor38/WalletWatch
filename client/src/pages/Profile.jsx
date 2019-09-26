@@ -6,14 +6,15 @@ const Profile = () => {
     const [selected, setSelected] = useState(null);
     const userData = useContext(UserProvider.context);
     useEffect(() => setSelected(userData), [userData]);
-    const [salary, setsalary] = useState(null);
+    const [salary, setSalary] = useState(null);
 
     const onSubmit = event => {
         event.preventDefault();
         API.adjustSalary({
             id: selected._id,
             salary: salary
-        })
+        }).then(res => { setSelected(res.data); window.location.reload() })
+            .catch(err => console.log(err));
 
     }
 
@@ -28,7 +29,7 @@ const Profile = () => {
                 <form onSubmit={onSubmit}>
                     <div className='container'>
                         <label> salary: </label>
-                        <input type="text" className='inputField' onChange={event => setsalary(event.target.value)} name="salary" placeholder="salary" />
+                        <input type="text" className='inputField' onChange={event => setSalary(event.target.value)} name="salary" placeholder="salary" value={salary} />
                     </div>
                     <button className="button-default" type="submit">Submit</button>
                 </form>

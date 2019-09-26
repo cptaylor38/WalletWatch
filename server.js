@@ -73,7 +73,8 @@ app.use(cookieSession({
 app.use(cors());
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.get("/auth/facebook", passport.authenticate("facebook"));
 app.get("/auth/facebook/callback",
@@ -106,7 +107,7 @@ if (process.env.NODE_ENV === "production") {
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/PennyDb");
 
-app.use('/', routes);
+app.use(routes);
 
 app.listen(PORT, function () {
     console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);

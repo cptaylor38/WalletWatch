@@ -5,6 +5,6 @@ console.log('salaryRt reached');
 
 router
     .route('/update')
-    .put(usersController.updateSalary);
+    .post(usersController.updateSalary);
 
 module.exports = router;
