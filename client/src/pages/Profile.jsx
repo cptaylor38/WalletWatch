@@ -1,12 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
 import UserProvider from "../contexts/UserProvider";
 import API from '../clientRoutes/API';
+import Nav from '../components/Nav';
 
 const Profile = () => {
     const [selected, setSelected] = useState(null);
     const userData = useContext(UserProvider.context);
     useEffect(() => setSelected(userData), [userData]);
-    const [salary, setSalary] = useState(null);
+    const [salary, setSalary] = useState('');
 
     const onSubmit = event => {
         event.preventDefault();
@@ -20,6 +21,7 @@ const Profile = () => {
 
     return (
         <>
+            <Nav user={selected} />
             <div className="page">
                 <p>{JSON.stringify(selected)}</p>
                 <p>{selected ? selected._id : ''}</p>
