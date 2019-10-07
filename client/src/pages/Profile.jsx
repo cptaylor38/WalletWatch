@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import UserProvider from "../contexts/UserProvider";
 import API from '../clientRoutes/API';
-import Nav from '../components/Nav';
+import Nav from '../components/Navbar/Nav';
 
 const Profile = () => {
     const [selected, setSelected] = useState(null);

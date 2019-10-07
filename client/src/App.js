@@ -4,6 +4,7 @@ import history from './history';
 import UserProvider from './contexts/UserProvider';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
+import './App.css';
 
 function App() {
   return (
