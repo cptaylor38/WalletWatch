@@ -1,0 +1,23 @@
+.homepage
+{
+    background: blue;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+
+}
+
+.hContent
+{
+    text-align: center;
+}
+
+.hTitle
+{
+    margin: 0;
+    opacity: 0;
+}
