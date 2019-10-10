@@ -1,6 +1,6 @@
 .homepage
 {
-    background: blue;
+    background-color: rgb(12, 183, 235);
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -14,10 +14,40 @@
 .hContent
 {
     text-align: center;
+    width: 100%;
 }
 
-.hTitle
+#hHeader
 {
-    margin: 0;
     opacity: 0;
+    margin: 0;
+    font-size: 44px;
+}
+
+#hPar1
+{
+    opacity: 0;
+    font-size: 24px;
+}
+
+#hPar2
+{
+    opacity: 0;
+    font-size: 24px;
+}
+
+.hButtonRow
+{
+    display: flex;
+    justify-content: space-evenly;
+    flex-flow: row wrap;
+    width: 60%;
+    margin: auto;
+}
+
+.hButton
+{
+    opacity: 0;
+    font-size: 24px;
+    margin: 20px auto;
 }
