@@ -1,14 +1,13 @@
 import React from 'react';
+import { FaFacebook, FaGooglePlusG } from 'react-icons/fa';
+import './SignIn.css';
 
 const SignIn = () => {
     return (
-        <>
-            <h4>Login:</h4>
-            <ul>
-                <li><a href='/auth/facebook'>Login with Facebook</a></li>
-                <li><a href='/auth/google'>Login with Google</a></li>
-            </ul>
-        </>
+        <div className='loginCont'>
+            <a href='/auth/facebook' className='loginBtn' id='facebookBtn'><FaFacebook /></a>
+            <a href='/auth/google' className='loginBtn' id='googleBtn'><FaGooglePlusG /></a>
+        </div>
     )
 }
 
