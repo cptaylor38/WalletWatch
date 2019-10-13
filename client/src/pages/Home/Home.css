@@ -31,6 +31,13 @@
     font-family: 'Roboto Mono', monospace;
 }
 
+#signInTxt
+{
+    font-family: 'Roboto Mono', monospace;
+    font-size: 20px;
+    opacity: 0;
+}
+
 #hHeader
 {
     opacity: 0;

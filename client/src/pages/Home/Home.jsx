@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import './Home.css';
 import SignIn from '../../components/SignIn/SignIn';
-import LearnPage from './Learn/Learn';
-import TweenMax, { Power2 } from 'gsap/TweenMax';
+import { Power2 } from 'gsap/TweenMax';
 import TimelineMax from 'gsap/TimelineMax';
 
 const Home = () => {
@@ -16,6 +15,7 @@ const Home = () => {
         t1.to('#hPar2', 3, { opacity: 1, ease: Power2.easeOut }, 2.5);
         t1.to('.hButton', 5, { opacity: 1, ease: Power2.easeOut }, 3.5);
         t1.to('.loginBtn', 3, { opacity: 1, ease: Power2.easeOut }, 4);
+        t1.to('#signInTxt', 3, { opacity: 1, ease: Power2.easeOut }, 4);
     }, [t1])
 
     return (
@@ -28,10 +28,9 @@ const Home = () => {
                         <p id='hPar2'>I'm here to help you manage your finances.</p>
                     </div>
                 </div>
+                <p id='signInTxt'>Sign In</p>
                 <SignIn id='hSign' />
             </div>
-            <LearnPage />
-
         </>
     )
 }

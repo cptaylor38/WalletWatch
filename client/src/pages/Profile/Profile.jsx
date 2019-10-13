@@ -1,45 +1,27 @@
 import React, { useContext, useState, useEffect } from "react";
 import UserProvider from "../../contexts/UserProvider";
-import API from '../../clientRoutes/API';
-import Nav from '../../components/Navbar/Nav';
+import { Grid, Container, Paper } from '@material-ui/core';
+import SalaryInput from '../../components/SalaryInput/SalaryInput';
+import './Profile.css';
 
 const Profile = () => {
     const [selected, setSelected] = useState(null);
     const userData = useContext(UserProvider.context);
     useEffect(() => setSelected(userData), [userData]);
-    const [salary, setSalary] = useState('');
-
-    const onSubmit = event => {
-        event.preventDefault();
-        API.adjustSalary({
-            id: selected._id,
-            salary: salary
-        }).then(res => { setSelected(res.data); window.location.reload() })
-            .catch(err => console.log(err));
-
-    }
 
     return (
-        <>
-            <Nav user={selected} />
-            <div className="page">
-                <p>{JSON.stringify(selected)}</p>
-                <p>{selected ? selected._id : ''}</p>
-            </div>
-            <div className='salarySection'>
-                <h1>What is your yearly salary?</h1>
-                <form onSubmit={onSubmit}>
-                    <div className='container'>
-                        <label> salary: </label>
-                        <input type="text" className='inputField' onChange={event => setSalary(event.target.value)} name="salary" placeholder="salary" value={salary} />
-                    </div>
-                    <button className="button-default" type="submit">Submit</button>
-                </form>
-            </div>
-            <div className='logoutSection'>
-                <a href='/auth/logout'>Log out</a>
-            </div>
-        </>
+        <Container maxWidth='xl' id='profilePage'>
+            <Grid container xs={12}>
+                <Paper id='profileHeader' xs={12}>
+                    <Grid item xs id='gridWelcome'>
+                        {selected ? (<h2>Welcome, {selected.username}</h2>) : ''}
+                    </Grid>
+                    <Grid item xs id='gridSalary'>
+                        <SalaryInput selected={selected} setSelected={setSelected} />
+                    </Grid>
+                </Paper>
+            </Grid>
+        </Container>
     );
 };
 

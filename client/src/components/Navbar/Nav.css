@@ -1,8 +1,9 @@
-.siteNav
+#siteNav
 {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 100%;    
+    width: 100%; 
+    background: rgba(63, 60, 60, 0.699);   
 }

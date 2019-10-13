@@ -7,9 +7,9 @@ import './Nav.css';
 const Nav = ({ user }) => {
     return (
         <>
-            <AppBar position='static'>
+            <AppBar position='static' id='siteNav'>
                 <Toolbar>
-                    <Typography variant='title' color='inherit'>
+                    <Typography variant='display5' color='inherit'>
                         {user ? <h3>Welcome, {user.username}</h3> : (<h3>Loading profile...</h3>)}
                     </Typography>
                 </Toolbar>

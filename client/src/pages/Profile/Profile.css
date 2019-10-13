@@ -1,0 +1,30 @@
+#profilePage
+{
+    min-width: 100vw;
+    min-height: 100vh;
+    background-image: url('https://img.pngio.com/white-background-photos-and-wallpaper-for-free-download-white-background-png-800_333.png');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+}
+
+#profileHeader
+{
+    min-height: 20vh;
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+#gridWelcome
+{
+    margin: auto;
+    padding: 20px;
+}
+
+#gridSalary
+{
+    margin: auto;
+    padding: 20px;
+}
