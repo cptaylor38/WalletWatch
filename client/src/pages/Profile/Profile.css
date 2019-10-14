@@ -8,15 +8,6 @@
     background-position: center center;
 }
 
-#profileHeader
-{
-    min-height: 20vh;
-    width: 100%;
-    margin-top: 20px;
-    display: flex;
-    flex-flow: row wrap;
-}
-
 #gridWelcome
 {
     margin: auto;
@@ -27,4 +18,22 @@
 {
     margin: auto;
     padding: 20px;
+}
+
+.profHeaderSub
+{
+    min-height: 20vh;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+@media(max-width: 959px)
+{
+    #profileHeader
+    {
+        
+    }
 }
