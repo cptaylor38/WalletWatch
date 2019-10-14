@@ -34,9 +34,8 @@ const SalaryInput = ({ selected, setSelected, setSalarySection }) => {
         if (incomeRate === 'hourly') {
             setSalary(parseFloat(`${hourly}.${cents}`).toFixed(2) * weekly * 4 * 12);
             console.log(salary);
-
         }
-    }, [hourly, weekly, incomeRate])
+    }, [hourly, weekly, incomeRate, cents, salary])
 
     const cancelUpdate = () => {
         setSalarySection(false);
@@ -47,29 +46,25 @@ const SalaryInput = ({ selected, setSelected, setSalarySection }) => {
     }
 
     const handleChange = e => {
-        if (/^[0-9]{1,10}$/.test(e.target.value)) {
-            switch (e.target.name) {
-                case 'salary':
-                    setSalary(e.target.value);
-                    break;
-                case 'hourly':
-                    setHourly(e.target.value);
-                    break;
-                case 'hourlyCents':
-                    if (e.target.value.length < 3) {
-                        setCents(e.target.value);
-                    }
-                    else e.target.value = ''
-                    break;
-                case 'weekly':
-                    setWeekly(e.target.value);
-                    break;
-                default:
-                    break;
-            }
-        }
-        else {
-            e.target.value = '';
+        switch (e.target.name) {
+            case 'salary':
+                setSalary(e.target.value);
+                break;
+            case 'hourly':
+                setHourly(e.target.value);
+                break;
+            case 'hourlyCents':
+                if (e.target.value.length < 3) {
+                    setCents(e.target.value);
+                }
+                else e.target.value = ''
+                break;
+            case 'weekly':
+                setWeekly(e.target.value);
+                break;
+            default:
+                break;
+
         }
     }
 
@@ -79,7 +74,7 @@ const SalaryInput = ({ selected, setSelected, setSalarySection }) => {
                 <form onSubmit={onSubmit} onFocus={clearAlerts}>
                     <div className='container'>
                         <label> Yearly salary: </label>
-                        <input type="text" className='inputField' onChange={e => handleChange(e)} name="salary" placeholder="salary" value={salary} />
+                        <input type="number" className='inputField' onChange={e => handleChange(e)} name="salary" placeholder="salary" value={salary} />
                     </div>
                     <button className="button-default" type="submit">Submit</button>
                 </form>
@@ -90,11 +85,11 @@ const SalaryInput = ({ selected, setSelected, setSalarySection }) => {
                 <form onSubmit={onSubmit} onFocus={clearAlerts}>
                     <div className='container'>
                         <label>Hourly wage:</label>
-                        <input type='text' className='inputField' onChange={e => handleChange(e)} name='hourly' placeholder='hourlyDollar' value={hourly} />
+                        <input type='number' className='inputField' onChange={e => handleChange(e)} name='hourly' placeholder='hourlyDollar' value={hourly} />
                         .
-                        <input type='text' className='inputField' onChange={e => handleChange(e)} name='hourlyCents' placeholder='cents' value={cents} />
+                        <input type='number' className='inputField' onChange={e => handleChange(e)} name='hourlyCents' placeholder='cents' value={cents} />
                         <label>Average weekly hours:</label>
-                        <input type='text' className='inputField' onChange={e => handleChange(e)} name='weekly' placeholder='weekly' value={weekly} />
+                        <input type='number' className='inputField' onChange={e => handleChange(e)} name='weekly' placeholder='weekly' value={weekly} />
                     </div>
                     <button className='button-default' type='submit'>Submit</button>
                 </form>
