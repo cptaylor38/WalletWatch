@@ -32,7 +32,10 @@ const Profile = () => {
                     <Paper className='profHeaderSub'>
                         {selected && !salarySection ? (
                             <>
-                                <p>Current yearly income: {selected.salary.toFixed(2)}</p>
+                                <p>Current yearly income: {selected.salary.toLocaleString("en-US", {
+                                    style: "currency",
+                                    currency: "USD"
+                                })}</p>
                                 <button type='button' onClick={() => showSalaryUpdate()}>Update now</button>
                             </>
                         ) :

@@ -1,0 +1,11 @@
+#salaryContainer
+{
+    text-align: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#salaryGrid
+{
+    width: 100%;
+}

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Container, Paper, Checkbox } from '@material-ui/core';
+import { Grid, Container, Paper, Checkbox, Button, FormControlLabel } from '@material-ui/core';
 import API from '../../clientRoutes/API';
+import SalarySub from './SalarySub/SalarySub';
+import HourlySub from './HourlySub/HourlySub';
 import './SalaryInput.css';
 
 const SalaryInput = ({ selected, setSelected, setSalarySection }) => {
@@ -13,8 +15,9 @@ const SalaryInput = ({ selected, setSelected, setSalarySection }) => {
     const [inputAlert, setInputAlert] = useState('')
 
     const onSubmit = event => {
+        console.log(incomeRate);
         event.preventDefault();
-        if (incomeRate === 'hourly' && !hourly || !weekly || !cents) {
+        if (incomeRate === 'hourly' && !hourly || incomeRate === 'hourly' && !weekly || incomeRate === 'hourly' && !cents) {
             return setInputAlert('Both your hourly rate and weekly hours must be entered.');
         }
         else {
@@ -33,11 +36,14 @@ const SalaryInput = ({ selected, setSelected, setSalarySection }) => {
     useEffect(() => {
         if (incomeRate === 'hourly') {
             setSalary(parseFloat(`${hourly}.${cents}`).toFixed(2) * weekly * 4 * 12);
-            console.log(salary);
+        }
+        else if (incomeRate === 'salaried') {
+            setSalary(parseFloat(`${salary}`));
         }
     }, [hourly, weekly, incomeRate, cents, salary])
 
     const cancelUpdate = () => {
+        setincomeRate(null)
         setSalarySection(false);
     }
 
@@ -64,35 +70,18 @@ const SalaryInput = ({ selected, setSelected, setSalarySection }) => {
                 break;
             default:
                 break;
-
         }
     }
 
     const displayForm = () => {
         if (incomeRate === 'salaried') {
             return (
-                <form onSubmit={onSubmit} onFocus={clearAlerts}>
-                    <div className='container'>
-                        <label> Yearly salary: </label>
-                        <input type="number" className='inputField' onChange={e => handleChange(e)} name="salary" placeholder="salary" value={salary} />
-                    </div>
-                    <button className="button-default" type="submit">Submit</button>
-                </form>
+                <SalarySub handleChange={handleChange} onSubmit={onSubmit} clearAlerts={clearAlerts} salary={salary} />
             )
         }
         if (incomeRate === 'hourly') {
             return (
-                <form onSubmit={onSubmit} onFocus={clearAlerts}>
-                    <div className='container'>
-                        <label>Hourly wage:</label>
-                        <input type='number' className='inputField' onChange={e => handleChange(e)} name='hourly' placeholder='hourlyDollar' value={hourly} />
-                        .
-                        <input type='number' className='inputField' onChange={e => handleChange(e)} name='hourlyCents' placeholder='cents' value={cents} />
-                        <label>Average weekly hours:</label>
-                        <input type='number' className='inputField' onChange={e => handleChange(e)} name='weekly' placeholder='weekly' value={weekly} />
-                    </div>
-                    <button className='button-default' type='submit'>Submit</button>
-                </form>
+                <HourlySub handleChange={handleChange} onSubmit={onSubmit} clearAlerts={clearAlerts} cents={cents} hourly={hourly} weekly={weekly} />
             )
         }
     }
@@ -100,14 +89,27 @@ const SalaryInput = ({ selected, setSelected, setSalarySection }) => {
     return (
         <>
             {inputAlert ? <p>{inputAlert}</p> : null}
-            {salary && hourly && weekly && cents ? <p>{salary.toFixed(2)}</p> : null}
+            {salary && hourly && weekly && cents ? <p>{salary.toLocaleString("en-US", {
+                style: "currency",
+                currency: "USD"
+            })}</p> : null}
             {!incomeRate ? <>
-                <label>Hourly</label>
-                <Checkbox value={'hourly'} className='cbox' onClick={() => rateSubmit('hourly')} />
-                <label>Salaried</label>
-                <Checkbox value={'salaried'} className='cbox' onClick={() => rateSubmit('salaried')} />
+                <FormControlLabel
+                    value={'hourly'}
+                    control={<Checkbox color="primary" />}
+                    label="Hourly"
+                    labelPlacement="start"
+                    onClick={() => rateSubmit('hourly')}
+                />
+                <FormControlLabel
+                    value={'salaried'}
+                    control={<Checkbox color="primary" />}
+                    label="Salaried"
+                    labelPlacement="start"
+                    onClick={() => rateSubmit('salaried')}
+                />
             </> : displayForm()}
-            <button className='button-default' type='button' onClick={() => cancelUpdate()}>Cancel</button>
+            <Button id='salaryBackBtn' onClick={() => cancelUpdate()}>Cancel</Button>
         </>
     )
 }
