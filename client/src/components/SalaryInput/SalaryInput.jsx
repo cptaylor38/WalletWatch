@@ -15,7 +15,6 @@ const SalaryInput = ({ selected, setSelected, setSalarySection }) => {
     const [inputAlert, setInputAlert] = useState('')
 
     const onSubmit = event => {
-        console.log(incomeRate);
         event.preventDefault();
         if (incomeRate === 'hourly' && !hourly || incomeRate === 'hourly' && !weekly || incomeRate === 'hourly' && !cents) {
             return setInputAlert('Both your hourly rate and weekly hours must be entered.');

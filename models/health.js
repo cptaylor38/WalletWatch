@@ -11,7 +11,8 @@ const HealthSchema = new Schema({
         health: { type: Schema.Types.ObjectId, ref: 'User' }
     },
     amount: { type: Number },
-    date: { type: Date, default: Date.now }
+    date: { type: Date, default: Date.now },
+    recurring: { type: Boolean, default: false }
 });
 
 const Health = mongoose.model("Health", HealthSchema);

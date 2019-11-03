@@ -30,6 +30,21 @@
     flex-direction: column;
 }
 
+#welcomeH
+{
+    font-family: 'Roboto Mono', monospace;
+}
+
+#currentSalP
+{
+    font-family: 'Roboto Mono', monospace;
+}
+
+#salaryUpdateBtn
+{
+    font-family: 'Roboto Mono', monospace;
+}
+
 @media(max-width: 959px)
 {
     #profileHeader

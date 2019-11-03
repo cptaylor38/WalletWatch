@@ -12,6 +12,8 @@ const LeisureSchema = new Schema({
     },
     amount: { type: Number },
     date: { type: Date, default: Date.now }
+    ,
+    recurring: { type: Boolean, default: false }
 });
 
 const Leisure = mongoose.model("Leisure", LeisureSchema);

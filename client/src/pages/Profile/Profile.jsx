@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import UserProvider from "../../contexts/UserProvider";
-import { Grid, Container, Paper } from '@material-ui/core';
+import { Grid, Container, Paper, Button } from '@material-ui/core';
 import SalaryInput from '../../components/SalaryInput/SalaryInput';
 import './Profile.css';
 import API from "../../clientRoutes/API";
@@ -8,11 +8,36 @@ import API from "../../clientRoutes/API";
 const Profile = () => {
     const [selected, setSelected] = useState(null);
     const [salarySection, setSalarySection] = useState(false);
+    const [chosenCat, setChosenCat] = useState('Home');
     const userData = useContext(UserProvider.context);
     useEffect(() => setSelected(userData), [userData]);
 
+    const expenseCategories = [{ id: 1, name: 'Home' }, { id: 2, name: 'Travel' }, { id: 2, name: 'Health' }, { id: 3, name: 'Leisure' }, { id: 4, name: 'Living' }, { id: 5, name: 'Finances' }];
+
     const showSalaryUpdate = () => {
         setSalarySection(true);
+    }
+
+    const categoryOnClick = (category) => {
+        setChosenCat(category);
+    }
+
+    const contentDisplay = () => {
+        switch (chosenCat) {
+            case 'Home':
+                return <p>Home</p>
+            case 'Travel':
+                return <p>Travel</p>
+            case 'Health':
+                return <p>Health</p>
+            case 'Leisure':
+                return <p>Leisure</p>
+            case 'Living':
+                return <p>Living</p>
+            case 'Finances':
+                return <p>Finances</p>
+            default: return <p>Home</p>
+        }
     }
 
     return (
@@ -21,9 +46,9 @@ const Profile = () => {
                 <Grid item xs={12} sm={5} lg={4} id='gridWelcome'>
                     <Paper className='profHeaderSub'>
                         {selected ? (<>
-                            <h2>Welcome, {selected.username}</h2>
+                            <h2 id='welcomeH'>Welcome, {selected.username}</h2>
                             <div className='logoutSection'>
-                                <a href='/auth/logout'>Log out</a>
+                                <Button size='medium' variant='contained' href='/auth/logout'>Log out</Button>
                             </div>
                         </>) : ''}
                     </Paper>
@@ -32,14 +57,30 @@ const Profile = () => {
                     <Paper className='profHeaderSub'>
                         {selected && !salarySection ? (
                             <>
-                                <p>Current yearly income: {selected.salary.toLocaleString("en-US", {
+                                <p id='currentSalP'>Current yearly income: {selected.salary.toLocaleString("en-US", {
                                     style: "currency",
                                     currency: "USD"
                                 })}</p>
-                                <button type='button' onClick={() => showSalaryUpdate()}>Update now</button>
+                                <Button id='salaryUpdateBtn' variant='outlined' onClick={() => showSalaryUpdate()}>Update</Button>
                             </>
                         ) :
                             <SalaryInput selected={selected} setSelected={setSelected} setSalarySection={setSalarySection} />}
+                    </Paper>
+                </Grid>
+            </Grid>
+            <Grid container id='expenseCategories'>
+                <Grid item xs={12} id='categoryNav'>
+                    <Paper className='categorySelectRegion'>
+                        {expenseCategories.map(item => <Button href="#text-buttons" onClick={() => categoryOnClick(item.name)} key={item.id} className='categoryBtn'>
+                            {item.name}
+                        </Button>)}
+                    </Paper>
+                </Grid>
+            </Grid>
+            <Grid container id='chosenCatContainer'>
+                <Grid item xs={12}>
+                    <Paper className='chosenCatRegion'>
+                        {contentDisplay()}
                     </Paper>
                 </Grid>
             </Grid>
