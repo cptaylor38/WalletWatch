@@ -45,9 +45,25 @@
     font-family: 'Roboto Mono', monospace;
 }
 
+.categorySelectRegion
+{
+    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+    flex-flow: row wrap;
+}
+
 @media(max-width: 959px)
 {
     #profileHeader
+    {
+        
+    }
+}
+
+@media(max-width: 440px)
+{
+    .categoryBtn
     {
         
     }

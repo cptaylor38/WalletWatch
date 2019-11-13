@@ -2,6 +2,15 @@ const db = require("../models");
 
 module.exports = {
 
+    display: function (req, res) {
+        db.User.findOne({ _id: req.body.id })
+            .populate('finances')
+            .exec((err, profile) => {
+                if (err) throw err;
+                res.json(profile);
+            });
+    },
+
     delete: function (req, res) {
         db.Finances.deleteOne({ _id: req.params.id })
             .then(result => console.log(result))

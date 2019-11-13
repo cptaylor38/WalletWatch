@@ -3,7 +3,7 @@ import UserProvider from "../../contexts/UserProvider";
 import { Grid, Container, Paper, Button } from '@material-ui/core';
 import SalaryInput from '../../components/SalaryInput/SalaryInput';
 import './Profile.css';
-import API from "../../clientRoutes/API";
+import Content from '../../components/Content/Content';
 
 const Profile = () => {
     const [selected, setSelected] = useState(null);
@@ -25,18 +25,18 @@ const Profile = () => {
     const contentDisplay = () => {
         switch (chosenCat) {
             case 'Home':
-                return <p>Home</p>
+                return <Content display={'home'} user={selected._id} />
             case 'Travel':
-                return <p>Travel</p>
+                return <Content display={'travel'} user={selected._id} />
             case 'Health':
-                return <p>Health</p>
+                return <Content display={'health'} user={selected._id} />
             case 'Leisure':
-                return <p>Leisure</p>
+                return <Content display={'leisure'} user={selected._id} />
             case 'Living':
-                return <p>Living</p>
+                return <Content display={'living'} user={selected._id} />
             case 'Finances':
-                return <p>Finances</p>
-            default: return <p>Home</p>
+                return <Content display={'finances'} user={selected._id} />
+            default: return <Content displpay={'home'} user={selected._id} />
         }
     }
 
@@ -80,7 +80,7 @@ const Profile = () => {
             <Grid container id='chosenCatContainer'>
                 <Grid item xs={12}>
                     <Paper className='chosenCatRegion'>
-                        {contentDisplay()}
+                        {selected ? contentDisplay() : <p>Loading</p>}
                     </Paper>
                 </Grid>
             </Grid>
