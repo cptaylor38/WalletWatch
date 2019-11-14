@@ -6,10 +6,9 @@ const Content = ({ display, user }) => {
     const [content, setContent] = useState(null);
 
     useEffect(() => {
-        console.log(display)
-        API.getCategoryData(`/${display}`, { id: user, cateogry: display })
-            .then(response => { setContent(response); console.log(response) });
-    }, []);
+        API.getCategoryData({ id: user, category: display })
+            .then(response => { setContent(response.data); console.log(response.data) });
+    }, [display, user]);
 
     return (
         <p>

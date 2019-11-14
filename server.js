@@ -11,7 +11,6 @@ const cookieSession = require('cookie-session');
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const User = require('./models/users');
 
-
 passport.serializeUser((user, cb) => {
     cb(null, user);
 });
@@ -75,7 +74,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
 app.get("/auth/facebook", passport.authenticate("facebook"));
 app.get("/auth/facebook/callback",
     passport.authenticate("facebook"),

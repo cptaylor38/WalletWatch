@@ -4,6 +4,9 @@ import { Grid, Container, Paper, Button } from '@material-ui/core';
 import SalaryInput from '../../components/SalaryInput/SalaryInput';
 import './Profile.css';
 import Content from '../../components/Content/Content';
+const video = require('../../assets/images/globe.mp4');
+const ogvideo = require('../../assets/images/ogglobe.ogv');
+const webmglobe = require('../../assets/images/webmglobe.webm');
 
 const Profile = () => {
     const [selected, setSelected] = useState(null);
@@ -12,7 +15,7 @@ const Profile = () => {
     const userData = useContext(UserProvider.context);
     useEffect(() => setSelected(userData), [userData]);
 
-    const expenseCategories = [{ id: 1, name: 'Home' }, { id: 2, name: 'Travel' }, { id: 2, name: 'Health' }, { id: 3, name: 'Leisure' }, { id: 4, name: 'Living' }, { id: 5, name: 'Finances' }];
+    const expenseCategories = ['Home', 'Travel', 'Health', 'Living', 'Leisure', 'Finances'];
 
     const showSalaryUpdate = () => {
         setSalarySection(true);
@@ -42,6 +45,13 @@ const Profile = () => {
 
     return (
         <Container maxWidth='xl' id='profilePage'>
+            <div id='backgroundContainer'>
+                <video autoPlay loop muted>
+                    <source src={video} type='video/mp4'></source>
+                    <source src={ogvideo} type='video/ogg'></source>
+                    <source src={webmglobe} type='video/webm'></source>
+                </video>
+            </div>
             <Grid container id='profileHeader'>
                 <Grid item xs={12} sm={5} lg={4} id='gridWelcome'>
                     <Paper className='profHeaderSub'>
@@ -71,8 +81,8 @@ const Profile = () => {
             <Grid container id='expenseCategories'>
                 <Grid item xs={12} id='categoryNav'>
                     <Paper className='categorySelectRegion'>
-                        {expenseCategories.map(item => <Button href="#text-buttons" onClick={() => categoryOnClick(item.name)} key={item.id} className='categoryBtn'>
-                            {item.name}
+                        {expenseCategories.map((item, index) => <Button href="#text-buttons" onClick={() => categoryOnClick(item)} key={index} className='categoryBtn'>
+                            {item}
                         </Button>)}
                     </Paper>
                 </Grid>

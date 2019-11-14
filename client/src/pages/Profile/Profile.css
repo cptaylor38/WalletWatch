@@ -2,10 +2,14 @@
 {
     min-width: 100vw;
     min-height: 100vh;
-    background-image: url('https://img.pngio.com/white-background-photos-and-wallpaper-for-free-download-white-background-png-800_333.png');
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center center;
+}
+
+#backgroundContainer
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
 }
 
 #gridWelcome
