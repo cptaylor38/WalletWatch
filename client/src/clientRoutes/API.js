@@ -8,5 +8,10 @@ export default {
     getCategoryData: data => {
         let id = data.id;
         return axios.get(`/api/expense/${id}/${data.category}`);
+    },
+
+    getHomeDisplay: data => {
+        let id = data.id;
+        return axios.get(`/api/home/${id}`);
     }
 };

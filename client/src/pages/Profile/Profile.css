@@ -84,8 +84,9 @@
 
 #homePaper
 {
-    text-align: center;
-    margin-bottom: 20px;
+    width: 100%;
+    margin: auto;
+    background: rgba(46, 45, 45, 0.897);
 }
 
 #homeBtn
@@ -94,12 +95,14 @@
     padding-right: 40px;
     padding-left: 40px;
     line-height: .5;
+    margin: auto;
+    color: white;
 }
 
 #homeBtn:hover
 {
-    background: black !important;
-    color: white !important;
+    background: white !important;
+    color: black !important;
 }
 
 #addExpenseSection
@@ -132,11 +135,9 @@
     text-align: center;
 }
 
-#expenseInputPaper
+#expenseInputSection
 {
-    text-align: center;
-    display: none;
-    border: 1px solid darkslategrey;
+    padding: 30px;
 }
 
 @media(max-width: 959px)

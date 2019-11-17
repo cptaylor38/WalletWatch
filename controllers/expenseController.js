@@ -16,11 +16,19 @@ module.exports = {
 
 
     create: function (req, res) {
-        const livingExpense = { title: req.body.title, body: req.body.body };
-        db.Living
-            .create(livingExpense)
-            .then(function (dbLiving) {
-                return db.User.findOneAndUpdate({ _id: req.body.id }, { $push: { living: dbLiving } }, { new: true });
+        const Expense =
+        {
+            category: req.body.category,
+            details: req.body.note,
+            amount: req.body.amount,
+            date: req.body.date,
+            recurring: req.body.recurring
+        };
+
+        db.Expense
+            .create(Expense)
+            .then(function (dbExpense) {
+                return db.User.findOneAndUpdate({ _id: req.body.id }, { $push: { expense: dbExpense } }, { new: true });
             })
             .then(function (dbUser) {
                 res.json(dbUser);

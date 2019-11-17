@@ -3,6 +3,7 @@ import UserProvider from "../../contexts/UserProvider";
 import { Grid, Container, Paper, Button } from '@material-ui/core';
 import { FaHome, FaMoneyBill, FaRegLightbulb, FaHeartbeat, FaGamepad, FaCarSide, FaFolderPlus } from 'react-icons/fa';
 import SalaryInput from '../../components/SalaryInput/SalaryInput';
+import ExpenseForm from '../../components/ExpenseForm/ExpenseForm';
 import './Profile.css';
 import Content from '../../components/Content/Content';
 const video = require('../../assets/images/globe.mp4');
@@ -94,20 +95,6 @@ const Profile = () => {
                     </Paper>
                 </Grid>
             </Grid>
-            <Grid container id='addCont'>
-                <Grid item xs={12} id='addItem'>
-                    <Paper id='addPaper'>
-                        <Grid item xs={12} id='addExpenseSection'>
-                            <Button id='toggleExpenseBtn' onClick={() => document.querySelector('#expenseInputPaper').style.display = 'flex'}><p style={{ marginRight: 10 }}>Add Expense</p> <FaFolderPlus style={{ fontSize: 24 }} /> </Button>
-                        </Grid>
-                    </Paper>
-                    <Paper id='expenseInputPaper'>
-                        <Grid item xs={12} id='expenseInputSection'>
-                            input stuff here
-                        </Grid>
-                    </Paper>
-                </Grid>
-            </Grid>
             <Grid container id='expenseCategories'>
                 <Grid item xs={12} id='categoryNav'>
                     <Paper className='categorySelectRegion'>
@@ -123,6 +110,20 @@ const Profile = () => {
                                 </Button>
                             )
                         })}
+                    </Paper>
+                </Grid>
+            </Grid>
+            <Grid container id='addCont'>
+                <Grid item xs={12} id='addItem'>
+                    <Paper id='addPaper'>
+                        <Grid item xs={12} id='addExpenseSection'>
+                            <Button id='toggleExpenseBtn' onClick={() => document.querySelector('#expenseInputPaper').style.display = 'flex'}><p style={{ marginRight: 10 }}>Add Expense</p> <FaFolderPlus style={{ fontSize: 24 }} /> </Button>
+                        </Grid>
+                    </Paper>
+                    <Paper id='expenseInputPaper'>
+                        <Grid item xs={12} id='expenseInputSection'>
+                            {selected ? <ExpenseForm user={selected._id} /> : null}
+                        </Grid>
                     </Paper>
                 </Grid>
             </Grid>
