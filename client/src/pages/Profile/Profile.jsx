@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import UserProvider from "../../contexts/UserProvider";
 import { Grid, Container, Paper, Button } from '@material-ui/core';
+import { FaHome, FaMoneyBill, FaRegLightbulb, FaHeartbeat, FaGamepad, FaCarSide, FaFolderPlus } from 'react-icons/fa';
 import SalaryInput from '../../components/SalaryInput/SalaryInput';
 import './Profile.css';
 import Content from '../../components/Content/Content';
@@ -15,7 +16,13 @@ const Profile = () => {
     const userData = useContext(UserProvider.context);
     useEffect(() => setSelected(userData), [userData]);
 
-    const expenseCategories = ['Home', 'Travel', 'Health', 'Living', 'Leisure', 'Finances'];
+    const expenseCategories = [
+        { style: { color: '#5A4218' }, name: 'Finances', icon: <FaMoneyBill /> },
+        { style: { color: 'green' }, name: 'Living', icon: <FaRegLightbulb /> },
+        { style: { color: 'red' }, name: 'Health', icon: <FaHeartbeat /> },
+        { style: { color: 'gold' }, name: 'Leisure', icon: <FaGamepad /> },
+        { style: { color: 'aquamarine' }, name: 'Travel', icon: <FaCarSide /> }
+    ];
 
     const showSalaryUpdate = () => {
         setSalarySection(true);
@@ -46,7 +53,7 @@ const Profile = () => {
     return (
         <Container maxWidth='xl' id='profilePage'>
             <div id='backgroundContainer'>
-                <video autoPlay loop muted>
+                <video autoPlay loop muted id='backgroundVid'>
                     <source src={video} type='video/mp4'></source>
                     <source src={ogvideo} type='video/ogg'></source>
                     <source src={webmglobe} type='video/webm'></source>
@@ -78,12 +85,44 @@ const Profile = () => {
                     </Paper>
                 </Grid>
             </Grid>
+            <Grid container id='homeCont'>
+                <Grid item xs={12} id='homeItem'>
+                    <Paper id='homePaper'>
+                        <Grid item xs={12} id='homeBtnSection'>
+                            <Button id='homeBtn' onClick={() => setChosenCat('Home')}><FaHome style={{ fontSize: '36px' }} /><p>Home</p></Button>
+                        </Grid>
+                    </Paper>
+                </Grid>
+            </Grid>
+            <Grid container id='addCont'>
+                <Grid item xs={12} id='addItem'>
+                    <Paper id='addPaper'>
+                        <Grid item xs={12} id='addExpenseSection'>
+                            <Button id='toggleExpenseBtn' onClick={() => document.querySelector('#expenseInputPaper').style.display = 'flex'}><p style={{ marginRight: 10 }}>Add Expense</p> <FaFolderPlus style={{ fontSize: 24 }} /> </Button>
+                        </Grid>
+                    </Paper>
+                    <Paper id='expenseInputPaper'>
+                        <Grid item xs={12} id='expenseInputSection'>
+                            input stuff here
+                        </Grid>
+                    </Paper>
+                </Grid>
+            </Grid>
             <Grid container id='expenseCategories'>
                 <Grid item xs={12} id='categoryNav'>
                     <Paper className='categorySelectRegion'>
-                        {expenseCategories.map((item, index) => <Button href="#text-buttons" onClick={() => categoryOnClick(item)} key={index} className='categoryBtn'>
-                            {item}
-                        </Button>)}
+                        {expenseCategories.map((item, index) => {
+                            return (
+                                <Button href="#text-buttons"
+                                    style={item.style}
+                                    onClick={() => categoryOnClick(item.name)}
+                                    key={index}
+                                    className='categoryBtn'>
+                                    <p className='catIcon'>{item.icon}</p>
+                                    <p>{item.name}</p>
+                                </Button>
+                            )
+                        })}
                     </Paper>
                 </Grid>
             </Grid>

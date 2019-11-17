@@ -55,6 +55,88 @@
     display: flex;
     justify-content: space-evenly;
     flex-flow: row wrap;
+    background-color: darkgray !important;
+}
+
+.categoryBtn
+{
+    font-weight: bold !important;
+}
+
+.catIcon
+{
+    font-size: 30px;
+    margin: 0 10px 0 0;
+}
+
+.categoryBtn:hover
+{
+    background-color: black !important;
+    color: white !important;
+    font-weight: bolder !important;
+}
+
+#homeItem
+{
+    display: flex;
+    justify-content: center;
+}
+
+#homePaper
+{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#homeBtn
+{
+    display: block;
+    padding-right: 40px;
+    padding-left: 40px;
+    line-height: .5;
+}
+
+#homeBtn:hover
+{
+    background: black !important;
+    color: white !important;
+}
+
+#addExpenseSection
+{
+    background-color: lightgrey;
+}
+
+#toggleExpenseBtn
+{
+    color: darkslategray;
+    font-weight: bold;
+}
+
+#toggleExpenseBtn:hover
+{
+    background: darkslategray !important;
+    color: white;
+    font-weight: bolder;
+}
+
+#addItem
+{
+    margin-bottom: 10px;
+    flex-direction: column;
+}
+
+#addPaper
+{
+    display: flex;
+    text-align: center;
+}
+
+#expenseInputPaper
+{
+    text-align: center;
+    display: none;
+    border: 1px solid darkslategrey;
 }
 
 @media(max-width: 959px)

@@ -7,34 +7,10 @@ const userSchema = new Schema({
     username: { type: String },
     googleId: { type: String },
     facebookId: { type: String },
-    living: [
+    expense: [
         {
             type: Schema.Types.ObjectId,
-            ref: "Living"
-        }
-    ],
-    travel: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: "Travel"
-        }
-    ],
-    health: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: "Health"
-        }
-    ],
-    leisure: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: "Leisure"
-        }
-    ],
-    finances: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: "Finances"
+            ref: "Expense"
         }
     ]
 })

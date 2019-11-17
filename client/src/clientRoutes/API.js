@@ -7,6 +7,6 @@ export default {
 
     getCategoryData: data => {
         let id = data.id;
-        return axios.get(`/api/${data.category}/${id}`);
+        return axios.get(`/api/expense/${id}/${data.category}`);
     }
 };
