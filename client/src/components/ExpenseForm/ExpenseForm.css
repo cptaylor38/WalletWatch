@@ -1,4 +1,17 @@
-#recurringGrid
+#expenseGrid
+{
+    display: flex;
+    justify-content: space-evenly;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+#expenseGrid > .MuiGrid-item
+{
+    padding: 20px;
+}
+
+#monthlyGrid
 {
     display: flex;
     flex-direction: column;

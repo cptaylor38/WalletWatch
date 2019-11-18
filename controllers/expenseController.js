@@ -19,10 +19,10 @@ module.exports = {
         const Expense =
         {
             category: req.body.category,
-            details: req.body.note,
-            amount: req.body.amount,
+            monthly: req.body.monthly,
             date: req.body.date,
-            recurring: req.body.recurring
+            amount: req.body.amount,
+            title: req.body.title
         };
 
         db.Expense

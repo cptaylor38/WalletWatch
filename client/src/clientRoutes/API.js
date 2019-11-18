@@ -13,5 +13,9 @@ export default {
     getHomeDisplay: data => {
         let id = data.id;
         return axios.get(`/api/home/${id}`);
+    },
+
+    createExpense: data => {
+        return axios.post('/api/expense/create', data);
     }
 };

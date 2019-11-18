@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FormControl, InputLabel, Select, MenuItem, FormHelperText, FormControlLabel, Grid, FormLabel, RadioGroup, Radio, TextField } from '@material-ui/core';
+import { FormControl, InputLabel, Select, MenuItem, FormHelperText, FormControlLabel, Grid, FormLabel, RadioGroup, Radio, TextField, Button } from '@material-ui/core';
 import DateFnsUtils from '@date-io/date-fns';
 import {
     MuiPickersUtilsProvider,
@@ -9,27 +9,27 @@ import NumberFormatCustom from './NumberFormatCustom';
 import './ExpenseForm.css';
 
 const ExpenseForm = ({ user }) => {
-    const [category, setCategory] = useState('Finances');
-    const [radioValue, setRadioValue] = useState('No');
-    const [recurring, setRecurring] = useState(false);
+    const [category, setCategory] = useState('');
+    const [radioValue, setRadioValue] = useState('');
+    const [monthly, setMonthly] = useState(false);
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [amount, setAmount] = useState('');
+    const [title, setTitle] = useState('');
 
     const categoryChange = e => {
         setCategory(e.target.value);
     }
 
-    const recurringHandler = e => {
+    const monthlyHandler = e => {
         setRadioValue(e.target.value);
         switch (e.target.value) {
             case 'Yes':
-                setRecurring(true);
+                setMonthly(true);
                 break;
             case 'No':
-                setRecurring(false);
+                setMonthly(false);
                 break;
         }
-        console.log(recurring);
     }
 
     const handleDateChange = date => {
@@ -40,8 +40,33 @@ const ExpenseForm = ({ user }) => {
         setAmount(e.target.value);
     }
 
+    const handleTitle = e => {
+        setTitle(e.target.value);
+    }
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        if (category !== '' && radioValue !== '' && amount !== '' && title !== '') {
+            console.log(`
+            category: ${category}
+            radioValue/Monthly: ${radioValue} ${monthly}
+            amount: ${amount}
+            title: ${title}
+            `);
+        }
+        else {
+            console.log(`
+            submit conditional failed
+            category: ${category}
+            radioValue/Monthly: ${radioValue}
+            amount: ${amount}
+            title: ${title}
+            `)
+        }
+    }
+
     return (
-        <Grid container>
+        <Grid container id='expenseGrid'>
             <Grid item id='categoryGrid'>
                 <FormControl>
                     <InputLabel id="demo-simple-select-helper-label">Category</InputLabel>
@@ -59,10 +84,10 @@ const ExpenseForm = ({ user }) => {
                     <FormHelperText>How you want to categorize this expense.</FormHelperText>
                 </FormControl>
             </Grid>
-            <Grid item id='recurringGrid'>
+            <Grid item id='monthlyGrid'>
                 <FormControl component="fieldset" >
-                    <FormLabel component="legend">Is this a recurring payment?</FormLabel>
-                    <RadioGroup aria-label="recurring" name="recurring" value={radioValue} onChange={recurringHandler}>
+                    <FormLabel component="legend">Is this a monthly charge?</FormLabel>
+                    <RadioGroup aria-label="monthly" name="monthly" value={radioValue} onChange={monthlyHandler}>
                         <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
                         <FormControlLabel value="No" control={<Radio />} label="No" />
                     </RadioGroup>
@@ -91,13 +116,28 @@ const ExpenseForm = ({ user }) => {
                     <TextField
                         label="Amount"
                         value={amount}
-                        onChange={(e) => handleAmount(e)}
+                        onChange={handleAmount}
                         id="formatted-numberformat-input"
                         InputProps={{
                             inputComponent: NumberFormatCustom
                         }}
                     />
                 </FormControl>
+            </Grid>
+            <Grid item id='titleGrid'>
+                <TextField
+                    id="outlined-multiline-flexible"
+                    label="Expense Title"
+                    multiline
+                    rowsMax="4"
+                    value={title}
+                    onChange={handleTitle}
+                    margin="normal"
+                    variant="outlined"
+                />
+            </Grid>
+            <Grid item id='submitGrid'>
+                <Button variant="contained" color="primary" type='submit' onClick={handleSubmit}>Submit</Button>
             </Grid>
         </Grid>
     )
