@@ -15,6 +15,7 @@ const Profile = () => {
     const [salarySection, setSalarySection] = useState(false);
     const [chosenCat, setChosenCat] = useState('Home');
     const userData = useContext(UserProvider.context);
+    const [expenseToggle, setExpenseToggle] = useState(false);
     useEffect(() => setSelected(userData), [userData]);
 
     const expenseCategories = [
@@ -32,6 +33,20 @@ const Profile = () => {
     const categoryOnClick = (category) => {
         setChosenCat(category);
     }
+
+    const expenseInputToggle = () => {
+        setExpenseToggle(!expenseToggle);
+    }
+
+    useEffect(() => {
+        let expenseDiv = document.querySelector('#expenseInputPaper');
+        if (expenseToggle === false) {
+            expenseDiv.style.display = 'none'
+        }
+        if (expenseToggle === true) {
+            expenseDiv.style.display = 'flex'
+        }
+    }, [expenseToggle])
 
     const contentDisplay = () => {
         switch (chosenCat) {
@@ -117,7 +132,7 @@ const Profile = () => {
                 <Grid item xs={12} id='addItem'>
                     <Paper id='addPaper'>
                         <Grid item xs={12} id='addExpenseSection'>
-                            <Button id='toggleExpenseBtn' onClick={() => document.querySelector('#expenseInputPaper').style.display = 'flex'}><p style={{ marginRight: 10 }}>Add Expense</p> <FaFolderPlus style={{ fontSize: 24 }} /> </Button>
+                            <Button id='toggleExpenseBtn' onClick={expenseInputToggle}><p style={{ marginRight: 10 }}>Add Expense</p> <FaFolderPlus style={{ fontSize: 24 }} /> </Button>
                         </Grid>
                     </Paper>
                     <Paper id='expenseInputPaper'>

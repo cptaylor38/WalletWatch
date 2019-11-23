@@ -17,10 +17,12 @@ const ExpenseForm = ({ user }) => {
     const [title, setTitle] = useState('');
 
     const categoryChange = e => {
+        document.querySelector('#categoryGrid').style.border = 'none';
         setCategory(e.target.value);
     }
 
     const monthlyHandler = e => {
+        document.querySelector('#monthlyGrid').style.border = 'none';
         setRadioValue(e.target.value);
         switch (e.target.value) {
             case 'Yes':
@@ -37,31 +39,40 @@ const ExpenseForm = ({ user }) => {
     }
 
     const handleAmount = e => {
+        document.querySelector('#amountGrid').style.border = 'none';
         setAmount(e.target.value);
     }
 
     const handleTitle = e => {
+        document.querySelector('#titleGrid').style.border = 'none';
         setTitle(e.target.value);
     }
 
     const handleSubmit = e => {
         e.preventDefault();
         if (category !== '' && radioValue !== '' && amount !== '' && title !== '') {
+            document.querySelector('#expenseInputPaper').style.display = 'none';
             console.log(`
             category: ${category}
             radioValue/Monthly: ${radioValue} ${monthly}
             amount: ${amount}
             title: ${title}
+            date: ${selectedDate}
             `);
         }
         else {
-            console.log(`
-            submit conditional failed
-            category: ${category}
-            radioValue/Monthly: ${radioValue}
-            amount: ${amount}
-            title: ${title}
-            `)
+            if (category === '') {
+                document.querySelector('#categoryGrid').style.border = '3px solid red';
+            }
+            if (radioValue === '') {
+                document.querySelector('#monthlyGrid').style.border = '3px solid red';
+            }
+            if (amount === '') {
+                document.querySelector('#amountGrid').style.border = '3px solid red';
+            }
+            if (title === '') {
+                document.querySelector('#titleGrid').style.border = '3px solid red';
+            }
         }
     }
 
