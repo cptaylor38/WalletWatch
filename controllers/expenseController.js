@@ -3,9 +3,11 @@ const db = require("../models");
 module.exports = {
 
     display: function (req, res) {
-        console.log('expense controller reached');
-        db.User.findOne({ _id: req.params.id })
-            .then(result => console.log(result));
+        let userId = req.params.id;
+        let category = req.params.category;
+        db.User.findOne({ _id: userId }, { "Expense": category })
+            .populate('expense')
+            .then(data => res.json(data));
     },
 
     delete: function (req, res) {

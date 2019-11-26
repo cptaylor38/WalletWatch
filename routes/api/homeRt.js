@@ -3,11 +3,7 @@ const db = require('../../models');
 
 router.route('/:id').get((req, res) => {
     db.User.findOne({ _id: req.params.id })
-        .populate('finances')
-        .populate('health')
-        .populate('leisure')
-        .populate('living')
-        .populate('travel')
+        .populate('expense')
         .exec((err, profile) => {
             if (err) throw err;
             console.log(profile);

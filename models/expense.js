@@ -12,7 +12,13 @@ const ExpenseSchema = new Schema({
     title: {
         type: String,
         expense: { type: Schema.Types.ObjectId, ref: 'User' }
-    }
+    },
+    paid: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Paid"
+        }
+    ]
 });
 
 const Expense = mongoose.model("Expense", ExpenseSchema);

@@ -7,6 +7,7 @@ import {
 } from '@material-ui/pickers';
 import NumberFormatCustom from './NumberFormatCustom';
 import './ExpenseForm.css';
+import API from '../../clientRoutes/API';
 
 const ExpenseForm = ({ user }) => {
     const [category, setCategory] = useState('');
@@ -51,14 +52,19 @@ const ExpenseForm = ({ user }) => {
     const handleSubmit = e => {
         e.preventDefault();
         if (category !== '' && radioValue !== '' && amount !== '' && title !== '') {
-            document.querySelector('#expenseInputPaper').style.display = 'none';
-            console.log(`
-            category: ${category}
-            radioValue/Monthly: ${radioValue} ${monthly}
-            amount: ${amount}
-            title: ${title}
-            date: ${selectedDate}
-            `);
+            let dataObject = {
+                id: user,
+                category: category,
+                monthly: monthly,
+                date: selectedDate,
+                amount: amount,
+                title: title
+            }
+            API.createExpense(dataObject)
+                .then(res => {
+                    console.log(res);
+                    document.querySelector('#expenseInputPaper').style.display = 'none';
+                });
         }
         else {
             if (category === '') {
