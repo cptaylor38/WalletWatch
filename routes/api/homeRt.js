@@ -6,7 +6,6 @@ router.route('/:id').get((req, res) => {
         .populate('expense')
         .exec((err, profile) => {
             if (err) throw err;
-            console.log(profile);
             res.json(profile);
         })
 })

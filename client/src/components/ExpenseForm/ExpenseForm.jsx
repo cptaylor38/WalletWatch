@@ -92,11 +92,11 @@ const ExpenseForm = ({ user }) => {
                         value={category}
                         onChange={categoryChange}
                     >
-                        <MenuItem value="Finances"><em>Finances</em></MenuItem>
-                        <MenuItem value="Living"><em>Living</em></MenuItem>
-                        <MenuItem value="Health"><em>Health</em></MenuItem>
-                        <MenuItem value="Leisure"><em>Leisure</em></MenuItem>
-                        <MenuItem value="Travel"><em>Travel</em></MenuItem>
+                        <MenuItem value="finances"><em>Finances</em></MenuItem>
+                        <MenuItem value="living"><em>Living</em></MenuItem>
+                        <MenuItem value="health"><em>Health</em></MenuItem>
+                        <MenuItem value="leisure"><em>Leisure</em></MenuItem>
+                        <MenuItem value="travel"><em>Travel</em></MenuItem>
                     </Select>
                     <FormHelperText>How you want to categorize this expense.</FormHelperText>
                 </FormControl>
