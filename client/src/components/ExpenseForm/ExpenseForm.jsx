@@ -62,7 +62,6 @@ const ExpenseForm = ({ user }) => {
             }
             API.createExpense(dataObject)
                 .then(res => {
-                    console.log(res);
                     document.querySelector('#expenseInputPaper').style.display = 'none';
                 });
         }

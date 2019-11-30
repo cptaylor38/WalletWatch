@@ -1,0 +1,10 @@
+#contentContainer
+{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.contentChargesPaper
+{
+    text-align: center;
+}

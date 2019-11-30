@@ -5,7 +5,6 @@ module.exports = {
     display: function (req, res) {
         let userId = req.params.id;
         let category = req.params.category;
-        console.log(category);
         db.User.findOne({ _id: userId })
             .populate('expense')
             .then(data => {

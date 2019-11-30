@@ -3,7 +3,6 @@ import NumberFormat from 'react-number-format';
 
 function NumberFormatCustom(props) {
     const { inputRef, onChange, ...other } = props;
-
     return (
         <NumberFormat
             {...other}

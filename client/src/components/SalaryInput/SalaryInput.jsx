@@ -10,13 +10,12 @@ const SalaryInput = ({ selected, setSelected, setSalarySection }) => {
     const [salary, setSalary] = useState('');
     const [incomeRate, setincomeRate] = useState(null);
     const [hourly, setHourly] = useState('');
-    const [cents, setCents] = useState('');
     const [weekly, setWeekly] = useState('');
     const [inputAlert, setInputAlert] = useState('')
 
     const onSubmit = event => {
         event.preventDefault();
-        if (incomeRate === 'hourly' && !hourly || incomeRate === 'hourly' && !weekly || incomeRate === 'hourly' && !cents) {
+        if (incomeRate === 'hourly' && !hourly || incomeRate === 'hourly' && !weekly) {
             return setInputAlert('Both your hourly rate and weekly hours must be entered.');
         }
         else {
@@ -32,15 +31,6 @@ const SalaryInput = ({ selected, setSelected, setSalarySection }) => {
         setInputAlert(null);
     }
 
-    useEffect(() => {
-        if (incomeRate === 'hourly') {
-            setSalary(parseFloat(`${hourly}.${cents}`).toFixed(2) * weekly * 4 * 12);
-        }
-        else if (incomeRate === 'salaried') {
-            setSalary(parseFloat(`${salary}`));
-        }
-    }, [hourly, weekly, incomeRate, cents, salary])
-
     const cancelUpdate = () => {
         setincomeRate(null)
         setSalarySection(false);
@@ -50,37 +40,31 @@ const SalaryInput = ({ selected, setSelected, setSalarySection }) => {
         setincomeRate(rate)
     }
 
-    const handleChange = e => {
-        switch (e.target.name) {
-            case 'salary':
-                setSalary(e.target.value);
-                break;
-            case 'hourly':
-                setHourly(e.target.value);
-                break;
-            case 'hourlyCents':
-                if (e.target.value.length < 3) {
-                    setCents(e.target.value);
-                }
-                else e.target.value = ''
-                break;
-            case 'weekly':
-                setWeekly(e.target.value);
-                break;
-            default:
-                break;
-        }
+    useEffect(() => {
+        setSalary(hourly * weekly * 4 * 12);
+    }, [hourly, weekly])
+
+    const handleHourly = (e) => {
+        setHourly(e.target.value);
+    }
+
+    const handleWeekly = (e) => {
+        setWeekly(e.target.value);
+    }
+
+    const handleSalary = (e) => {
+        setSalary(e.target.value);
     }
 
     const displayForm = () => {
         if (incomeRate === 'salaried') {
             return (
-                <SalarySub handleChange={handleChange} onSubmit={onSubmit} clearAlerts={clearAlerts} salary={salary} />
+                <SalarySub handleChange={handleSalary} onSubmit={onSubmit} clearAlerts={clearAlerts} salary={salary} />
             )
         }
         if (incomeRate === 'hourly') {
             return (
-                <HourlySub handleChange={handleChange} onSubmit={onSubmit} clearAlerts={clearAlerts} cents={cents} hourly={hourly} weekly={weekly} />
+                <HourlySub handleHourly={handleHourly} handleWeekly={handleWeekly} onSubmit={onSubmit} clearAlerts={clearAlerts} hourly={hourly} weekly={weekly} />
             )
         }
     }
@@ -88,7 +72,7 @@ const SalaryInput = ({ selected, setSelected, setSalarySection }) => {
     return (
         <>
             {inputAlert ? <p>{inputAlert}</p> : null}
-            {salary && hourly && weekly && cents ? <p>{salary.toLocaleString("en-US", {
+            {salary && hourly && weekly ? <p>{salary.toLocaleString("en-US", {
                 style: "currency",
                 currency: "USD"
             })}</p> : null}

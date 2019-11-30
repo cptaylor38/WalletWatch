@@ -143,10 +143,8 @@ const Profile = () => {
                 </Grid>
             </Grid>
             <Grid container id='chosenCatContainer'>
-                <Grid item xs={12}>
-                    <Paper className='chosenCatRegion'>
-                        {selected ? contentDisplay() : <p>Loading</p>}
-                    </Paper>
+                <Grid item xs={12} className='chosenCatRegion'>
+                    {selected ? contentDisplay() : <p>Loading</p>}
                 </Grid>
             </Grid>
         </Container >
