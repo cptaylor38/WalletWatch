@@ -8,6 +8,7 @@ const Content = ({ display, user }) => {
     const [content, setContent] = useState(null);
     const [monthlyCharges, setMonthlyCharges] = useState(null);
     const [oneTime, setOneTime] = useState(null);
+    const [retrieve, setRetrieve] = useState(false);
 
     const retrieveContent = () => {
         if (display !== null && user !== null) {
@@ -17,7 +18,7 @@ const Content = ({ display, user }) => {
             }
             else {
                 API.getCategoryData({ id: user, category: display })
-                    .then(response => { setContent(response.data); console.log(response.data) });
+                    .then(response => { setContent(response.data); setRetrieve(false); console.log(response.data) });
             }
         }
     }
@@ -31,7 +32,7 @@ const Content = ({ display, user }) => {
         }
     }
 
-    useEffect(retrieveContent, [display, user]);
+    useEffect(retrieveContent, [display, user, retrieve]);
     useEffect(sortExpenses, [content]);
 
 
@@ -49,12 +50,13 @@ const Content = ({ display, user }) => {
                     <Grid item xs={12} lg={5}>
                         <Paper className='contentChargesPaper'>
                             <h2>Monthly Charges</h2>
-                            {monthlyCharges ? monthlyCharges.map((item, index) => <ChargeItem data={item} key={index} />) : null}
+                            {monthlyCharges ? monthlyCharges.map((item, index) => <ChargeItem data={item} key={index} setRetrieve={setRetrieve} />) : null}
                         </Paper>
                     </Grid>
                     <Grid item xs={12} lg={5}>
                         <Paper className='contentChargesPaper'>
                             <h2>One-time Charges</h2>
+                            {oneTime ? oneTime.map((item, index) => <ChargeItem data={item} key={index} setRetrieve={setRetrieve} />) : null}
                         </Paper>
                     </Grid>
                 </Grid>}

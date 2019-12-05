@@ -18,9 +18,19 @@ module.exports = {
 
 
     delete: function (req, res) {
-        db.Living.deleteOne({ _id: req.params.id })
+        db.Expense.findByIdAndDelete({ _id: req.params.id })
             .then(result => console.log(result))
             .catch(err => console.log(err));
+    },
+
+    update: function (req, res) {
+        db.Expense.findOneAndUpdate({ _id: req.body.id }, {
+            category: req.body.category,
+            monthly: req.body.monthly,
+            date: req.body.date,
+            amount: req.body.amount,
+            title: req.body.title
+        }, { new: true }).then(result => res.json(result))
     },
 
 

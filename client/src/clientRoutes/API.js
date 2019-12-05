@@ -17,5 +17,13 @@ export default {
 
     createExpense: data => {
         return axios.post('/api/expense/create', data);
+    },
+
+    updateExpense: data => {
+        return axios.post('/api/expense/update', data);
+    },
+
+    deleteExpense: data => {
+        return axios.put(`/api/expense/delete/${data.id}`);
     }
 };

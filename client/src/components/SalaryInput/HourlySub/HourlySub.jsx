@@ -1,6 +1,6 @@
 import React from 'react';
 import './HourlySub.css';
-import { Grid, Paper, Button, InputAdornment, TextField, FormControl } from '@material-ui/core'
+import { Grid, Button, TextField, FormControl } from '@material-ui/core'
 import NumberFormatCustom from '../../ExpenseForm/NumberFormatCustom';
 
 const HourlySub = ({ handleWeekly, handleHourly, onSubmit, clearAlerts, hourly, weekly }) => {

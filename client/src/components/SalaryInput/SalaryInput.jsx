@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Container, Paper, Checkbox, Button, FormControlLabel } from '@material-ui/core';
+import { Checkbox, Button, FormControlLabel } from '@material-ui/core';
 import API from '../../clientRoutes/API';
 import SalarySub from './SalarySub/SalarySub';
 import HourlySub from './HourlySub/HourlySub';

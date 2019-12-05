@@ -9,13 +9,27 @@ import NumberFormatCustom from './NumberFormatCustom';
 import './ExpenseForm.css';
 import API from '../../clientRoutes/API';
 
-const ExpenseForm = ({ user }) => {
+const ExpenseForm = ({ user, propData, form, toggleForm, setRetrieve }) => {
     const [category, setCategory] = useState('');
     const [radioValue, setRadioValue] = useState('');
     const [monthly, setMonthly] = useState(false);
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [amount, setAmount] = useState('');
     const [title, setTitle] = useState('');
+
+    useEffect(() => {
+        if (propData) {
+            setCategory(propData.category.toLowerCase())
+            setMonthly(propData.monthly)
+            setSelectedDate(propData.date)
+            setAmount(propData.amount)
+            setTitle(propData.title)
+            if (propData.monthly === true) {
+                setRadioValue('Yes')
+            }
+            else setRadioValue('No')
+        }
+    }, [propData])
 
     const categoryChange = e => {
         document.querySelector('#categoryGrid').style.border = 'none';
@@ -30,6 +44,9 @@ const ExpenseForm = ({ user }) => {
                 setMonthly(true);
                 break;
             case 'No':
+                setMonthly(false);
+                break;
+            default:
                 setMonthly(false);
                 break;
         }
@@ -51,34 +68,50 @@ const ExpenseForm = ({ user }) => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        if (category !== '' && radioValue !== '' && amount !== '' && title !== '') {
+        if (form === true) {
             let dataObject = {
-                id: user,
+                id: propData._id,
                 category: category,
                 monthly: monthly,
                 date: selectedDate,
                 amount: amount,
                 title: title
             }
-            API.createExpense(dataObject)
-                .then(res => {
-                    document.querySelector('#expenseInputPaper').style.display = 'none';
-                });
+
+            API.updateExpense(dataObject)
+                .then(toggleForm(false))
         }
         else {
-            if (category === '') {
-                document.querySelector('#categoryGrid').style.border = '3px solid red';
+            if (category !== '' && radioValue !== '' && amount !== '' && title !== '') {
+                let dataObject = {
+                    id: user,
+                    category: category,
+                    monthly: monthly,
+                    date: selectedDate,
+                    amount: amount,
+                    title: title
+                }
+                API.createExpense(dataObject)
+                    .then(res => {
+                        document.querySelector('#expenseInputPaper').style.display = 'none';
+                    });
             }
-            if (radioValue === '') {
-                document.querySelector('#monthlyGrid').style.border = '3px solid red';
-            }
-            if (amount === '') {
-                document.querySelector('#amountGrid').style.border = '3px solid red';
-            }
-            if (title === '') {
-                document.querySelector('#titleGrid').style.border = '3px solid red';
+            else {
+                if (category === '') {
+                    document.querySelector('#categoryGrid').style.border = '3px solid red';
+                }
+                if (radioValue === '') {
+                    document.querySelector('#monthlyGrid').style.border = '3px solid red';
+                }
+                if (amount === '') {
+                    document.querySelector('#amountGrid').style.border = '3px solid red';
+                }
+                if (title === '') {
+                    document.querySelector('#titleGrid').style.border = '3px solid red';
+                }
             }
         }
+        setRetrieve(true);
     }
 
     return (

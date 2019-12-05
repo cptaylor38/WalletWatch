@@ -6,12 +6,17 @@ router
     .get(expenseController.display);
 
 router
-    .route('/:id')
+    .route('/delete/:id')
     .put(expenseController.delete);
 
 router
     .route('/create')
     .post(expenseController.create);
+
+router
+    .route('/update')
+    .post(expenseController.update);
+
 
 
 module.exports = router;
