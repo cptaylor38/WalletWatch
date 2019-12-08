@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Grid, Paper } from '@material-ui/core';
+import { Grid, Paper, Button } from '@material-ui/core';
+import { FaFolderPlus } from 'react-icons/fa';
 import './Content.css';
+import ExpenseForm from '../ExpenseForm/ExpenseForm';
 import ChargeItem from './ChargeItem/ChargeItem';
 import API from "../../clientRoutes/API";
 
@@ -9,6 +11,7 @@ const Content = ({ display, user }) => {
     const [monthlyCharges, setMonthlyCharges] = useState(null);
     const [oneTime, setOneTime] = useState(null);
     const [retrieve, setRetrieve] = useState(false);
+    const [expenseToggle, setExpenseToggle] = useState(false);
 
     const retrieveContent = () => {
         if (display !== null && user !== null) {
@@ -32,6 +35,20 @@ const Content = ({ display, user }) => {
         }
     }
 
+    const expenseInputToggle = () => {
+        setExpenseToggle(!expenseToggle);
+    }
+
+    useEffect(() => {
+        let expenseDiv = document.querySelector('#expenseInputPaper');
+        if (expenseToggle === false) {
+            expenseDiv.style.display = 'none'
+        }
+        if (expenseToggle === true) {
+            expenseDiv.style.display = 'flex'
+        }
+    }, [expenseToggle]);
+
     useEffect(retrieveContent, [display, user, retrieve]);
     useEffect(sortExpenses, [content]);
 
@@ -41,25 +58,56 @@ const Content = ({ display, user }) => {
         <>
             {display === 'home' ?
                 <>
+                    <Grid container id='addCont'>
+                        <Grid item xs={12} id='addItem'>
+                            <Paper id='addPaper'>
+                                <Grid item xs={12} id='addExpenseSection'>
+                                    <Button id='toggleExpenseBtn' onClick={expenseInputToggle}><p style={{ marginRight: 10 }}>Add Expense</p> <FaFolderPlus style={{ fontSize: 24 }} /> </Button>
+                                </Grid>
+                            </Paper>
+                            <Paper id='expenseInputPaper'>
+                                <Grid item xs={12} id='expenseInputSection'>
+                                    {user ? <ExpenseForm user={user} update={() => retrieveContent()} /> : null}
+                                </Grid>
+                            </Paper>
+                        </Grid>
+                    </Grid>
                     <Paper>
                         <p>Home</p>
                     </Paper>
                 </>
                 :
-                <Grid container id='contentContainer'>
-                    <Grid item xs={12} lg={5}>
-                        <Paper className='contentChargesPaper'>
-                            <h2>Monthly Charges</h2>
-                            {monthlyCharges ? monthlyCharges.map((item, index) => <ChargeItem data={item} key={index} setRetrieve={setRetrieve} />) : null}
-                        </Paper>
+                <>
+                    <Grid container id='addCont'>
+                        <Grid item xs={12} id='addItem'>
+                            <Paper id='addPaper'>
+                                <Grid item xs={12} id='addExpenseSection'>
+                                    <Button id='toggleExpenseBtn' onClick={expenseInputToggle}><p style={{ marginRight: 10 }}>Add Expense</p> <FaFolderPlus style={{ fontSize: 24 }} /> </Button>
+                                </Grid>
+                            </Paper>
+                            <Paper id='expenseInputPaper'>
+                                <Grid item xs={12} id='expenseInputSection'>
+                                    {user ? <ExpenseForm user={user} setRetrieve={setRetrieve} /> : null}
+                                </Grid>
+                            </Paper>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={12} lg={5}>
-                        <Paper className='contentChargesPaper'>
-                            <h2>One-time Charges</h2>
-                            {oneTime ? oneTime.map((item, index) => <ChargeItem data={item} key={index} setRetrieve={setRetrieve} />) : null}
-                        </Paper>
+                    <Grid container id='contentContainer'>
+                        <Grid item xs={12} lg={5}>
+                            <Paper className='contentChargesPaper'>
+                                <h2>Monthly Charges</h2>
+                                {monthlyCharges ? monthlyCharges.map((item, index) => <ChargeItem data={item} key={index} setRetrieve={setRetrieve} />) : null}
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={12} lg={5}>
+                            <Paper className='contentChargesPaper'>
+                                <h2>One-time Charges</h2>
+                                {oneTime ? oneTime.map((item, index) => <ChargeItem data={item} key={index} setRetrieve={setRetrieve} />) : null}
+                            </Paper>
+                        </Grid>
                     </Grid>
-                </Grid>}
+                </>
+            }
         </>
     )
 }

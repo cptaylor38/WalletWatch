@@ -19,12 +19,12 @@ const ChargeItem = ({ data, setRetrieve }) => {
 
     return (
         <>
-            <Grid container>
+            <Grid container className='chargeItem'>
                 {form === true && data ? <ExpenseForm propData={data} form={form} toggleForm={toggleForm} setRetrieve={setRetrieve} /> :
                     <>
                         <Grid item><p>{data.title}</p></Grid>
                         <Grid item><p>${data.amount}</p></Grid>
-                        <Grid item><p>on {moment(data.date).format("dddd, MMMM Do YYYY")}</p></Grid>
+                        <Grid item><p>{moment(data.date).format("dddd, MMMM Do YYYY")}</p></Grid>
                         <Button type='button' onClick={updateField}><FaEdit /></Button>
                         <Button type='button' onClick={deleteExpense}><FaCut /></Button>
                     </>}

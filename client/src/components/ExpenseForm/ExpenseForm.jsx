@@ -79,7 +79,10 @@ const ExpenseForm = ({ user, propData, form, toggleForm, setRetrieve }) => {
             }
 
             API.updateExpense(dataObject)
-                .then(toggleForm(false))
+                .then((response) => {
+                    toggleForm(false);
+                    setRetrieve(true);
+                })
         }
         else {
             if (category !== '' && radioValue !== '' && amount !== '' && title !== '') {
@@ -94,6 +97,12 @@ const ExpenseForm = ({ user, propData, form, toggleForm, setRetrieve }) => {
                 API.createExpense(dataObject)
                     .then(res => {
                         document.querySelector('#expenseInputPaper').style.display = 'none';
+                        setAmount('');
+                        setRadioValue('');
+                        setMonthly(false);
+                        setTitle('');
+                        setCategory('');
+                        setRetrieve(true);
                     });
             }
             else {
@@ -111,7 +120,6 @@ const ExpenseForm = ({ user, propData, form, toggleForm, setRetrieve }) => {
                 }
             }
         }
-        setRetrieve(true);
     }
 
     return (
