@@ -66,6 +66,10 @@ const ExpenseForm = ({ user, propData, form, toggleForm, setRetrieve }) => {
         setTitle(e.target.value);
     }
 
+    const handleCancel = e => {
+        toggleForm(false);
+    }
+
     const handleSubmit = e => {
         e.preventDefault();
         if (form === true) {
@@ -195,6 +199,9 @@ const ExpenseForm = ({ user, propData, form, toggleForm, setRetrieve }) => {
             </Grid>
             <Grid item id='submitGrid'>
                 <Button variant="contained" color="primary" type='submit' onClick={handleSubmit}>Submit</Button>
+            </Grid>
+            <Grid item id='cancelExpenseGrid'>
+                <Button variant='contained' color='grey' type='button' onClick={handleCancel}>Cancel</Button>
             </Grid>
         </Grid>
     )

@@ -1,6 +1,17 @@
+.contentChargesPaper
+{
+    box-sizing: border-box;
+    text-align: center;
+    padding: 5px;
+    font-family: 'Roboto Mono', monospace;
+    background-color: rgba(255, 255, 255) !important;
+    margin-bottom: 3px;
+}
+
 .chargeItem
 {
     padding: 5px;
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
 }

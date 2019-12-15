@@ -94,16 +94,12 @@ const Content = ({ display, user }) => {
                     </Grid>
                     <Grid container id='contentContainer'>
                         <Grid item xs={12} lg={5}>
-                            <Paper className='contentChargesPaper'>
-                                <h2>Monthly Charges</h2>
-                                {monthlyCharges ? monthlyCharges.map((item, index) => <ChargeItem data={item} key={index} setRetrieve={setRetrieve} />) : null}
-                            </Paper>
+                            {monthlyCharges && monthlyCharges.length > 0 ? <h2 className='contentChargesHeader'>Monthly</h2> : <p>You haven't added any recurring expenses in this category.</p>}
+                            {monthlyCharges ? monthlyCharges.map((item, index) => <ChargeItem data={item} key={index} setRetrieve={setRetrieve} />) : null}
                         </Grid>
                         <Grid item xs={12} lg={5}>
-                            <Paper className='contentChargesPaper'>
-                                <h2>One-time Charges</h2>
-                                {oneTime ? oneTime.map((item, index) => <ChargeItem data={item} key={index} setRetrieve={setRetrieve} />) : null}
-                            </Paper>
+                            {oneTime && oneTime.length > 0 ? <h2 className='contentChargesHeader'>Non-Monthly</h2> : <p>You haven't added any non-recurring expenses in this category.</p>}
+                            {oneTime !== null ? oneTime.map((item, index) => <ChargeItem data={item} key={index} setRetrieve={setRetrieve} />) : null}
                         </Grid>
                     </Grid>
                 </>

@@ -64,7 +64,7 @@ const SalaryInput = ({ selected, setSelected, setSalarySection }) => {
         }
         if (incomeRate === 'hourly') {
             return (
-                <HourlySub handleHourly={handleHourly} handleWeekly={handleWeekly} onSubmit={onSubmit} clearAlerts={clearAlerts} hourly={hourly} weekly={weekly} />
+                <HourlySub handleHourly={handleHourly} handleWeekly={handleWeekly} onSubmit={onSubmit} clearAlerts={clearAlerts} hourly={hourly} weekly={weekly} salary={salary} />
             )
         }
     }
@@ -72,10 +72,6 @@ const SalaryInput = ({ selected, setSelected, setSalarySection }) => {
     return (
         <>
             {inputAlert ? <p>{inputAlert}</p> : null}
-            {salary && hourly && weekly ? <p>{salary.toLocaleString("en-US", {
-                style: "currency",
-                currency: "USD"
-            })}</p> : null}
             {!incomeRate ? <>
                 <FormControlLabel
                     value={'hourly'}

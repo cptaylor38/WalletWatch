@@ -3,6 +3,7 @@
     text-align: center;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
 }
 
 #hourlyWageGrid
@@ -28,4 +29,9 @@
 #hourlySubmit
 {
     margin-top: 10px;
+}
+
+#salaryTotalP
+{
+    font-size: 22px;
 }

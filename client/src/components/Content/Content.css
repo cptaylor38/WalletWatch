@@ -6,7 +6,10 @@
 
 .contentChargesHeader
 {
-    padding: 5px;
     text-align: center;
+    border-bottom: 1px solid grey;
+    padding-bottom: 30px;
 }
+
+
 
