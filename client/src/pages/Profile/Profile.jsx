@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import UserProvider from "../../contexts/UserProvider";
 import { Grid, Container, Paper, Button } from '@material-ui/core';
-import { FaHome, FaMoneyBill, FaRegLightbulb, FaHeartbeat, FaGamepad, FaCarSide, FaFolderPlus } from 'react-icons/fa';
+import { FaHome, FaMoneyBill, FaRegLightbulb, FaHeartbeat, FaGamepad, FaCarSide } from 'react-icons/fa';
 import SalaryInput from '../../components/SalaryInput/SalaryInput';
 import './Profile.css';
 import Content from '../../components/Content/Content';

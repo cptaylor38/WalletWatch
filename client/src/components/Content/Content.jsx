@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Grid, Paper, Button } from '@material-ui/core';
 import { FaFolderPlus } from 'react-icons/fa';
+import CHeader from './ContentHeader/ContentHeader';
+import HelperText from './HelperText/HelperText';
 import './Content.css';
 import ExpenseForm from '../ExpenseForm/ExpenseForm';
 import ChargeItem from './ChargeItem/ChargeItem';
@@ -67,7 +69,7 @@ const Content = ({ display, user }) => {
                             </Paper>
                             <Paper id='expenseInputPaper'>
                                 <Grid item xs={12} id='expenseInputSection'>
-                                    {user ? <ExpenseForm user={user} update={() => retrieveContent()} /> : null}
+                                    {user ? <ExpenseForm user={user} update={() => retrieveContent()} setRetrieve={setRetrieve} /> : null}
                                 </Grid>
                             </Paper>
                         </Grid>
@@ -94,11 +96,11 @@ const Content = ({ display, user }) => {
                     </Grid>
                     <Grid container id='contentContainer'>
                         <Grid item xs={12} lg={5}>
-                            {monthlyCharges && monthlyCharges.length > 0 ? <h2 className='contentChargesHeader'>Monthly</h2> : <p>You haven't added any recurring expenses in this category.</p>}
+                            {monthlyCharges && monthlyCharges.length > 0 ? <CHeader message={'Monthly'} /> : <HelperText monthly={true} display={display} />}
                             {monthlyCharges ? monthlyCharges.map((item, index) => <ChargeItem data={item} key={index} setRetrieve={setRetrieve} />) : null}
                         </Grid>
                         <Grid item xs={12} lg={5}>
-                            {oneTime && oneTime.length > 0 ? <h2 className='contentChargesHeader'>Non-Monthly</h2> : <p>You haven't added any non-recurring expenses in this category.</p>}
+                            {oneTime && oneTime.length > 0 ? <CHeader message={'Non-Monthly'} /> : <HelperText monthly={false} display={display} />}
                             {oneTime !== null ? oneTime.map((item, index) => <ChargeItem data={item} key={index} setRetrieve={setRetrieve} />) : null}
                         </Grid>
                     </Grid>

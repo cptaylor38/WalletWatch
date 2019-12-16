@@ -13,8 +13,12 @@ const ChargeItem = ({ data, setRetrieve }) => {
     }
 
     const deleteExpense = () => {
+        document.querySelectorAll('.expenseDeleteBtn').disabled = true;
         API.deleteExpense({ id: data._id })
-            .then(setRetrieve(true));
+            .then(response => {
+                document.querySelectorAll('.expenseDeleteBtn').disabled = false;
+                setRetrieve(true)
+            });
     }
 
     return (
@@ -30,7 +34,7 @@ const ChargeItem = ({ data, setRetrieve }) => {
                                 <Button type='button' onClick={updateField}><FaEdit /></Button>
                             </Grid>
                             <Grid item xs={1}>
-                                <Button type='button' onClick={deleteExpense}><FaCut /></Button>
+                                <Button type='button' className='expenseDeleteBtn' onClick={deleteExpense}><FaCut /></Button>
                             </Grid>
                         </>}
                 </Grid>
