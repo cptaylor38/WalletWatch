@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Grid, Paper, Button } from '@material-ui/core';
 import { FaFolderPlus } from 'react-icons/fa';
 import CHeader from './ContentHeader/ContentHeader';
+import Overview from './HomeOverview/HomeOverview';
 import HelperText from './HelperText/HelperText';
 import './Content.css';
 import ExpenseForm from '../ExpenseForm/ExpenseForm';
@@ -19,11 +20,11 @@ const Content = ({ display, user }) => {
         if (display !== null && user !== null) {
             if (display === 'home') {
                 API.getHomeDisplay({ id: user })
-                    .then(response => { setContent(response.data); console.log(response.data) })
+                    .then(response => { setContent(response.data); })
             }
             else {
                 API.getCategoryData({ id: user, category: display })
-                    .then(response => { setContent(response.data); setRetrieve(false); console.log(response.data) });
+                    .then(response => { setContent(response.data); setRetrieve(false); });
             }
         }
     }
@@ -75,7 +76,7 @@ const Content = ({ display, user }) => {
                         </Grid>
                     </Grid>
                     <Paper>
-                        <p>Home</p>
+                        <Overview content={content} />
                     </Paper>
                 </>
                 :
