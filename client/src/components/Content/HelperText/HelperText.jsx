@@ -23,7 +23,7 @@ const Header = ({ monthly, display }) => {
                     setText('Ex. Car Payments, Auto Insurance, etc.')
                     break;
                 default:
-                    setText('No expenses found for this category.')
+                    setText('...')
                     break;
             }
         }
@@ -49,7 +49,7 @@ const Header = ({ monthly, display }) => {
                     break;
             }
         }
-    }, [display])
+    }, [display, monthly])
 
     return (
         <Paper className='helperPaper'>

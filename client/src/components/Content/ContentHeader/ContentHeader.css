@@ -5,4 +5,8 @@
     margin-bottom: 3px;
     align-items: center;
     font-family: 'Roboto Mono', monospace;
+    background: rgba(236, 234, 234, 0.945) !important;
+    color: rgb(88, 85, 85) !important;
+    border-radius: 25px !important;
+    margin-top: 10px;
 }

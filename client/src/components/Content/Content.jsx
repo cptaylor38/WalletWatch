@@ -8,6 +8,7 @@ import './Content.css';
 import ExpenseForm from '../ExpenseForm/ExpenseForm';
 import ChargeItem from './ChargeItem/ChargeItem';
 import API from "../../clientRoutes/API";
+import moment from 'moment';
 
 const Content = ({ display, user }) => {
     const [content, setContent] = useState(null);
@@ -33,9 +34,15 @@ const Content = ({ display, user }) => {
         if (content !== null && display !== 'home') {
             let sortedOneTime = content.filter(item => item.monthly === false);
             let sortedMonthly = content.filter(item => item.monthly === true);
-            setMonthlyCharges(sortedMonthly);
-            setOneTime(sortedOneTime);
+            let datedOneTime = sortRecent(sortedOneTime);
+            let datedMonthly = sortRecent(sortedMonthly);
+            setMonthlyCharges(datedMonthly);
+            setOneTime(datedOneTime);
         }
+    }
+
+    const sortRecent = array => {
+        return array.sort((a, b) => moment(b.date).unix() - moment(a.date).unix())
     }
 
     const expenseInputToggle = () => {

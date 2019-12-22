@@ -5,6 +5,7 @@ import { FaHome, FaMoneyBill, FaRegLightbulb, FaHeartbeat, FaGamepad, FaCarSide 
 import SalaryInput from '../../components/SalaryInput/SalaryInput';
 import './Profile.css';
 import Content from '../../components/Content/Content';
+import moment from "moment";
 const video = require('../../assets/images/globe.mp4');
 const ogvideo = require('../../assets/images/ogglobe.ogv');
 const webmglobe = require('../../assets/images/webmglobe.webm');
@@ -61,8 +62,8 @@ const Profile = () => {
                 </video>
             </div>
             <Grid container id='profileHeader'>
-                <Grid item xs={12} sm={5} lg={4} id='gridWelcome'>
-                    <Paper className='profHeaderSub'>
+                <Grid item xs={12} sm={3} lg={3} id='gridWelcome'>
+                    <Paper className='profHeaderSub' id='welcomePaper'>
                         {selected ? (<>
                             <h2 id='welcomeH'>Welcome, {selected.username}</h2>
                             <div className='logoutSection'>
@@ -71,8 +72,13 @@ const Profile = () => {
                         </>) : ''}
                     </Paper>
                 </Grid>
-                <Grid item xs={12} sm={7} lg={8} id='gridSalary'>
-                    <Paper className='profHeaderSub'>
+                <Grid item xs={12} sm={3} lg={3} id='gridDate'>
+                    <Paper className='profileHeaderSub' id='datePaper'>
+                        <p>{moment(Date.now()).format('dddd, LL')}</p>
+                    </Paper>
+                </Grid>
+                <Grid item xs={12} sm={6} lg={6} id='gridSalary'>
+                    <Paper className='profHeaderSub' id='salaryPaper'>
                         {selected && !salarySection ? (
                             <>
                                 <p id='currentSalP'>Current yearly income: {selected.salary.toLocaleString("en-US", {
