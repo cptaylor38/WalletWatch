@@ -16,17 +16,13 @@ const Content = ({ display, user }) => {
     const [oneTime, setOneTime] = useState(null);
     const [retrieve, setRetrieve] = useState(false);
     const [expenseToggle, setExpenseToggle] = useState(false);
+    const [totalMonthly, setTotalMonthly] = useState(null);
 
     const retrieveContent = () => {
         if (display !== null && user !== null) {
-            if (display === 'home') {
-                API.getHomeDisplay({ id: user })
-                    .then(response => { setContent(response.data); })
-            }
-            else {
-                API.getCategoryData({ id: user, category: display })
-                    .then(response => { setContent(response.data); setRetrieve(false); });
-            }
+            API.getCategoryData({ id: user, category: display })
+                .then(response => { setContent(response.data); setRetrieve(false); });
+
         }
     }
 
@@ -59,6 +55,14 @@ const Content = ({ display, user }) => {
         }
     }, [expenseToggle]);
 
+    useEffect(() => {
+        if (monthlyCharges !== null && monthlyCharges.length > 0) {
+            let total = 0;
+            monthlyCharges.map(item => total += item.amount);
+            setTotalMonthly(total);
+        }
+    }, [monthlyCharges])
+
     useEffect(retrieveContent, [display, user, retrieve]);
     useEffect(sortExpenses, [content]);
 
@@ -82,9 +86,9 @@ const Content = ({ display, user }) => {
                             </Paper>
                         </Grid>
                     </Grid>
-                    <Paper>
-                        <Overview content={content} />
-                    </Paper>
+                    <Grid container id='homeContentGrid'>
+                        <Overview user={user} />
+                    </Grid>
                 </>
                 :
                 <>
@@ -104,7 +108,7 @@ const Content = ({ display, user }) => {
                     </Grid>
                     <Grid container id='contentContainer'>
                         <Grid item xs={12} lg={5}>
-                            {monthlyCharges && monthlyCharges.length > 0 ? <CHeader message={'Monthly'} /> : <HelperText monthly={true} display={display} />}
+                            {monthlyCharges && monthlyCharges.length > 0 ? <CHeader message={'Monthly'} total={totalMonthly} /> : <HelperText monthly={true} display={display} />}
                             {monthlyCharges ? monthlyCharges.map((item, index) => <ChargeItem data={item} key={index} setRetrieve={setRetrieve} />) : null}
                         </Grid>
                         <Grid item xs={12} lg={5}>

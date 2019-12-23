@@ -1,0 +1,14 @@
+#recurringPiePaper
+{
+    padding: 5px;
+    margin: 5px;
+}
+
+#recurringPie
+{
+    z-index: 10;
+    box-sizing: border-box;
+    background: rgb(214, 206, 206);
+    padding: 5px;
+    margin: auto;
+}

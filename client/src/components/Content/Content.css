@@ -4,6 +4,14 @@
     justify-content: space-evenly;
 }
 
+#homeContentGrid
+{
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    box-sizing: border-box;
+}
+
 
 
 
