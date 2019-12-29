@@ -1,12 +1,12 @@
-.contentChargesHeader
+.contentHeader
 {
     display: flex;
     justify-content: center;
     margin-bottom: 3px;
     align-items: center;
     font-family: 'Roboto Mono', monospace;
-    background: rgba(236, 234, 234, 0.945) !important;
-    color: rgb(88, 85, 85) !important;
-    border-radius: 25px !important;
+    background: rgba(99, 88, 88, 0.945) !important;
+    color: rgb(223, 215, 215) !important;
     margin-top: 10px;
+    padding: 10px 0;
 }

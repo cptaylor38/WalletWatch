@@ -201,7 +201,7 @@ const ExpenseForm = ({ user, propData, form, toggleForm, setRetrieve }) => {
                 <Button variant="contained" color="primary" type='submit' onClick={handleSubmit}>Submit</Button>
             </Grid>
             {toggleForm ? <Grid item id='cancelExpenseGrid'>
-                <Button variant='contained' color='grey' type='button' onClick={handleCancel}>Cancel</Button>
+                <Button variant='contained' color='primary' type='button' onClick={handleCancel}>Cancel</Button>
             </Grid> : null}
         </Grid>
     )

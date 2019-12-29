@@ -4,13 +4,11 @@ import { Paper } from '@material-ui/core';
 
 const Header = ({ message, total }) => {
     return (
-        <Paper className='contentChargesHeader'>
-            <h3>{message} {total ?
-                <>{total.toLocaleString("en-US", {
-                    style: "currency",
-                    currency: "USD"
-                })}</> : null}</h3>
-        </Paper>
+        <h3 className='contentHeader'>{message} {total ?
+            <>{total.toLocaleString("en-US", {
+                style: "currency",
+                currency: "USD"
+            })}</> : null}</h3>
     )
 }
 export default Header;

@@ -62,44 +62,34 @@ const Profile = () => {
                 </video>
             </div>
             <Grid container id='profileHeader'>
-                <Grid item xs={12} sm={3} lg={3} id='gridWelcome'>
-                    <Paper className='profHeaderSub' id='welcomePaper'>
-                        {selected ? (<>
-                            <h2 id='welcomeH'>Welcome, {selected.username}</h2>
-                            <div className='logoutSection'>
-                                <Button size='medium' variant='contained' href='/auth/logout'>Log out</Button>
-                            </div>
-                        </>) : ''}
-                    </Paper>
+                <Grid item id='name_logout'>
+                    {selected ? (<>
+                        <div className='logoutSection'>
+                            <p id='welcomeH'>Welcome, {selected.username} <Button size='small' variant='contained' href='/auth/logout'>Log out</Button></p>
+
+                        </div>
+                    </>) : ''}
                 </Grid>
-                <Grid item xs={12} sm={3} lg={3} id='gridDate'>
-                    <Paper className='profileHeaderSub' id='datePaper'>
-                        <p>{moment(Date.now()).format('dddd, LL')}</p>
-                    </Paper>
+                <Grid item id='gridDate'>
+                    <p>{moment(Date.now()).format('dddd, LL')}</p>
                 </Grid>
-                <Grid item xs={12} sm={6} lg={6} id='gridSalary'>
-                    <Paper className='profHeaderSub' id='salaryPaper'>
-                        {selected && !salarySection ? (
-                            <>
-                                <p id='currentSalP'>Current yearly income: {selected.salary.toLocaleString("en-US", {
-                                    style: "currency",
-                                    currency: "USD"
-                                })}</p>
-                                <Button id='salaryUpdateBtn' variant='outlined' onClick={() => showSalaryUpdate()}>Update</Button>
-                            </>
-                        ) :
-                            <SalaryInput selected={selected} setSelected={setSelected} setSalarySection={setSalarySection} />}
-                    </Paper>
+                <Grid item>
+                    <Button id='homeBtn' onClick={() => setChosenCat('Home')}><FaHome style={{ fontSize: '36px' }} /><p>Home</p></Button>
                 </Grid>
             </Grid>
-            <Grid container id='homeCont'>
-                <Grid item xs={12} id='homeItem'>
-                    <Paper id='homePaper'>
-                        <Grid item xs={12} id='homeBtnSection'>
-                            <Button id='homeBtn' onClick={() => setChosenCat('Home')}><FaHome style={{ fontSize: '36px' }} /><p>Home</p></Button>
-                        </Grid>
-                    </Paper>
-                </Grid>
+            <Grid container id='gridSalary'>
+                <Paper className='profHeaderSub' id='salaryPaper'>
+                    {selected && !salarySection ? (
+                        <>
+                            <p id='currentSalP'>Current yearly income: {selected.salary.toLocaleString("en-US", {
+                                style: "currency",
+                                currency: "USD"
+                            })}</p>
+                            <Button id='salaryUpdateBtn' variant='outlined' onClick={() => showSalaryUpdate()}>Update</Button>
+                        </>
+                    ) :
+                        <SalaryInput selected={selected} setSelected={setSelected} setSalarySection={setSalarySection} />}
+                </Paper>
             </Grid>
             <Grid container id='expenseCategories'>
                 <Grid item xs={12} id='categoryNav'>

@@ -1,21 +1,32 @@
-.contentChargesPaper
-{
-    box-sizing: border-box;
-    text-align: center;
-    padding: 5px;
-    font-family: 'Roboto Mono', monospace;
-    background-color: rgba(255, 255, 255) !important;
-    margin-bottom: 3px;
-    background: rgb(249, 255, 234) !important;
-    color: rgb(109, 104, 104) !important;
-    border-radius: 15px !important;
-}
-
 .chargeItem
 {
     padding: 5px;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    font-size: 12px;
+    font-size: 16px;
+    border-bottom: 1px solid rgb(207, 207, 207);
+    font-family: 'Roboto Mono', monospace;
+    box-sizing: border-box;
+}
+
+.chargeItem:last-child
+{
+    border-bottom: none;
+}
+
+@media(min-width: 565)
+{
+    .chargeItem
+    {
+        font-size: 16px;
+    }
+}
+
+@media(max-width: 420px)
+{
+    .chargeItem
+    {
+        font-size: 12px;
+    }
 }

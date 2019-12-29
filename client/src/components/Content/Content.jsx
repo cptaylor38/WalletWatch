@@ -108,12 +108,20 @@ const Content = ({ display, user }) => {
                     </Grid>
                     <Grid container id='contentContainer'>
                         <Grid item xs={12} lg={5}>
-                            {monthlyCharges && monthlyCharges.length > 0 ? <CHeader message={'Monthly'} total={totalMonthly} /> : <HelperText monthly={true} display={display} />}
-                            {monthlyCharges ? monthlyCharges.map((item, index) => <ChargeItem data={item} key={index} setRetrieve={setRetrieve} />) : null}
+                            <Paper>
+                                {monthlyCharges && monthlyCharges.length > 0 ? <CHeader message={'Monthly'} total={totalMonthly} /> : <HelperText monthly={true} display={display} />}
+                                <Grid container className='expListCont'>
+                                    {monthlyCharges ? monthlyCharges.map((item, index) => <ChargeItem data={item} key={index} setRetrieve={setRetrieve} />) : null}
+                                </Grid>
+                            </Paper>
                         </Grid>
                         <Grid item xs={12} lg={5}>
-                            {oneTime && oneTime.length > 0 ? <CHeader message={'Non-Monthly'} /> : <HelperText monthly={false} display={display} />}
-                            {oneTime !== null ? oneTime.map((item, index) => <ChargeItem data={item} key={index} setRetrieve={setRetrieve} />) : null}
+                            <Paper>
+                                {oneTime && oneTime.length > 0 ? <CHeader message={'Non-Monthly'} /> : <HelperText monthly={false} display={display} />}
+                                <Grid container className='expListCont'>
+                                    {oneTime !== null ? oneTime.map((item, index) => <ChargeItem data={item} key={index} setRetrieve={setRetrieve} />) : null}
+                                </Grid>
+                            </Paper>
                         </Grid>
                     </Grid>
                 </>

@@ -23,22 +23,20 @@ const ChargeItem = ({ data, setRetrieve }) => {
 
     return (
         <>
-            <Paper className='contentChargesPaper'>
-                <Grid container className='chargeItem'>
-                    {form === true && data ? <ExpenseForm propData={data} form={form} toggleForm={toggleForm} setRetrieve={setRetrieve} /> :
-                        <>
-                            <Grid item xs={3} className='gridICharge'><p>{data.title}</p></Grid>
-                            <Grid item xs={1} className='gridICharge'><p>${data.amount}</p></Grid>
-                            <Grid item xs={3} className='gridICharge'><p>{moment(data.date).format("MM/DD/YYYY")}</p></Grid>
-                            <Grid item xs={1} className='gridICharge'>
-                                <Button type='button' onClick={updateField}><FaEdit /></Button>
-                            </Grid>
-                            <Grid item xs={1} className='gridICharge'>
-                                <Button type='button' className='expenseDeleteBtn' onClick={deleteExpense}><FaCut /></Button>
-                            </Grid>
-                        </>}
-                </Grid>
-            </Paper>
+            <Grid container className='chargeItem'>
+                {form === true && data ? <ExpenseForm propData={data} form={form} toggleForm={toggleForm} setRetrieve={setRetrieve} /> :
+                    <>
+                        <Grid item xs={3} className='gridICharge'><p>{data.title}</p></Grid>
+                        <Grid item xs={1} className='gridICharge'><p>${data.amount}</p></Grid>
+                        <Grid item xs={3} className='gridICharge'><p>{moment(data.date).format("MM/DD/YYYY")}</p></Grid>
+                        <Grid item xs={1} className='gridICharge'>
+                            <Button type='button' onClick={updateField}><FaEdit /></Button>
+                        </Grid>
+                        <Grid item xs={1} className='gridICharge'>
+                            <Button type='button' className='expenseDeleteBtn' onClick={deleteExpense}><FaCut /></Button>
+                        </Grid>
+                    </>}
+            </Grid>
         </>
     )
 }
