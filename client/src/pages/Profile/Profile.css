@@ -1,3 +1,8 @@
+html
+{
+    scroll-behavior: smooth;
+}
+
 #profilePage
 {
     min-width: 100vw;
@@ -29,6 +34,12 @@
     margin-top: 20px;
 }
 
+#gridDate
+{
+    font-size: 20px;
+    font-family: 'Roboto Mono', monospace;
+}
+
 #profileHeader
 {
     display: flex;
@@ -47,11 +58,13 @@
     flex-direction: column;
     min-width: 100%;
     text-align: center;
+    padding-bottom: 25px;
 }
 
 #welcomeH
 {
     font-family: 'Roboto Mono', monospace;
+    font-size: 20px;
 }
 
 #currentSalP
@@ -80,7 +93,7 @@
 
 .catIcon
 {
-    font-size: 30px;
+    font-size: 20px;
     margin: 0 10px 0 0;
 }
 
@@ -104,14 +117,29 @@
     background: rgba(46, 45, 45, 0.897);
 }
 
+#logBtn
+{
+    display: block;
+    padding: 0 40px;
+    text-align: center;
+    margin-top: 3px;
+    font-weight: bolder;
+}
+
+#logBtn:hover
+{
+    background: rgb(97, 18, 18);
+    color: white;
+}
+
 #homeBtn
 {
     display: block;
-    padding-right: 40px;
-    padding-left: 40px;
+    padding: 5px 25px;
     line-height: .5;
     margin: auto;
     color: white;
+    border-radius: 50%;
 }
 
 #homeBtn:hover
@@ -166,6 +194,25 @@
 @media(max-width: 440px)
 {
     .categoryBtn
+    {
+        padding: 0 !important;
+        margin: 0;
+    }
+
+    .expenseCatText
+    {
+        display: none;
+    }
+
+    .catIcon
+    {
+        
+    }
+}
+
+@media(max-width: 320px)
+{
+    .catIcon
     {
         
     }

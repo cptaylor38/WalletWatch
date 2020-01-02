@@ -5,9 +5,9 @@ import NumberFormatCustom from '../../ExpenseForm/NumberFormatCustom';
 
 const HourlySub = ({ handleWeekly, handleHourly, onSubmit, clearAlerts, hourly, weekly, salary }) => {
     return (
-        <form onSubmit={onSubmit} onFocus={clearAlerts}>
+        <form onSubmit={onSubmit} onFocus={clearAlerts} id='hourlySalForm'>
             <Grid container id='hourlyContainer'>
-                <Grid item xs={4} id='hourlyWageGrid'>
+                <Grid item id='hourlyWageGrid'>
                     <FormControl fullWidth >
                         <TextField
                             label="Hourly Average"

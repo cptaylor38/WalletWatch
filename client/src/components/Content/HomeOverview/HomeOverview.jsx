@@ -147,6 +147,11 @@ const Overview = ({ user }) => {
                     </Paper>
                     : <p>Loading</p>}
             </Grid>
+            <Grid container>
+                <Paper>
+                    Some stuff here
+                </Paper>
+            </Grid>
         </>
     )
 }

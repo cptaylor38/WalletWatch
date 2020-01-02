@@ -62,19 +62,18 @@ const Profile = () => {
                 </video>
             </div>
             <Grid container id='profileHeader'>
+                <Grid item>
+                    {selected ? <p id='welcomeH'>Welcome, {selected.username} <Button id='logBtn' variant='contained' href='/auth/logout'>Log out</Button></p> : null}
+                </Grid>
                 <Grid item id='name_logout'>
                     {selected ? (<>
                         <div className='logoutSection'>
-                            <p id='welcomeH'>Welcome, {selected.username} <Button size='small' variant='contained' href='/auth/logout'>Log out</Button></p>
-
+                            <Button id='homeBtn' onClick={() => setChosenCat('Home')}><FaHome style={{ fontSize: '36px' }} /><p>Home</p></Button>
                         </div>
                     </>) : ''}
                 </Grid>
                 <Grid item id='gridDate'>
                     <p>{moment(Date.now()).format('dddd, LL')}</p>
-                </Grid>
-                <Grid item>
-                    <Button id='homeBtn' onClick={() => setChosenCat('Home')}><FaHome style={{ fontSize: '36px' }} /><p>Home</p></Button>
                 </Grid>
             </Grid>
             <Grid container id='gridSalary'>
@@ -102,7 +101,7 @@ const Profile = () => {
                                     key={index}
                                     className='categoryBtn'>
                                     <p className='catIcon'>{item.icon}</p>
-                                    <p>{item.name}</p>
+                                    <p className='expenseCatText'>{item.name}</p>
                                 </Button>
                             )
                         })}
