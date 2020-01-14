@@ -3,11 +3,15 @@ import './HomeOverview.css';
 import { Doughnut } from 'react-chartjs-2';
 import API from '../../../clientRoutes/API';
 import { Paper, Grid } from '@material-ui/core';
+import OverviewMobileSub from './OverviewMobileSub';
+import moment from 'moment';
 
 const Overview = ({ user }) => {
   const [profile, setProfile] = useState(null);
   const [doughnut, setDoughnut] = useState(null);
   const [nonMonDoughnut, setNonMonDoughnut] = useState(null);
+  const [recurringTotal, setRecurringTotal] = useState(null);
+  const [nonRecurringTotal, setNonRecurringTotal] = useState(null);
 
   useEffect(() => {
     if (profile !== null) {
@@ -23,28 +27,39 @@ const Overview = ({ user }) => {
       let nonMonLei = 0;
       let nonMonTra = 0;
 
+      let nonRecTotal = 0;
+      profile.expense.filter(item => {
+        console.log(moment(item.date).format('MMMM'));
+        console.log(moment(Date.now()).format('MMMM'));
+        if (item.recurring === false) {
+          if (
+            moment(item.date).format('MMMM') ===
+            moment(Date.now()).format('MMMM')
+          ) {
+            nonRecTotal += item.amount;
+            return item;
+          }
+        }
+        setNonRecurringTotal(nonRecTotal);
+      });
+
       profile.expense.map(item => {
         switch (item.category) {
           case 'finances':
             if (item.monthly === true) return (financesTotal += item.amount);
             else return (nonMonFin += item.amount);
-            break;
           case 'living':
             if (item.monthly === true) return (livingTotal += item.amount);
             else return (nonMonLiv += item.amount);
-            break;
           case 'health':
             if (item.monthly === true) return (healthTotal += item.amount);
             else return (nonMonHea += item.amount);
-            break;
           case 'leisure':
             if (item.monthly === true) return (leisureTotal += item.amount);
             else return (nonMonLei += item.amount);
-            break;
           case 'travel':
             if (item.monthly === true) return (travelTotal += item.amount);
             else return (nonMonTra += item.amount);
-            break;
           default:
             return item;
         }
@@ -52,6 +67,7 @@ const Overview = ({ user }) => {
 
       let total =
         financesTotal + livingTotal + healthTotal + leisureTotal + travelTotal;
+      setRecurringTotal(total);
       let nonMonTotal =
         nonMonFin + nonMonLiv + nonMonHea + nonMonLei + nonMonTra;
 
@@ -91,6 +107,12 @@ const Overview = ({ user }) => {
           }
         ]
       });
+    }
+  }, [profile]);
+
+  useEffect(() => {
+    console.log(profile);
+    if (profile !== null && profile.expense.length > 0) {
     }
   }, [profile]);
 
@@ -150,7 +172,15 @@ const Overview = ({ user }) => {
         )}
       </Grid>
       <Grid container id='mobileOverview'>
-        <Paper>Some stuff here</Paper>
+        <Paper>
+          {recurringTotal !== null && nonRecurringTotal !== null ? (
+            <OverviewMobileSub
+              rTotal={recurringTotal}
+              nrTotal={nonRecurringTotal}
+              profile={profile}
+            />
+          ) : null}
+        </Paper>
       </Grid>
     </>
   );
