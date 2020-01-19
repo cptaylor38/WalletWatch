@@ -127,10 +127,7 @@ app.get('/auth/logout', (req, res) => {
 });
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('view/build'));
-  app.get('*', (request, response) => {
-    response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-  });
+  app.use(express.static(path.join(__dirname, 'client/build')));
 }
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/PennyDb');
