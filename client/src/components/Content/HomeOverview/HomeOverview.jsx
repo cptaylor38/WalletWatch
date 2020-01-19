@@ -14,7 +14,7 @@ const Overview = ({ user }) => {
   const [nonRecurringTotal, setNonRecurringTotal] = useState(null);
 
   useEffect(() => {
-    if (profile !== null && profile.expense !== null) {
+    if (profile !== null) {
       let financesTotal = 0;
       let livingTotal = 0;
       let healthTotal = 0;
@@ -29,8 +29,6 @@ const Overview = ({ user }) => {
 
       let nonRecTotal = 0;
       profile.expense.filter(item => {
-        console.log(moment(item.date).format('MMMM'));
-        console.log(moment(Date.now()).format('MMMM'));
         if (item.recurring === false) {
           if (
             moment(item.date).format('MMMM') ===
@@ -111,13 +109,9 @@ const Overview = ({ user }) => {
   }, [profile]);
 
   useEffect(() => {
-    console.log(profile);
-    if (profile !== null && profile.expense.length > 0) {
-    }
-  }, [profile]);
-
-  useEffect(() => {
     API.getHomeDisplay({ id: user }).then(response => {
+      console.log(response.data);
+
       setProfile(response.data);
     });
   }, []);
