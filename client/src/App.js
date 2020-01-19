@@ -9,13 +9,11 @@ import './App.css';
 function App() {
   return (
     <Router history={history}>
-
       <UserProvider>
-        <Route path='/profile' component={Profile} />
+        <Route path='/profile/' component={Profile} />
       </UserProvider>
 
       <Route exact path='/' component={Home} />
-
     </Router>
   );
 }
