@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.fd70ed1c.chunk.css",
+    "main.js": "/static/js/main.dbe2d253.chunk.js",
+    "main.js.map": "/static/js/main.dbe2d253.chunk.js.map",
+    "runtime~main.js": "/static/js/runtime~main.a7ca617d.js",
+    "runtime~main.js.map": "/static/js/runtime~main.a7ca617d.js.map",
+    "static/js/2.818ea7ce.chunk.js": "/static/js/2.818ea7ce.chunk.js",
+    "static/js/2.818ea7ce.chunk.js.map": "/static/js/2.818ea7ce.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.94c7e21efeab5905be6877e5c67fe99d.js": "/precache-manifest.94c7e21efeab5905be6877e5c67fe99d.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.fd70ed1c.chunk.css.map": "/static/css/main.fd70ed1c.chunk.css.map",
+    "static/media/globe.mp4": "/static/media/globe.0e99500f.mp4",
+    "static/media/ogglobe.ogv": "/static/media/ogglobe.145a8ac2.ogv",
+    "static/media/penny.svg": "/static/media/penny.128c48c6.svg",
+    "static/media/webmglobe.webm": "/static/media/webmglobe.cf9b0c18.webm"
+  }
+}
