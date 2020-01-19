@@ -110,7 +110,8 @@ const Overview = ({ user }) => {
 
   useEffect(() => {
     API.getHomeDisplay({ id: user }).then(response => {
-      console.log(response.data);
+      console.log('userid', user);
+      console.log('response.data', response.data);
 
       setProfile(response.data);
     });
