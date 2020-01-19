@@ -61,8 +61,10 @@ passport.use(
       User.findOne({ username: profile.displayName }).then(currentUser => {
         if (currentUser) {
           if (currentUser.googleId !== profile.id) {
-            User.findOneAndUpdate({ googleId: profile.id }).then(updatedUser =>
-              cb(null, updatedUser)
+            User.findOneAndUpdate({ googleId: profile.id }).then(
+              updatedUser => {
+                cb(null, updatedUser);
+              }
             );
           } else {
             cb(null, currentUser);
@@ -70,7 +72,8 @@ passport.use(
         } else {
           new User({ username: profile.displayName, googleId: profile.id })
             .save()
-            .then(newUser => cb(null, newUser));
+            .then(newUser => cb(null, newUser))
+            .catch(err => console.log(err));
         }
       });
     }
