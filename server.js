@@ -99,7 +99,7 @@ app.get(
   '/auth/facebook/callback',
   passport.authenticate('facebook'),
   (req, res) => {
-    res.redirect('/profile/');
+    res.redirect('/profile');
   }
 );
 
@@ -113,7 +113,7 @@ app.get(
   '/auth/google/callback',
   passport.authenticate('google'),
   (req, res) => {
-    res.redirect('/profile/');
+    res.redirect('/profile');
   }
 );
 
