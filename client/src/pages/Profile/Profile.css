@@ -1,219 +1,169 @@
-html
-{
-    scroll-behavior: smooth;
+html {
+  scroll-behavior: smooth;
 }
 
-#profilePage
-{
-    min-width: 100vw;
-    min-height: 100vh;
+#profilePage {
+  min-width: 100vw;
+  min-height: 100vh;
 }
 
-#backgroundContainer
-{
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
+#backgroundContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
 
-#profileHeader
-{
-    display: flex;
-    align-items: center;
+#profileHeader {
+  display: flex;
+  align-items: center;
 }
 
-#salaryPaper
-{
-    background: rgb(219, 219, 219);
-    color: black;
+#salaryPaper {
+  background: rgb(219, 219, 219);
+  color: black;
 }
 
-#gridSalary
-{
-    margin-top: 20px;
+#gridSalary {
+  margin-top: 20px;
 }
 
-#gridDate
-{
-    font-size: 20px;
-    font-family: 'Roboto Mono', monospace;
+#gridDate {
+  font-size: 20px;
+  font-family: 'Roboto Mono', monospace;
 }
 
-#profileHeader
-{
-    display: flex;
-    justify-content: space-evenly;
-    background: black;
-    padding: 20px;
-    color: white;
+#profileHeader {
+  display: flex;
+  justify-content: space-evenly;
+  background: black;
+  padding: 20px;
+  color: white;
 }
 
-.profHeaderSub
-{
-    padding: 10px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    min-width: 100%;
-    text-align: center;
-    padding-bottom: 25px;
+.profHeaderSub {
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-width: 100%;
+  text-align: center;
+  padding-bottom: 25px;
 }
 
-#welcomeH
-{
-    font-family: 'Roboto Mono', monospace;
-    font-size: 20px;
+#welcomeH {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 20px;
 }
 
-#currentSalP
-{
-    font-family: 'Roboto Mono', monospace;
+#currentSalP {
+  font-family: 'Roboto Mono', monospace;
 }
 
-#salaryUpdateBtn
-{
-    font-family: 'Roboto Mono', monospace;
+#salaryUpdateBtn {
+  font-family: 'Roboto Mono', monospace;
 }
 
-.categorySelectRegion
-{
-    text-align: center;
-    display: flex;
-    justify-content: space-evenly;
-    flex-flow: row wrap;
-    background-color: darkgray !important;
+.categorySelectRegion {
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  flex-flow: row wrap;
+  background-color: darkgray !important;
 }
 
-.categoryBtn
-{
-    font-weight: bold !important;
+.categoryBtn {
+  font-weight: bold !important;
 }
 
-.catIcon
-{
-    font-size: 20px;
-    margin: 0 10px 0 0;
+.catIcon {
+  font-size: 20px;
+  margin: 0 10px 0 0;
 }
 
-.categoryBtn:hover
-{
-    background-color: black !important;
-    color: white !important;
-    font-weight: bolder !important;
+.categoryBtn:hover {
+  background-color: black !important;
+  color: white !important;
+  font-weight: bolder !important;
 }
 
-#homeItem
-{
-    display: flex;
-    justify-content: center;
+#homeItem {
+  display: flex;
+  justify-content: center;
 }
 
-#homePaper
-{
-    width: 100%;
-    margin: auto;
-    background: rgba(46, 45, 45, 0.897);
+#homePaper {
+  width: 100%;
+  margin: auto;
+  background: rgba(46, 45, 45, 0.897);
 }
 
-#logBtn
-{
-    display: block;
-    padding: 0 40px;
-    text-align: center;
-    margin-top: 3px;
-    font-weight: bolder;
+#logBtn {
+  display: block;
+  padding: 0 40px;
+  text-align: center;
+  margin-top: 3px;
+  font-weight: bolder;
 }
 
-#logBtn:hover
-{
-    background: rgb(97, 18, 18);
-    color: white;
+#logBtn:hover {
+  background: rgb(97, 18, 18);
+  color: white;
 }
 
-#homeBtn
-{
-    display: block;
-    padding: 5px 25px;
-    line-height: .5;
-    margin: auto;
-    color: white;
-    border-radius: 50%;
+#homeBtn {
+  display: block;
+  padding: 5px 25px;
+  line-height: 0.5;
+  margin: auto;
+  color: white;
+  border-radius: 50%;
 }
 
-#homeBtn:hover
-{
-    background: white !important;
-    color: black !important;
+#homeBtn:hover {
+  background: white !important;
+  color: black !important;
 }
 
-#addExpenseSection
-{
-    background-color: lightgrey;
+#addExpenseSection {
+  background-color: lightgrey;
 }
 
-#toggleExpenseBtn
-{
-    color: darkslategray;
-    font-weight: bold;
+#toggleExpenseBtn {
+  color: darkslategray;
+  font-weight: bold;
 }
 
-#toggleExpenseBtn:hover
-{
-    background: darkslategray !important;
-    color: white;
-    font-weight: bolder;
+#toggleExpenseBtn:hover {
+  background: darkslategray !important;
+  color: white;
+  font-weight: bolder;
 }
 
-#addItem
-{
-    margin-bottom: 10px;
-    flex-direction: column;
+#addItem {
+  margin-bottom: 10px;
+  flex-direction: column;
 }
 
-#addPaper
-{
-    display: flex;
-    text-align: center;
+#addPaper {
+  display: flex;
+  text-align: center;
 }
 
-#expenseInputSection
-{
-    padding: 30px;
+#expenseInputSection {
+  padding: 30px;
 }
 
-@media(max-width: 959px)
-{
-    #profileHeader
-    {
-        
-    }
+@media (max-width: 565px) {
+  .expenseCatText {
+    display: none;
+  }
 }
 
-@media(max-width: 440px)
-{
-    .categoryBtn
-    {
-        padding: 0 !important;
-        margin: 0;
-    }
-
-    .expenseCatText
-    {
-        display: none;
-    }
-
-    .catIcon
-    {
-        
-    }
-}
-
-@media(max-width: 320px)
-{
-    .catIcon
-    {
-        
-    }
+@media (max-width: 440px) {
+  .categoryBtn {
+    padding: 0 !important;
+    margin: 0;
+  }
 }

@@ -23,6 +23,38 @@
   display: none;
 }
 
+.ovSubC {
+  font-family: 'Roboto Mono', monospace;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
+
+.ovSubI {
+  text-align: center;
+  margin: 5px 0 !important;
+}
+
+.ovP {
+  box-sizing: border-box;
+  padding: 10px;
+  background: rgb(247, 247, 247) !important;
+}
+
+.ovPercP {
+  border: 1px solid black;
+  padding: 10px;
+  background: rgba(254, 255, 216, 0.945) !important;
+}
+
+.ovI {
+  font-style: italic;
+}
+
+.percSpan {
+  font-weight: bolder;
+}
+
 @media (max-width: 620px) {
   .pieGridItem {
     display: none;

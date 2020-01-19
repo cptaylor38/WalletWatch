@@ -172,15 +172,13 @@ const Overview = ({ user }) => {
         )}
       </Grid>
       <Grid container id='mobileOverview'>
-        <Paper>
-          {recurringTotal !== null && nonRecurringTotal !== null ? (
-            <OverviewMobileSub
-              rTotal={recurringTotal}
-              nrTotal={nonRecurringTotal}
-              profile={profile}
-            />
-          ) : null}
-        </Paper>
+        {recurringTotal !== null && nonRecurringTotal !== null ? (
+          <OverviewMobileSub
+            rTotal={recurringTotal}
+            nrTotal={nonRecurringTotal}
+            profile={profile}
+          />
+        ) : null}
       </Grid>
     </>
   );
