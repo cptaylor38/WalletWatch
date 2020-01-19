@@ -14,7 +14,7 @@ const Overview = ({ user }) => {
   const [nonRecurringTotal, setNonRecurringTotal] = useState(null);
 
   useEffect(() => {
-    if (profile !== null) {
+    if (profile !== null && profile.expense.length > 0) {
       let financesTotal = 0;
       let livingTotal = 0;
       let healthTotal = 0;
