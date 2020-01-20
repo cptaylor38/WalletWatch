@@ -14,11 +14,7 @@ const Overview = ({ user }) => {
   const [nonRecurringTotal, setNonRecurringTotal] = useState(null);
 
   useEffect(() => {
-    if (
-      profile !== null &&
-      profile.expense !== null &&
-      profile.expense.length > 0
-    ) {
+    if (profile !== null) {
       console.log('profile', profile);
       console.log('profile.expense array', profile.expense);
       let financesTotal = 0;
@@ -117,6 +113,7 @@ const Overview = ({ user }) => {
 
   useEffect(() => {
     API.getHomeDisplay({ id: user }).then(response => {
+      console.log('response', response);
       setProfile(response.data);
     });
   }, []);
