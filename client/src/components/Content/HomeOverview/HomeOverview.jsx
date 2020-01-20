@@ -28,6 +28,7 @@ const Overview = ({ user }) => {
       let nonMonTra = 0;
 
       let nonRecTotal = 0;
+      console.log(profile);
       profile.expense.filter(item => {
         if (item.recurring === false) {
           if (
