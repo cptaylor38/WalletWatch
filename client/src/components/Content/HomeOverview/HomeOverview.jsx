@@ -15,8 +15,8 @@ const Overview = ({ user }) => {
 
   useEffect(() => {
     if (profile !== null && profile.expense.length > 0) {
-      console.log(profile);
-      console.log(profile.expense);
+      console.log('profile', profile);
+      console.log('profile.expense array', profile.expense);
       let financesTotal = 0;
       let livingTotal = 0;
       let healthTotal = 0;
@@ -30,7 +30,6 @@ const Overview = ({ user }) => {
       let nonMonTra = 0;
 
       let nonRecTotal = 0;
-      console.log(profile);
 
       profile.expense.filter(item => {
         if (item.recurring === false) {
