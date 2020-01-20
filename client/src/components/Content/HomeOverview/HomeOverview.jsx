@@ -29,7 +29,8 @@ const Overview = ({ user }) => {
 
       let nonRecTotal = 0;
       console.log(profile);
-      profile.expense.filter(item => {
+
+      profile.expense.map(item => {
         if (item.recurring === false) {
           if (
             moment(item.date).format('MMMM') ===
