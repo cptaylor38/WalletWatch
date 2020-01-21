@@ -126,6 +126,8 @@ app.get('/auth/logout', (req, res) => {
   res.redirect('/');
 });
 
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/PennyDb');
+
 app.use(routes);
 if (process.env.NODE_ENV === 'production') {
   // app.use(express.static(path.join(__dirname, 'client/build')));
@@ -134,8 +136,6 @@ if (process.env.NODE_ENV === 'production') {
     response.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
-
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/PennyDb');
 
 app.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
