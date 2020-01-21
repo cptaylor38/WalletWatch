@@ -4,8 +4,8 @@
   "description": "Expense Tracker",
   "main": "server.js",
   "scripts": {
-    "start": "NODE_ENV=production npm run start:prod",
-    "start:prod": "node server.js",
+    "start": "npm run start:prod",
+    "start:prod": "cross-env NODE_ENV=production node server.js",
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
     "client": "cd client && npm run start",
     "seed": "node scripts/seedDB.js",
@@ -47,5 +47,8 @@
     "path": "^0.12.7",
     "react-number-format": "^4.3.1",
     "react-particles-js": "^2.7.0"
+  },
+  "devDependencies": {
+    "cross-env": "^6.0.3"
   }
 }
