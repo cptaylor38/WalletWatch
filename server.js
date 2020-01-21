@@ -126,6 +126,7 @@ app.get('/auth/logout', (req, res) => {
   res.redirect('/');
 });
 
+app.use(routes);
 if (process.env.NODE_ENV === 'production') {
   // app.use(express.static(path.join(__dirname, 'client/build')));
   app.use(express.static(path.join(__dirname, 'client/build')));
@@ -135,8 +136,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/PennyDb');
-
-app.use(routes);
 
 app.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
