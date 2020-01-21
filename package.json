@@ -11,7 +11,7 @@
     "seed": "node scripts/seedDB.js",
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
-    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "repository": {
     "type": "git",
@@ -46,9 +46,7 @@
     "passport-google-oauth20": "^2.0.0",
     "path": "^0.12.7",
     "react-number-format": "^4.3.1",
-    "react-particles-js": "^2.7.0"
-  },
-  "devDependencies": {
+    "react-particles-js": "^2.7.0",
     "cross-env": "^6.0.3"
   }
 }
