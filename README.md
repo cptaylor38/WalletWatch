@@ -13,29 +13,12 @@ Features and site overview:
 This was meant to be a small MERN exercise with practice using Material Ui and Passport auth that I hadn't used before.
 
 It's still a bit of a work in progress with a few bugs:
-\*Design changes - i.e.
 
-Design flaws:
-
-\*Displaying empty pie charts on load for someone with no expenses. Should be replaced with some helper text.
+Design notes:
 
 \*The pages, as they are, could use a bit more content and the categories currently do not filter out expenses from other months. The pie chart and mobile version of the overview do.
 
-\*Might be an overly cluttered ui for relatively simple functionality.
-
-\*Expense form cancel button has misteriously vanished - need to add back or reset form content upon toggle.
-
-\*General ui improvements and design - i.e. extra paper component from material ui an empty expense column helper text.
-
-\*Nav bar and better mobile layout
-
-\*Data population and state transitions - loading visuals could be added.
-
-Bugs
-
-\*Expense form toggle button must be clicked twice to launch the form.
-
-\*Facebook passport login does not currently function due to my server's security settings.
+\*Data population and state transitions could be handled better.
 
 Attached images - and deployed [site:](http://penny-checkbook.herokuapp.com/)
 
