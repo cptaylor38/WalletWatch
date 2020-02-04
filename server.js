@@ -6,7 +6,6 @@ const mongoose = require('mongoose');
 const routes = require('./routes');
 const PORT = process.env.PORT || 5000;
 const passport = require('passport');
-const FacebookStrategy = require('passport-facebook').Strategy;
 const keys = require('./config');
 const cookieSession = require('cookie-session');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
@@ -20,35 +19,6 @@ passport.deserializeUser((id, cb) => {
     cb(null, user);
   });
 });
-
-passport.use(
-  new FacebookStrategy(
-    {
-      clientID: keys.FACEBOOK.clientID,
-      clientSecret: keys.FACEBOOK.clientSecret,
-      callbackURL: '/auth/facebook/callback'
-    },
-    (accessToken, refreshToken, profile, cb) => {
-      User.findOne({ username: profile.displayName }).then(currentUser => {
-        if (currentUser) {
-          if (currentUser.facebookId !== profile.id) {
-            User.findOneAndUpdate({ facebookId: profile.id })
-              .then(updatedUser => cb(null, updatedUser))
-              .catch(err => console.log(err));
-          } else {
-            cb(null, currentUser);
-          }
-        } else {
-          new User({ username: profile.displayName, facebookId: profile.id })
-            .save()
-            .then(
-              (newUser => cb(null, newUser)).catch(err => console.log(err))
-            );
-        }
-      });
-    }
-  )
-);
 
 passport.use(
   new GoogleStrategy(
@@ -94,15 +64,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.get('/auth/facebook', passport.authenticate('facebook'));
-app.get(
-  '/auth/facebook/callback',
-  passport.authenticate('facebook'),
-  (req, res) => {
-    res.redirect('/profile');
-  }
-);
-
 app.get(
   '/auth/google',
   passport.authenticate('google', {

@@ -155,9 +155,34 @@ html {
   padding: 30px;
 }
 
+@media (max-width: 770px) {
+  #welcomeH {
+    font-size: 12px;
+  }
+  #logBtn {
+    font-size: 12px;
+  }
+  #homeBtn {
+    font-size: 12px;
+  }
+  #gridDate {
+    font-size: 12px;
+  }
+}
+
 @media (max-width: 565px) {
   .expenseCatText {
     display: none;
+  }
+}
+
+@media (max-width: 492px) {
+  #homeBtnG {
+    order: 3;
+  }
+  #profileHeader {
+    flex-direction: column;
+    padding: 0;
   }
 }
 

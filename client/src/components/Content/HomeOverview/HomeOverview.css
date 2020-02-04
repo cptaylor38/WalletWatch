@@ -19,8 +19,10 @@
   padding: 20px;
 }
 
-#mobileOverview {
-  display: none;
+.ovAlt {
+  font-family: 'Roboto Mono', monospace;
+  text-align: center;
+  padding: 10px;
 }
 
 .ovSubC {
@@ -58,9 +60,5 @@
 @media (max-width: 620px) {
   .pieGridItem {
     display: none;
-  }
-
-  #mobileOverview {
-    display: block;
   }
 }

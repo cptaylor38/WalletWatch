@@ -62,7 +62,7 @@ const OverviewMobileSub = ({ profile, nrTotal, rTotal }) => {
         <Paper className='ovP'>
           <header>
             <span>Budget remaining: </span>
-            {format$(rTotal + nrTotal)}
+            {format$(profile.salary - (rTotal + nrTotal))}
           </header>
         </Paper>
       </Grid>

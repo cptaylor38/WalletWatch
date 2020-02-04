@@ -120,7 +120,7 @@ const Overview = ({ user }) => {
   return (
     <>
       <Grid item xs={12} sm={12} md={6} lg={6} className='pieGridItem'>
-        {doughnut !== null ? (
+        {doughnut !== null && recurringTotal > 0 ? (
           <Paper id='recurringPiePaper'>
             <Doughnut
               id='recurringPie'
@@ -140,11 +140,17 @@ const Overview = ({ user }) => {
             />
           </Paper>
         ) : (
-          <p>Loading</p>
+          <Paper className='ovAlt'>
+            <p>
+              This section evaluates your recurring charges, i.e. Credit card
+              charges, school loan payments, phone payments, etc. Click 'Add
+              Expense' above to add an item.
+            </p>
+          </Paper>
         )}
       </Grid>
       <Grid item xs={12} sm={12} md={6} lg={6} className='pieGridItem'>
-        {nonMonDoughnut !== null ? (
+        {nonMonDoughnut !== null && nonRecurringTotal > 0 ? (
           <Paper id='recurringPiePaper'>
             <Doughnut
               id='recurringPie'
@@ -164,17 +170,30 @@ const Overview = ({ user }) => {
             />
           </Paper>
         ) : (
-          <p>Loading</p>
+          <Paper className='ovAlt'>
+            <p>
+              This section evaluates your one-time charges, i.e. meals, gas,
+              movie tickets, etc. Click 'Add Expense' above to add an item.
+            </p>
+          </Paper>
         )}
       </Grid>
       <Grid container id='mobileOverview'>
-        {recurringTotal !== null && nonRecurringTotal !== null ? (
+        {recurringTotal !== null &&
+        nonRecurringTotal !== null &&
+        profile.salary > 0 ? (
           <OverviewMobileSub
             rTotal={recurringTotal}
             nrTotal={nonRecurringTotal}
             profile={profile}
           />
-        ) : null}
+        ) : (
+          <Paper className='ovAlt'>
+            This section provides an overview of your charges and how they
+            affect your monthly income. Please ensure your salary is updated
+            above.
+          </Paper>
+        )}
       </Grid>
     </>
   );
