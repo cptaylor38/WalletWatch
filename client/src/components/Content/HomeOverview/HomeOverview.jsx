@@ -71,7 +71,7 @@ const Overview = ({ user }) => {
       setRecurringTotal(total);
       let nonMonTotal =
         nonMonFin + nonMonLiv + nonMonHea + nonMonLei + nonMonTra;
-      nonRecurringTotal(nonMonTotal);
+      setNonRecurringTotal(nonMonTotal);
 
       setDoughnut({
         labels: ['Finances', 'Living', 'Health', 'Leisure', 'Travel'],
