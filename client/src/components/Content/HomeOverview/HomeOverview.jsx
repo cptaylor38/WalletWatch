@@ -31,7 +31,7 @@ const Overview = ({ user }) => {
 
       let nonRecTotal = 0;
 
-      profile.expense.filter(item => {
+      profile.expense.filter((item) => {
         if (item.recurring === false) {
           if (
             moment(item.date).format('MMMM') ===
@@ -44,7 +44,7 @@ const Overview = ({ user }) => {
         setNonRecurringTotal(nonRecTotal);
       });
 
-      profile.expense.map(item => {
+      profile.expense.map((item) => {
         switch (item.category) {
           case 'finances':
             if (item.monthly === true) return (financesTotal += item.amount);
@@ -71,6 +71,7 @@ const Overview = ({ user }) => {
       setRecurringTotal(total);
       let nonMonTotal =
         nonMonFin + nonMonLiv + nonMonHea + nonMonLei + nonMonTra;
+      nonRecurringTotal(nonMonTotal);
 
       setDoughnut({
         labels: ['Finances', 'Living', 'Health', 'Leisure', 'Travel'],
@@ -80,7 +81,7 @@ const Overview = ({ user }) => {
               'en-US',
               {
                 style: 'currency',
-                currency: 'USD'
+                currency: 'USD',
               }
             )}`,
             backgroundColor: ['#5A4218', 'green', 'red', 'gold', 'aquamarine'],
@@ -89,10 +90,10 @@ const Overview = ({ user }) => {
               livingTotal,
               healthTotal,
               leisureTotal,
-              travelTotal
-            ]
-          }
-        ]
+              travelTotal,
+            ],
+          },
+        ],
       });
 
       setNonMonDoughnut({
@@ -101,18 +102,18 @@ const Overview = ({ user }) => {
           {
             label: `Msc. Charges - ${nonMonTotal.toLocaleString('en-US', {
               style: 'currency',
-              currency: 'USD'
+              currency: 'USD',
             })}`,
             backgroundColor: ['#5A4218', 'green', 'red', 'gold', 'aquamarine'],
-            data: [nonMonFin, nonMonLiv, nonMonHea, nonMonLei, nonMonTra]
-          }
-        ]
+            data: [nonMonFin, nonMonLiv, nonMonHea, nonMonLei, nonMonTra],
+          },
+        ],
       });
     }
   }, [profile]);
 
   useEffect(() => {
-    API.getHomeDisplay({ id: user }).then(response => {
+    API.getHomeDisplay({ id: user }).then((response) => {
       console.log('response', response);
       setProfile(response.data);
     });
@@ -129,13 +130,13 @@ const Overview = ({ user }) => {
                 title: {
                   display: true,
                   text: doughnut.datasets[0].label,
-                  fontSize: 12
+                  fontSize: 12,
                 },
                 legend: {
                   display: true,
                   position: 'bottom',
-                  maintainAspectRation: false
-                }
+                  maintainAspectRation: false,
+                },
               }}
             />
           </Paper>
@@ -159,13 +160,13 @@ const Overview = ({ user }) => {
                 title: {
                   display: true,
                   text: nonMonDoughnut.datasets[0].label,
-                  fontSize: 12
+                  fontSize: 12,
                 },
                 legend: {
                   display: true,
                   position: 'bottom',
-                  maintainAspectRation: false
-                }
+                  maintainAspectRation: false,
+                },
               }}
             />
           </Paper>
