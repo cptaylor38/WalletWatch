@@ -87,7 +87,10 @@ app.get('/auth/logout', (req, res) => {
   res.redirect('/');
 });
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/PennyDb');
+mongoose.connect(`${process.env.MONGODB_URI}`, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+});
 
 app.use(routes);
 app.use(express.static(path.join(__dirname, 'client/build')));
