@@ -25,7 +25,7 @@ passport.use(
     {
       clientID: keys.GOOGLE.clientID,
       clientSecret: keys.GOOGLE.clientSecret,
-      callbackURL: '/auth/google/callback'
+      callbackURL: 'https://penny-checkbook.herokuapp.com/auth/google/callback'
     },
     (accessToken, refreshToken, profile, cb) => {
       User.findOne({ username: profile.displayName }).then(currentUser => {
