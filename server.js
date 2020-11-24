@@ -25,7 +25,7 @@ passport.use(
     {
       clientID: keys.GOOGLE.clientID,
       clientSecret: keys.GOOGLE.clientSecret,
-      callbackURL: '/auth/google/callback'
+      callbackURL: 'w'
     },
     (accessToken, refreshToken, profile, cb) => {
       User.findOne({ username: profile.displayName }).then(currentUser => {
@@ -70,21 +70,14 @@ app.get(
     scope: ['profile', 'email'],
   })
 );
-app.get(
-  '/auth/google/callback',
-  passport.authenticate('google', {
-    successRedirect: '/profile',
-    failureRedirect: '/login'
-  }),
-);
 
-// app.get(
-//   '/auth/google/callback',
-//   passport.authenticate('google'),
-//   (req, res) => {
-//     res.redirect('/profile');
-//   }
-// );
+app.get(
+  'https://penny-checkbook.herokuapp.com/auth/google/callback',
+  passport.authenticate('google'),
+  (req, res) => {
+    res.redirect('/profile');
+  }
+);
 
 app.get('/user', (req, res) => {
   res.send(req.user);
