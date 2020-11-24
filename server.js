@@ -8,7 +8,8 @@ const PORT = process.env.PORT || 5000;
 const passport = require('passport');
 const keys = require('./config');
 const cookieSession = require('cookie-session');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
+// const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const GoogleStrategy = require('passport-google-oauth').OAuthStrategy;
 const User = require('./models/users');
 
 passport.serializeUser((user, cb) => {
@@ -72,7 +73,7 @@ app.get(
 );
 
 app.get(
-  'https://penny-checkbook.herokuapp.com/auth/google/callback',
+  '/auth/google/callback',
   passport.authenticate('google'),
   (req, res) => {
     res.redirect('/profile');
