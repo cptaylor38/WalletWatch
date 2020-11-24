@@ -67,16 +67,24 @@ app.use(express.json());
 app.get(
   '/auth/google',
   passport.authenticate('google', {
-    scope: ['profile', 'email']
+    scope: ['profile', 'email'],
   })
 );
 app.get(
   '/auth/google/callback',
-  passport.authenticate('google'),
-  (req, res) => {
-    res.redirect('/profile');
-  }
+  passport.authenticate('google', {
+    successRedirect: '/profile',
+    failureRedirect: '/login'
+  }),
 );
+
+// app.get(
+//   '/auth/google/callback',
+//   passport.authenticate('google'),
+//   (req, res) => {
+//     res.redirect('/profile');
+//   }
+// );
 
 app.get('/user', (req, res) => {
   res.send(req.user);
