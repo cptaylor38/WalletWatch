@@ -8,8 +8,7 @@ const PORT = process.env.PORT || 5000;
 const passport = require('passport');
 const keys = require('./config');
 const cookieSession = require('cookie-session');
-// const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const GoogleStrategy = require('passport-google-oauth').OAuthStrategy;
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('./models/users');
 
 passport.serializeUser((user, cb) => {
@@ -26,7 +25,7 @@ passport.use(
     {
       clientID: keys.GOOGLE.clientID,
       clientSecret: keys.GOOGLE.clientSecret,
-      callbackURL: 'w'
+      callbackURL: '/auth/google/callback'
     },
     (accessToken, refreshToken, profile, cb) => {
       User.findOne({ username: profile.displayName }).then(currentUser => {
