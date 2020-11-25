@@ -28,24 +28,29 @@ passport.use(
       callbackURL: '/auth/google/callback'
     },
     (accessToken, refreshToken, profile, cb) => {
-      User.findOne({ username: profile.displayName }).then(currentUser => {
-        if (currentUser) {
-          if (currentUser.googleId !== profile.id) {
-            User.findOneAndUpdate({ googleId: profile.id }).then(
-              updatedUser => {
-                cb(null, updatedUser);
-              }
-            );
+      try{
+        User.findOne({ username: profile.displayName }).then(currentUser => {
+          if (currentUser) {
+            if (currentUser.googleId !== profile.id) {
+              User.findOneAndUpdate({ googleId: profile.id }).then(
+                updatedUser => {
+                  cb(null, updatedUser);
+                }
+              );
+            } else {
+              cb(null, currentUser);
+            }
           } else {
-            cb(null, currentUser);
+            new User({ username: profile.displayName, googleId: profile.id })
+              .save()
+              .then(newUser => cb(null, newUser))
+              .catch(err => console.log(err));
           }
-        } else {
-          new User({ username: profile.displayName, googleId: profile.id })
-            .save()
-            .then(newUser => cb(null, newUser))
-            .catch(err => console.log(err));
-        }
-      });
+        });
+      }
+      catch(err){
+        res.send(err);
+      }
     }
   )
 );
@@ -94,7 +99,7 @@ mongoose.connect(`${process.env.MONGODB_URI}`, {
 });
 
 app.use(routes);
-app.use(express.static(path.join(__dirname, 'client/build')));
+// app.use(express.static(path.join(__dirname, 'client/build')));
 app.get('*', (request, response) => {
   response.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
 });
