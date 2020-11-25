@@ -46,7 +46,7 @@ passport.use(
               .then(newUser => cb(null, newUser))
               .catch(err => console.log(err));
           }
-        });
+        }).catch((response)=> console.log(response));
       }
       catch(err){
         res.send(err);
