@@ -99,7 +99,7 @@ mongoose.connect(`${process.env.MONGODB_URI}`, {
 });
 
 app.use(routes);
-// app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, 'client/build')));
 app.get('*', (request, response) => {
   response.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
 });
