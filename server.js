@@ -11,6 +11,12 @@ const cookieSession = require('cookie-session');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('./models/users');
 
+
+mongoose.connect(`${process.env.MONGODB_URI}`, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+});
+
 passport.serializeUser((user, cb) => {
   cb(null, user);
 });
@@ -93,10 +99,7 @@ app.get('/auth/logout', (req, res) => {
   res.redirect('/');
 });
 
-mongoose.connect(`${process.env.MONGODB_URI}`, {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-});
+
 
 app.use(routes);
 app.use(express.static(path.join(__dirname, 'client/build')));
