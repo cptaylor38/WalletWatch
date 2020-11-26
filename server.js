@@ -34,29 +34,34 @@ passport.use(
       callbackURL: '/auth/google/callback'
     },
     (accessToken, refreshToken, profile, cb) => {
-      try{
-        User.findOne({ username: profile.displayName }).then(currentUser => {
-          if (currentUser) {
-            if (currentUser.googleId !== profile.id) {
-              User.findOneAndUpdate({ googleId: profile.id }).then(
-                updatedUser => {
-                  cb(null, updatedUser);
+        User.findOne({ username: profile.displayName })
+            .then(currentUser => 
+              {
+                if (currentUser) 
+                {
+                  if (currentUser.googleId !== profile.id) 
+                  {
+                    User.findOneAndUpdate({ googleId: profile.id })
+                        .then(updatedUser => cb(null, updatedUser))
+                        .catch(err => {
+                          res.send(err);
+                          console.log(err);
+                        });
+                  } 
+                  else 
+                  {
+                    cb(null, currentUser);
+                  }
                 }
-              );
-            } else {
-              cb(null, currentUser);
-            }
-          } else {
-            new User({ username: profile.displayName, googleId: profile.id })
-              .save()
-              .then(newUser => cb(null, newUser))
-              .catch(err => console.log(err));
-          }
-        }).catch((response)=> console.log(response));
-      }
-      catch(err){
-        res.send(err);
-      }
+                else 
+                {
+                  new User({ username: profile.displayName, googleId: profile.id })
+                          .save()
+                          .then(newUser => cb(null, newUser))
+                          .catch(err => console.log(err));
+                }
+            })
+            .catch((response)=> console.log(response));
     }
   )
 );
@@ -75,15 +80,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.get(
-  '/auth/google',
+app.get('/auth/google',
   passport.authenticate('google', {
     scope: ['profile', 'email'],
   })
 );
 
-app.get(
-  '/auth/google/callback',
+app.get('/auth/google/callback',
   passport.authenticate('google'),
   (req, res) => {
     res.redirect('/profile');
