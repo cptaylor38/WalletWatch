@@ -12,10 +12,15 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('./models/users');
 
 
-mongoose.connect(`${process.env.MONGODB_URI}`, {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-});
+try{
+  mongoose.connect(`${process.env.MONGODB_URI}`, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+  });
+}
+catch(err){
+  console.log(err);
+}
 
 passport.serializeUser((user, cb) => {
   cb(null, user);
