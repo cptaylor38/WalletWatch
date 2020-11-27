@@ -88,12 +88,13 @@ app.use(express.json());
 app.get('/auth/google',
   passport.authenticate('google', {
     scope: ['profile', 'email'],
-  })
+  }).then((response)=> console.log(response))
 );
 
 app.get('/auth/google/callback',
   passport.authenticate('google'),
   (req, res) => {
+    console.log(req, '/auth/google/callback')
     res.redirect('/profile');
   }
 );
