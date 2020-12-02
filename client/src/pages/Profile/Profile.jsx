@@ -62,13 +62,6 @@ const Profile = () => {
 
   return (
     <Container maxWidth='xl' id='profilePage'>
-      <div id='backgroundContainer'>
-        <video autoPlay loop muted id='backgroundVid'>
-          <source src={video} type='video/mp4'></source>
-          <source src={ogvideo} type='video/ogg'></source>
-          <source src={webmglobe} type='video/webm'></source>
-        </video>
-      </div>
       <Grid container id='profileHeader'>
         <Grid item id='logoutSection'>
           {selected ? (
