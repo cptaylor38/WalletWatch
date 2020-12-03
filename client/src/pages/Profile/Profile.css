@@ -7,13 +7,6 @@ html {
   min-height: 100vh;
 }
 
-#backgroundContainer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -1;
-}
-
 #profileHeader {
   display: flex;
   align-items: center;
@@ -52,11 +45,6 @@ html {
   padding-bottom: 25px;
 }
 
-#welcomeH {
-  font-family: 'Roboto Mono', monospace;
-  font-size: 20px;
-}
-
 #currentSalP {
   font-family: 'Roboto Mono', monospace;
 }
@@ -73,21 +61,6 @@ html {
   background-color: darkgray !important;
 }
 
-.categoryBtn {
-  font-weight: bold !important;
-}
-
-.catIcon {
-  font-size: 20px;
-  margin: 0 10px 0 0;
-}
-
-.categoryBtn:hover {
-  background-color: black !important;
-  color: white !important;
-  font-weight: bolder !important;
-}
-
 #homeItem {
   display: flex;
   justify-content: center;
@@ -97,33 +70,6 @@ html {
   width: 100%;
   margin: auto;
   background: rgba(46, 45, 45, 0.897);
-}
-
-#logBtn {
-  display: block;
-  padding: 0 40px;
-  text-align: center;
-  margin-top: 3px;
-  font-weight: bolder;
-}
-
-#logBtn:hover {
-  background: rgb(97, 18, 18);
-  color: white;
-}
-
-#homeBtn {
-  display: block;
-  padding: 5px 25px;
-  line-height: 0.5;
-  margin: auto;
-  color: white;
-  border-radius: 50%;
-}
-
-#homeBtn:hover {
-  background: white !important;
-  color: black !important;
 }
 
 #addExpenseSection {

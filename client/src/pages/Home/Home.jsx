@@ -1,22 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './Home.css';
 import SignIn from '../../components/SignIn/SignIn';
-import { Power2 } from 'gsap/TweenMax';
-import TimelineMax from 'gsap/TimelineMax';
 
 const Home = () => {
-
-    const t1 = new TimelineMax()
-
-    useEffect(() => {
-        t1.to('#pennyImg', 3, { opacity: 1, ease: Power2.easeOut }, .3);
-        t1.to('#hHeader', 5, { opacity: 1, ease: Power2.easeOut }, .5);
-        t1.to('#hPar1', 3, { opacity: 1, ease: Power2.easeOut }, 1.5);
-        t1.to('#hPar2', 3, { opacity: 1, ease: Power2.easeOut }, 2.5);
-        t1.to('.hButton', 5, { opacity: 1, ease: Power2.easeOut }, 3.5);
-        t1.to('.loginBtn', 3, { opacity: 1, ease: Power2.easeOut }, 4);
-        t1.to('#signInTxt', 3, { opacity: 1, ease: Power2.easeOut }, 4);
-    }, [t1])
 
     return (
         <>

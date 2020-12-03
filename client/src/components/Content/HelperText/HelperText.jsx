@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './HelperText.css';
-import { Paper } from '@material-ui/core';
 
 const Header = ({ monthly, display }) => {
   const [text, setText] = useState('...');

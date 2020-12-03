@@ -1,21 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react';
 import UserProvider from '../../contexts/UserProvider';
 import { Grid, Container, Paper, Button } from '@material-ui/core';
-import {
-  FaHome,
-  FaMoneyBill,
-  FaRegLightbulb,
-  FaHeartbeat,
-  FaGamepad,
-  FaCarSide
-} from 'react-icons/fa';
 import SalaryInput from '../../components/SalaryInput/SalaryInput';
 import './Profile.css';
 import Content from '../../components/Content/Content';
-import moment from 'moment';
-const video = require('../../assets/images/globe.mp4');
-const ogvideo = require('../../assets/images/ogglobe.ogv');
-const webmglobe = require('../../assets/images/webmglobe.webm');
+import Navbar from '../../components/Navbar/Nav';
 
 const Profile = () => {
   const [selected, setSelected] = useState(null);
@@ -24,14 +13,6 @@ const Profile = () => {
   const userData = useContext(UserProvider.context);
 
   useEffect(() => setSelected(userData), [userData]);
-
-  const expenseCategories = [
-    { style: { color: '#5A4218' }, name: 'Finances', icon: <FaMoneyBill /> },
-    { style: { color: 'green' }, name: 'Living', icon: <FaRegLightbulb /> },
-    { style: { color: 'red' }, name: 'Health', icon: <FaHeartbeat /> },
-    { style: { color: 'gold' }, name: 'Leisure', icon: <FaGamepad /> },
-    { style: { color: 'aquamarine' }, name: 'Travel', icon: <FaCarSide /> }
-  ];
 
   const showSalaryUpdate = () => {
     setSalarySection(true);
@@ -61,36 +42,9 @@ const Profile = () => {
   };
 
   return (
+    <>
+    <Navbar selected={selected} user={userData} setChosenCat={setChosenCat} categoryOnClick={categoryOnClick}/>
     <Container maxWidth='xl' id='profilePage'>
-      <Grid container id='profileHeader'>
-        <Grid item id='logoutSection'>
-          {selected ? (
-            <p id='welcomeH'>
-              Welcome, {selected.username}{' '}
-              <Button id='logBtn' variant='contained' href='/auth/logout'>
-                Log out
-              </Button>
-            </p>
-          ) : null}
-        </Grid>
-        <Grid item id='homeBtnG'>
-          {selected ? (
-            <>
-              <div className='homeSection'>
-                <Button id='homeBtn' onClick={() => setChosenCat('Home')}>
-                  <FaHome style={{ fontSize: '36px' }} />
-                  <p>Home</p>
-                </Button>
-              </div>
-            </>
-          ) : (
-            ''
-          )}
-        </Grid>
-        <Grid item id='gridDate'>
-          <p>{moment(Date.now()).format('dddd, LL')}</p>
-        </Grid>
-      </Grid>
       <Grid container id='gridSalary'>
         <Paper className='profHeaderSub' id='salaryPaper'>
           {selected && !salarySection ? (
@@ -119,32 +73,13 @@ const Profile = () => {
           )}
         </Paper>
       </Grid>
-      <Grid container id='expenseCategories'>
-        <Grid item xs={12} id='categoryNav'>
-          <Paper className='categorySelectRegion'>
-            {expenseCategories.map((item, index) => {
-              return (
-                <Button
-                  href='#text-buttons'
-                  style={item.style}
-                  onClick={() => categoryOnClick(item.name)}
-                  key={index}
-                  className='categoryBtn'
-                >
-                  <p className='catIcon'>{item.icon}</p>
-                  <p className='expenseCatText'>{item.name}</p>
-                </Button>
-              );
-            })}
-          </Paper>
-        </Grid>
-      </Grid>
       <Grid container id='chosenCatContainer'>
         <Grid item xs={12} className='chosenCatRegion'>
           {selected ? contentDisplay() : <p>Loading</p>}
         </Grid>
       </Grid>
     </Container>
+    </>
   );
 };
 

@@ -8,11 +8,11 @@
 .loginBtn {
   font-size: 64px;
   margin: auto;
+  color: cornflowerblue !important;
 }
 
 .loginBtn:hover > svg {
-  font-size: 68px;
-  color: black;
+  color: green;
 }
 
 #facebookBtn {
