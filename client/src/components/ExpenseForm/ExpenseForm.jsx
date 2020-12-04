@@ -11,7 +11,7 @@ import {
   RadioGroup,
   Radio,
   TextField,
-  Button
+  Button,
 } from '@material-ui/core';
 import DateFnsUtils from '@date-io/date-fns';
 import {
@@ -22,7 +22,7 @@ import NumberFormatCustom from './NumberFormatCustom';
 import './ExpenseForm.css';
 import API from '../../clientRoutes/API';
 
-const ExpenseForm = ({ user, propData, form, toggleForm, setRetrieve }) => {
+const ExpenseForm = ({ user, propData, form, toggleForm, setRetrieve, update}) => {
   const [category, setCategory] = useState('');
   const [radioValue, setRadioValue] = useState('');
   const [monthly, setMonthly] = useState(false);
@@ -95,7 +95,6 @@ const ExpenseForm = ({ user, propData, form, toggleForm, setRetrieve }) => {
       };
 
       API.updateExpense(dataObject).then(response => {
-        toggleForm(false);
         setRetrieve(true);
       });
     } else {
@@ -114,7 +113,6 @@ const ExpenseForm = ({ user, propData, form, toggleForm, setRetrieve }) => {
           title: title
         };
         API.createExpense(dataObject).then(res => {
-          document.querySelector('#expenseInputPaper').style.display = 'none';
           setAmount('');
           setRadioValue('');
           setMonthly(false);

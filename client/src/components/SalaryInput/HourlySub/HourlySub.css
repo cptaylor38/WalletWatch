@@ -1,52 +1,44 @@
-#hourlyContainer
-{
-    text-align: center;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+#hourlyContainer {
+  text-align: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
-#hourlyWageGrid
-{
-    padding: 10px;
+#hourlyWageGrid {
+  padding: 10px;
 }
 
-#weeklyGrid
-{
-    padding: 10px;
+#weeklyGrid {
+  padding: 10px;
 }
 
-.MuiOutlinedInput-root
-{
-    margin-top: 10px;
+.MuiOutlinedInput-root {
+  margin-top: 10px;
 }
 
-.MuiInputLabel-outlined
-{
-    margin-top: 10px;
+.MuiInputLabel-outlined {
+  margin-top: 10px;
 }
 
-#hourlySubmit
-{
-    margin-top: 10px;
+#hourlySubmit {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
-#salaryTotalP
-{
-    font-size: 22px;
+#salaryTotalP {
+  font-size: 16px;
 }
 
-@media(max-width: 440px)
-{
-    #hourlyContainer
-    {
-        display: flex;
-        flex-flow: column wrap;
-    }
+@media (max-width: 440px) {
+  #hourlyContainer {
+    display: flex;
+    flex-flow: column wrap;
+  }
 
-    #hourlyWageGrid
-    {
-        padding: 20px;
-        font-size: 20px;
-    }
+  #hourlyWageGrid {
+    padding: 20px;
+    font-size: 20px;
+  }
 }

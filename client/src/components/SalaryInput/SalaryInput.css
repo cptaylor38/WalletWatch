@@ -1,9 +1,15 @@
-.cbox
-{
-    color: black;
+.cbox {
+  color: black;
 }
 
-#salaryBackBtn
-{
-    margin-top: 10px;
+#salaryBackBtn {
+  margin-top: 10px;
+  color: black;
+  background: gainsboro;
+  margin-left: 1em;
+}
+
+#salaryBackBtn:hover {
+  background: rgb(75, 75, 75);
+  color: white;
 }

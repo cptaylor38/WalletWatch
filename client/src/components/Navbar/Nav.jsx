@@ -1,11 +1,12 @@
 import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import { Grid, Container, Paper, Button } from '@material-ui/core';
-import { FaHome, FaMoneyBill, FaRegLightbulb, FaHeartbeat, FaGamepad, FaCarSide } from 'react-icons/fa';
+import SalaryInput from '../../components/SalaryInput/SalaryInput';
+import { FaHome, FaMoneyBill, FaRegLightbulb, FaHeartbeat, FaGamepad, FaCarSide, FaEdit } from 'react-icons/fa';
 import './Nav.css';
 import moment from 'moment';
 
-const Nav = ({ user, setChosenCat, categoryOnClick }) => {
+const Nav = ({ user, setChosenCat, categoryOnClick, showSalaryUpdate, selected, salarySection, setSalarySection, setSelected }) => {
 
     const expenseCategories = [
         { style: { color: 'green' }, name: 'Finances', icon: <FaMoneyBill /> },
@@ -19,16 +20,43 @@ const Nav = ({ user, setChosenCat, categoryOnClick }) => {
         <>
             <AppBar position='static' id='siteNav'>
                 <Grid container id='navTop'>
-                <Grid item>{user ? <h3>Welcome, {user.username}</h3> : (<h3>Loading profile...</h3>)}</Grid>
-                <Grid item><p>{moment(Date.now()).format('dddd, LL')}</p></Grid>
-                <Grid item>
-                    <Button className='navBtn' id='homeBtn' variant='contained' onClick={()=> setChosenCat('Home')}><FaHome /></Button>
+                    <Grid item>
+                        {user ? <h3>Welcome, {user.username}</h3> : (<h3>Loading profile...</h3>)}
+                        <Grid item><p>{moment(Date.now()).format('dddd, LL')}</p></Grid>
+                    </Grid>
+                    <Grid item id='navSalary'>
+                    {selected && !salarySection ? (
+                        <>
+                            <p>Current yearly income:{' '}
+                            <span style={{color: 'rgb(159, 400, 159)'}}>
+                                {selected.salary.toLocaleString('en-US', 
+                                    { style: 'currency',
+                                      currency: 'USD'
+                                    })}
+                            </span>
+                            </p>
+                            <Button
+                                id='salaryUpdateBtn'
+                                variant='outlined'
+                                onClick={() => showSalaryUpdate()}>
+                                    <FaEdit />
+                            </Button>
+                        </>
+                    ) : (
+                            <SalaryInput
+                                selected={selected}
+                                setSelected={setSelected}
+                                setSalarySection={setSalarySection}/>
+                        )}
                 </Grid>
-                <Grid item>
-                    <Button className='navBtn' variant='contained' href='/auth/logout'>
-                        Sign Out
-                    </Button>
-                </Grid>
+                    <Grid item>
+                        <Button className='navBtn' id='homeBtn' variant='contained' onClick={()=> setChosenCat('Home')}><FaHome /></Button>
+                    </Grid>
+                    <Grid item>
+                        <Button className='navBtn' variant='contained' href='/auth/logout'>
+                            Sign Out
+                        </Button>
+                    </Grid>
                 </Grid>
                 <Grid container id='navBottom'>
                     <div id='categoryNav'>

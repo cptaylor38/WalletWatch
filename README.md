@@ -38,3 +38,7 @@ Next up on improvements:
 6. Look into other content and features, i.e. adds, api's, information pertaining to certain expenses like travel services, email/sms notifications on upcoming payments.
 7. Track payments.
 8. General expansion of functionality and styling improvements required.
+9. Fix data retrieval after expense submission, currently not loading new items.
+10. Add default value to expense form category when loaded under specific tabs.
+11. Clean up unnecessary html elements.
+12. Look into redux to clean up some state management/And Redux learning opportunity.

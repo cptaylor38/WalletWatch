@@ -49,10 +49,6 @@ html {
   font-family: 'Roboto Mono', monospace;
 }
 
-#salaryUpdateBtn {
-  font-family: 'Roboto Mono', monospace;
-}
-
 .categorySelectRegion {
   text-align: center;
   display: flex;
@@ -66,16 +62,6 @@ html {
   justify-content: center;
 }
 
-#homePaper {
-  width: 100%;
-  margin: auto;
-  background: rgba(46, 45, 45, 0.897);
-}
-
-#addExpenseSection {
-  background-color: lightgrey;
-}
-
 #toggleExpenseBtn {
   color: darkslategray;
   font-weight: bold;
@@ -85,20 +71,6 @@ html {
   background: darkslategray !important;
   color: white;
   font-weight: bolder;
-}
-
-#addItem {
-  margin-bottom: 10px;
-  flex-direction: column;
-}
-
-#addPaper {
-  display: flex;
-  text-align: center;
-}
-
-#expenseInputSection {
-  padding: 30px;
 }
 
 @media (max-width: 770px) {

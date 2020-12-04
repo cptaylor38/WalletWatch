@@ -1,18 +1,26 @@
-#expenseGrid
-{
-    display: flex;
-    justify-content: space-evenly;
-    flex-flow: row wrap;
-    align-items: center;
+#expenseGrid {
+  display: flex;
+  justify-content: space-evenly;
+  flex-flow: row wrap;
+  align-items: center;
 }
 
-#expenseGrid > .MuiGrid-item
-{
-    padding: 20px;
+#expenseGrid > .MuiGrid-item {
+  padding: 20px;
 }
 
-#monthlyGrid
-{
-    display: flex;
-    flex-direction: column;
+#monthlyGrid {
+  display: flex;
+  flex-direction: column;
+}
+
+#addExpenseSection {
+  display: flex;
+  justify-content: center;
+}
+
+#expenseInputSection {
+  padding: 30px;
+  display: flex;
+  justify-content: center;
 }

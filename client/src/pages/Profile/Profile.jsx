@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import UserProvider from '../../contexts/UserProvider';
 import { Grid, Container, Paper, Button } from '@material-ui/core';
-import SalaryInput from '../../components/SalaryInput/SalaryInput';
 import './Profile.css';
 import Content from '../../components/Content/Content';
 import Navbar from '../../components/Navbar/Nav';
@@ -43,36 +42,16 @@ const Profile = () => {
 
   return (
     <>
-    <Navbar selected={selected} user={userData} setChosenCat={setChosenCat} categoryOnClick={categoryOnClick}/>
+    <Navbar 
+      selected={selected} 
+      setSelected={setSelected}
+      user={userData} 
+      setChosenCat={setChosenCat} 
+      showSalaryUpdate={showSalaryUpdate}
+      salarySection={salarySection}
+      setSalarySection={setSalarySection}
+      categoryOnClick={categoryOnClick}/>
     <Container maxWidth='xl' id='profilePage'>
-      <Grid container id='gridSalary'>
-        <Paper className='profHeaderSub' id='salaryPaper'>
-          {selected && !salarySection ? (
-            <>
-              <p id='currentSalP'>
-                Current yearly income:{' '}
-                {selected.salary.toLocaleString('en-US', {
-                  style: 'currency',
-                  currency: 'USD'
-                })}
-              </p>
-              <Button
-                id='salaryUpdateBtn'
-                variant='outlined'
-                onClick={() => showSalaryUpdate()}
-              >
-                Update
-              </Button>
-            </>
-          ) : (
-            <SalaryInput
-              selected={selected}
-              setSelected={setSelected}
-              setSalarySection={setSalarySection}
-            />
-          )}
-        </Paper>
-      </Grid>
       <Grid container id='chosenCatContainer'>
         <Grid item xs={12} className='chosenCatRegion'>
           {selected ? contentDisplay() : <p>Loading</p>}

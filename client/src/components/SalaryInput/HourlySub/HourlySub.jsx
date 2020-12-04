@@ -33,13 +33,11 @@ const HourlySub = ({ handleWeekly, handleHourly, onSubmit, clearAlerts, hourly, 
                         onChange={handleWeekly}
                     />
                 </Grid>
-                <Grid item>
+                <Grid item xs={12} id='hourlySubmit'>
                     {salary && hourly && weekly ? <p id='salaryTotalP'>{salary.toLocaleString("en-US", {
                         style: "currency",
                         currency: "USD"
                     })}</p> : null}
-                </Grid>
-                <Grid item xs={12} id='hourlySubmit'>
                     <Button variant="outlined" type='submit'>Submit</Button>
                 </Grid>
             </Grid>

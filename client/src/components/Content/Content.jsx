@@ -47,7 +47,7 @@ const Content = ({ display, user }) => {
   };
 
   useEffect(() => {
-    let expenseDiv = document.querySelector('#expenseInputPaper');
+    let expenseDiv = document.querySelector('#expenseInputSection');
     if (expenseToggle === false) {
       expenseDiv.style.display = 'none';
     }
@@ -73,25 +73,21 @@ const Content = ({ display, user }) => {
         <>
           <Grid container id='addCont'>
             <Grid item xs={12} id='addItem'>
-              <Paper id='addPaper'>
-                <Grid item xs={12} id='addExpenseSection'>
+              <Grid item xs={12} id='addExpenseSection'>
                   <Button id='toggleExpenseBtn' onClick={expenseInputToggle}>
                     <p style={{ marginRight: 10 }}>Add Expense</p>{' '}
                     <FaFolderPlus style={{ fontSize: 24 }} />{' '}
                   </Button>
-                </Grid>
-              </Paper>
-              <Paper id='expenseInputPaper'>
-                <Grid item xs={12} id='expenseInputSection'>
+              </Grid>
+              <Grid item xs={12} id='expenseInputSection'>
                   {user ? (
                     <ExpenseForm
                       user={user}
-                      update={() => retrieveContent()}
-                      setRetrieve={setRetrieve}
+                        update={() => retrieveContent()}
+                        setRetrieve={setRetrieve}
                     />
                   ) : null}
                 </Grid>
-              </Paper>
             </Grid>
           </Grid>
           <Grid container id='homeContentGrid'>
@@ -102,21 +98,17 @@ const Content = ({ display, user }) => {
         <>
           <Grid container id='addCont'>
             <Grid item xs={12} id='addItem'>
-              <Paper id='addPaper'>
-                <Grid item xs={12} id='addExpenseSection'>
+              <Grid item xs={12} id='addExpenseSection'>
                   <Button id='toggleExpenseBtn' onClick={expenseInputToggle}>
                     <p style={{ marginRight: 10 }}>Add Expense</p>{' '}
                     <FaFolderPlus style={{ fontSize: 24 }} />{' '}
                   </Button>
-                </Grid>
-              </Paper>
-              <Paper id='expenseInputPaper'>
-                <Grid item xs={12} id='expenseInputSection'>
+              </Grid>
+              <Grid item xs={12} id='expenseInputSection'>
                   {user ? (
-                    <ExpenseForm user={user} setRetrieve={setRetrieve} />
+                    <ExpenseForm user={user} setRetrieve={setRetrieve}/>
                   ) : null}
-                </Grid>
-              </Paper>
+              </Grid>
             </Grid>
           </Grid>
           <Grid container id='contentContainer'>
