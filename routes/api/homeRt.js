@@ -6,7 +6,6 @@ router.route('/:id').get((req, res) => {
   db.User.findOne({ _id: req.params.id })
     .populate('expense')
     .exec((err, profile) => {
-      console.log(profile);
       if (err) throw err;
       res.json(profile);
     });

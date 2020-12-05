@@ -11,7 +11,6 @@ const UserProvider = ({ children }) => {
             .catch(err => console.log(err));
     }, [])
 
-
     return (
         <context.Provider value={user}>
             {children}

@@ -15,8 +15,6 @@ const Overview = ({ user }) => {
 
   useEffect(() => {
     if (profile !== null) {
-      console.log('profile', profile);
-      console.log('profile.expense array', profile.expense);
       let financesTotal = 0;
       let livingTotal = 0;
       let healthTotal = 0;
@@ -114,7 +112,6 @@ const Overview = ({ user }) => {
 
   useEffect(() => {
     API.getHomeDisplay({ id: user }).then((response) => {
-      console.log('response', response);
       setProfile(response.data);
     });
   }, []);
