@@ -5,6 +5,8 @@ import SalaryInput from '../../components/SalaryInput/SalaryInput';
 import { FaHome, FaMoneyBill, FaRegLightbulb, FaHeartbeat, FaGamepad, FaCarSide, FaEdit } from 'react-icons/fa';
 import './Nav.css';
 import moment from 'moment';
+import {useSelector} from 'react-redux';
+import {SignIn} from '../../redux/actions';
 
 const Nav = ({ user, setChosenCat, categoryOnClick, showSalaryUpdate, selected, salarySection, setSalarySection, setSelected }) => {
 
@@ -16,6 +18,8 @@ const Nav = ({ user, setChosenCat, categoryOnClick, showSalaryUpdate, selected, 
         { style: { color: 'rgb(68, 46, 16)' }, name: 'Travel', icon: <FaCarSide /> }
       ];
 
+    // const user = useSelector(state => state.user);
+
     return (
         <>
             <AppBar position='static' id='siteNav'>
@@ -25,11 +29,11 @@ const Nav = ({ user, setChosenCat, categoryOnClick, showSalaryUpdate, selected, 
                         <Grid item><p>{moment(Date.now()).format('dddd, LL')}</p></Grid>
                     </Grid>
                     <Grid item id='navSalary'>
-                    {selected && !salarySection ? (
+                    {user.salary && !salarySection ? (
                         <>
                             <p>Current yearly income:{' '}
                             <span style={{color: 'rgb(159, 400, 159)'}}>
-                                {selected.salary.toLocaleString('en-US', 
+                                {user.salary.toLocaleString('en-US', 
                                     { style: 'currency',
                                       currency: 'USD'
                                     })}
@@ -44,7 +48,7 @@ const Nav = ({ user, setChosenCat, categoryOnClick, showSalaryUpdate, selected, 
                         </>
                     ) : (
                             <SalaryInput
-                                selected={selected}
+                                user={user}
                                 setSelected={setSelected}
                                 setSalarySection={setSalarySection}/>
                         )}

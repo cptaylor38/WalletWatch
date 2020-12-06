@@ -4,14 +4,21 @@ import { Grid, Container} from '@material-ui/core';
 import './Profile.css';
 import Content from '../../components/Content/Content';
 import Navbar from '../../components/Navbar/Nav';
+import {useSelector, useDispatch} from 'react-redux';
+import {getData, initUser} from '../../redux/actions';
 
 const Profile = () => {
   const [selected, setSelected] = useState(null);
   const [salarySection, setSalarySection] = useState(false);
   const [chosenCat, setChosenCat] = useState('Home');
   const userData = useContext(UserProvider.context);
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.user)
 
   useEffect(() => setSelected(userData), [userData]);
+  useEffect(()=> {
+    if(userData) dispatch(getData(userData._id))
+  }, [userData])
 
   const showSalaryUpdate = () => {
     setSalarySection(true);
@@ -43,9 +50,8 @@ const Profile = () => {
   return (
     <>
     <Navbar 
-      selected={selected} 
       setSelected={setSelected}
-      user={userData} 
+      user={user} 
       setChosenCat={setChosenCat} 
       showSalaryUpdate={showSalaryUpdate}
       salarySection={salarySection}

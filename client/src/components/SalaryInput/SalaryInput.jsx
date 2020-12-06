@@ -5,7 +5,7 @@ import SalarySub from './SalarySub/SalarySub';
 import HourlySub from './HourlySub/HourlySub';
 import './SalaryInput.css';
 
-const SalaryInput = ({ selected, setSelected, setSalarySection }) => {
+const SalaryInput = ({ user, setSelected, setSalarySection }) => {
 
     const [salary, setSalary] = useState('');
     const [incomeRate, setincomeRate] = useState(null);
@@ -20,7 +20,7 @@ const SalaryInput = ({ selected, setSelected, setSalarySection }) => {
         }
         else {
             API.adjustSalary({
-                id: selected._id,
+                id: user._id,
                 salary: salary
             }).then(res => { setSelected(res.data); console.log(res.data); setSalarySection(false) })
                 .catch(err => console.log(err));
