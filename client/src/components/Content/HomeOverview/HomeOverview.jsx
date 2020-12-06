@@ -114,7 +114,7 @@ const Overview = ({ user }) => {
     API.getHomeDisplay({ id: user }).then((response) => {
       setProfile(response.data);
     });
-  }, []);
+  }, [user]);
   return (
     <>
       <Grid item xs={12} sm={12} md={6} lg={6} className='pieGridItem'>

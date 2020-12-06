@@ -1,6 +1,6 @@
 import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
-import { Grid, Container, Paper, Button } from '@material-ui/core';
+import { Grid, Button } from '@material-ui/core';
 import SalaryInput from '../../components/SalaryInput/SalaryInput';
 import { FaHome, FaMoneyBill, FaRegLightbulb, FaHeartbeat, FaGamepad, FaCarSide, FaEdit } from 'react-icons/fa';
 import './Nav.css';

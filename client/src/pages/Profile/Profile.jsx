@@ -4,21 +4,12 @@ import { Grid, Container} from '@material-ui/core';
 import './Profile.css';
 import Content from '../../components/Content/Content';
 import Navbar from '../../components/Navbar/Nav';
-import {useSelector, useDispatch} from 'react-redux';
-import { initializeUser } from '../../actions';
 
 const Profile = () => {
   const [selected, setSelected] = useState(null);
   const [salarySection, setSalarySection] = useState(false);
   const [chosenCat, setChosenCat] = useState('Home');
   const userData = useContext(UserProvider.context);
-  const user = useSelector(state => state.user);
-  const dispatch = useDispatch();
-
-  useEffect(()=> {
-    if(userData) dispatch(initializeUser(userData));
-    console.log(user);
-  }, [userData])
 
   useEffect(() => setSelected(userData), [userData]);
 
