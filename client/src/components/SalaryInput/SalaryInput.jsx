@@ -22,7 +22,10 @@ const SalaryInput = ({ user, setSelected, setSalarySection }) => {
             API.adjustSalary({
                 id: user._id,
                 salary: salary
-            }).then(res => { setSelected(res.data); console.log(res.data); setSalarySection(false) })
+            }).then(res => { 
+                //implement dispatch to update user state salary and remove setSelected prop
+                setSelected(res.data); console.log(res.data); setSalarySection(false) 
+            })
                 .catch(err => console.log(err));
         }
     }
