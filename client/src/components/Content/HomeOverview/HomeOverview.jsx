@@ -4,12 +4,13 @@ import { Doughnut } from 'react-chartjs-2';
 import API from '../../../clientRoutes/API';
 import { Paper, Grid } from '@material-ui/core';
 import OverviewMobileSub from './OverviewMobileSub';
+import {useDispatch} from 'react-redux';
 import moment from 'moment';
 
 const Overview = ({ user }) => {
   const [profile, setProfile] = useState(null);
-  const [doughnut, setDoughnut] = useState(null);
-  const [nonMonDoughnut, setNonMonDoughnut] = useState(null);
+  const [monthlyGraph, setMonthlyGraph] = useState(null);
+  const [nonMonthlyGraph, setNonMonthlyGraph] = useState(null);
   const [recurringTotal, setRecurringTotal] = useState(null);
   const [nonRecurringTotal, setNonRecurringTotal] = useState(null);
 
@@ -69,54 +70,38 @@ const Overview = ({ user }) => {
       });
 
       
-      // let recurringExpenseTotal = 
       expenseSumHelper(recurringExpenseObj, true);
-      // let nonRecurringExpenseTotal = 
       expenseSumHelper(nonRecurringExpenseObj, false);
-
-      setDoughnut({
-        labels: ['Finances', 'Living', 'Health', 'Leisure', 'Travel'],
-        datasets: [
-          {
-            label: `Recurring Monthly Expenses - ${recurringTotal.toLocaleString(
-              'en-US',
-              {
-                style: 'currency',
-                currency: 'USD',
-              }
-            )}`,
-            backgroundColor: ['#5A4218', 'green', 'red', 'gold', 'aquamarine'],
-            data: [
-              recurringExpenseObj.financesTotal,
-              recurringExpenseObj.livingTotal,
-              recurringExpenseObj.healthTotal,
-              recurringExpenseObj.leisureTotal,
-              recurringExpenseObj.travelTotal,
-            ],
-          },
-        ],
-      });
-
-      setNonMonDoughnut({
-        labels: ['Finances', 'Living', 'Health', 'Leisure', 'Travel'],
-        datasets: [
-          {
-            label: `Msc. Charges - ${nonRecurringTotal.toLocaleString('en-US', {
-              style: 'currency',
-              currency: 'USD',
-            })}`,
-            backgroundColor: ['#5A4218', 'green', 'red', 'gold', 'aquamarine'],
-            data: [
-              nonRecurringExpenseObj.financesTotal, 
-              nonRecurringExpenseObj.livingTotal, 
-              nonRecurringExpenseObj.healthTotal, 
-              nonRecurringExpenseObj.leisureTotal, 
-              nonRecurringExpenseObj.travelTotal]
-          },
-        ],
-      });
+      graphInitHelper(recurringExpenseObj, true);
+      graphInitHelper(nonRecurringExpenseObj, false);
     }
   }, [profile]);
+
+  const graphInitHelper = (expenseObj, recurring)=> {
+    let graph = {
+      labels: ['Finances', 'Living', 'Health', 'Leisure', 'Travel'],
+      datasets: [
+        {
+          label: `Recurring Monthly Expenses - ${expenseSumHelper(expenseObj).toLocaleString(
+            'en-US',
+            {
+              style: 'currency',
+              currency: 'USD',
+            }
+          )}`,
+          backgroundColor: ['#5A4218', 'green', 'red', 'gold', 'aquamarine'],
+          data: [
+            expenseObj.financesTotal,
+            expenseObj.livingTotal,
+            expenseObj.healthTotal,
+            expenseObj.leisureTotal,
+            expenseObj.travelTotal,
+          ],
+        },
+      ],
+    }
+    recurring ? setMonthlyGraph(graph) : setNonMonthlyGraph(graph);
+  }
 
   const expenseSumHelper = (expenseObj, recurring)=> {
     let total = 0;
@@ -124,7 +109,7 @@ const Overview = ({ user }) => {
       total += prop;
     }
     expenseObj === recurring ? setRecurringTotal(total) : setNonRecurringTotal(total);
-    // return total;
+    return total;
   }
 
   useEffect(() => {
@@ -132,18 +117,19 @@ const Overview = ({ user }) => {
       setProfile(response.data);
     });
   }, [user]);
+
   return (
     <>
       <Grid item xs={12} sm={12} md={6} lg={6} className='pieGridItem'>
-        {doughnut !== null && recurringTotal > 0 ? (
+        {monthlyGraph !== null && recurringTotal > 0 ? (
           <Paper id='recurringPiePaper'>
             <Doughnut
               id='recurringPie'
-              data={doughnut}
+              data={monthlyGraph}
               options={{
                 title: {
                   display: true,
-                  text: doughnut.datasets[0].label,
+                  text: monthlyGraph.datasets[0].label,
                   fontSize: 12,
                 },
                 legend: {
@@ -165,15 +151,15 @@ const Overview = ({ user }) => {
         )}
       </Grid>
       <Grid item xs={12} sm={12} md={6} lg={6} className='pieGridItem'>
-        {nonMonDoughnut !== null && nonRecurringTotal > 0 ? (
+        {nonMonthlyGraph !== null && nonRecurringTotal > 0 ? (
           <Paper id='recurringPiePaper'>
             <Doughnut
               id='recurringPie'
-              data={nonMonDoughnut}
+              data={nonMonthlyGraph}
               options={{
                 title: {
                   display: true,
-                  text: nonMonDoughnut.datasets[0].label,
+                  text: nonMonthlyGraph.datasets[0].label,
                   fontSize: 12,
                 },
                 legend: {
