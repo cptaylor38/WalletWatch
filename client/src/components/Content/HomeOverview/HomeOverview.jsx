@@ -4,18 +4,16 @@ import { Doughnut } from 'react-chartjs-2';
 import API from '../../../clientRoutes/API';
 import { Paper, Grid } from '@material-ui/core';
 import OverviewMobileSub from './OverviewMobileSub';
-import {useDispatch} from 'react-redux';
 import moment from 'moment';
 
 const Overview = ({ user }) => {
-  const [profile, setProfile] = useState(null);
   const [monthlyGraph, setMonthlyGraph] = useState(null);
   const [nonMonthlyGraph, setNonMonthlyGraph] = useState(null);
   const [recurringTotal, setRecurringTotal] = useState(null);
   const [nonRecurringTotal, setNonRecurringTotal] = useState(null);
 
   useEffect(() => {
-    if (profile !== null) {
+    if (user !== null) {
       let recurringExpenseObj = {
         financesTotal: 0,
         livingTotal: 0,
@@ -34,7 +32,7 @@ const Overview = ({ user }) => {
 
       let nonRecTotal = 0;
 
-      profile.expense.filter((item) => {
+      user.expense.filter((item) => {
         if (item.recurring === false) {
           if (
             moment(item.date).format('MMMM') ===
@@ -47,7 +45,7 @@ const Overview = ({ user }) => {
         setNonRecurringTotal(nonRecTotal);
       });
 
-      profile.expense.map((item) => {
+      user.expense.map((item) => {
         switch (item.category) {
           case 'finances':
             if (item.monthly) return (recurringExpenseObj.financesTotal += item.amount);
@@ -75,7 +73,7 @@ const Overview = ({ user }) => {
       graphInitHelper(recurringExpenseObj, true);
       graphInitHelper(nonRecurringExpenseObj, false);
     }
-  }, [profile]);
+  }, [user]);
 
   const graphInitHelper = (expenseObj, recurring)=> {
     let graph = {
@@ -112,11 +110,12 @@ const Overview = ({ user }) => {
     return total;
   }
 
-  useEffect(() => {
-    API.getHomeDisplay({ id: user }).then((response) => {
-      setProfile(response.data);
-    });
-  }, [user]);
+  //Is this necessary if I'm not modifying the user on this component?
+  // useEffect(() => {
+  //   API.getHomeDisplay({ id: user }).then((response) => {
+  //     setProfile(response.data);
+  //   });
+  // }, [user]);
 
   return (
     <>
@@ -182,11 +181,11 @@ const Overview = ({ user }) => {
       <Grid container id='mobileOverview'>
         {recurringTotal !== null &&
         nonRecurringTotal !== null &&
-        profile.salary > 0 ? (
+        user.salary > 0 ? (
           <OverviewMobileSub
             rTotal={recurringTotal}
             nrTotal={nonRecurringTotal}
-            profile={profile}
+            user={user}
           />
         ) : (
           <Paper className='ovAlt'>
