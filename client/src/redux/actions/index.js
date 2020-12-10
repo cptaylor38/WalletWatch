@@ -12,3 +12,10 @@ export const initUser = (data) => {
         payload: data
     }
 }
+
+export const updateProfile = (data) => {
+    return {
+        type: 'Update',
+        payload: data
+    }
+}

@@ -5,7 +5,7 @@ import './Profile.css';
 import Content from '../../components/Content/Content';
 import Navbar from '../../components/Navbar/Nav';
 import {useSelector, useDispatch} from 'react-redux';
-import {getData, initUser} from '../../redux/actions';
+import {getData } from '../../redux/actions';
 
 const Profile = () => {
   const [selected, setSelected] = useState(null);
@@ -18,7 +18,7 @@ const Profile = () => {
   useEffect(() => setSelected(userData), [userData]);
   useEffect(()=> {
     if(userData) dispatch(getData(userData._id))
-  }, [userData])
+  }, [userData, dispatch])
 
   const showSalaryUpdate = () => {
     setSalarySection(true);
@@ -50,7 +50,6 @@ const Profile = () => {
   return (
     <>
     <Navbar 
-      setSelected={setSelected}
       user={user} 
       setChosenCat={setChosenCat} 
       showSalaryUpdate={showSalaryUpdate}

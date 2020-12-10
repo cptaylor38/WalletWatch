@@ -3,15 +3,18 @@ import { Checkbox, Button, FormControlLabel } from '@material-ui/core';
 import API from '../../clientRoutes/API';
 import SalarySub from './SalarySub/SalarySub';
 import HourlySub from './HourlySub/HourlySub';
+import {useDispatch} from 'react-redux';
+import {updateProfile} from '../../redux/actions';
 import './SalaryInput.css';
 
-const SalaryInput = ({ user, setSelected, setSalarySection }) => {
+const SalaryInput = ({ user, setSalarySection }) => {
 
     const [salary, setSalary] = useState('');
     const [incomeRate, setincomeRate] = useState(null);
     const [hourly, setHourly] = useState('');
     const [weekly, setWeekly] = useState('');
     const [inputAlert, setInputAlert] = useState('')
+    const dispatch = useDispatch();
 
     const onSubmit = event => {
         event.preventDefault();
@@ -23,8 +26,8 @@ const SalaryInput = ({ user, setSelected, setSalarySection }) => {
                 id: user._id,
                 salary: salary
             }).then(res => { 
-                //implement dispatch to update user state salary and remove setSelected prop
-                setSelected(res.data); console.log(res.data); setSalarySection(false) 
+                dispatch(updateProfile(res.data))
+                setSalarySection(false) 
             })
                 .catch(err => console.log(err));
         }

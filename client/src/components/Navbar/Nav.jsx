@@ -5,10 +5,8 @@ import SalaryInput from '../../components/SalaryInput/SalaryInput';
 import { FaHome, FaMoneyBill, FaRegLightbulb, FaHeartbeat, FaGamepad, FaCarSide, FaEdit } from 'react-icons/fa';
 import './Nav.css';
 import moment from 'moment';
-import {useSelector} from 'react-redux';
-import {SignIn} from '../../redux/actions';
 
-const Nav = ({ user, setChosenCat, categoryOnClick, showSalaryUpdate, selected, salarySection, setSalarySection, setSelected }) => {
+const Nav = ({ user, setChosenCat, categoryOnClick, showSalaryUpdate, salarySection, setSalarySection }) => {
 
     const expenseCategories = [
         { style: { color: 'green' }, name: 'Finances', icon: <FaMoneyBill /> },
@@ -17,8 +15,6 @@ const Nav = ({ user, setChosenCat, categoryOnClick, showSalaryUpdate, selected, 
         { style: { color: 'gold' }, name: 'Leisure', icon: <FaGamepad /> },
         { style: { color: 'rgb(68, 46, 16)' }, name: 'Travel', icon: <FaCarSide /> }
       ];
-
-    // const user = useSelector(state => state.user);
 
     return (
         <>
@@ -49,7 +45,6 @@ const Nav = ({ user, setChosenCat, categoryOnClick, showSalaryUpdate, selected, 
                     ) : (
                             <SalaryInput
                                 user={user}
-                                setSelected={setSelected}
                                 setSalarySection={setSalarySection}/>
                         )}
                 </Grid>
