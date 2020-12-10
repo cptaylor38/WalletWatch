@@ -7,29 +7,32 @@ import OverviewMobileSub from './OverviewMobileSub';
 import moment from 'moment';
 
 const Overview = ({ user }) => {
-  const [profile, setProfile] = useState(null);
-  const [doughnut, setDoughnut] = useState(null);
-  const [nonMonDoughnut, setNonMonDoughnut] = useState(null);
+  const [monthlyGraph, setMonthlyGraph] = useState(null);
+  const [nonMonthlyGraph, setNonMonthlyGraph] = useState(null);
   const [recurringTotal, setRecurringTotal] = useState(null);
   const [nonRecurringTotal, setNonRecurringTotal] = useState(null);
 
   useEffect(() => {
-    if (profile !== null) {
-      let financesTotal = 0;
-      let livingTotal = 0;
-      let healthTotal = 0;
-      let leisureTotal = 0;
-      let travelTotal = 0;
+    if (user !== null) {
+      let recurringExpenseObj = {
+        financesTotal: 0,
+        livingTotal: 0,
+        healthTotal: 0,
+        leisureTotal: 0,
+        travelTotal: 0
+      }
 
-      let nonMonFin = 0;
-      let nonMonLiv = 0;
-      let nonMonHea = 0;
-      let nonMonLei = 0;
-      let nonMonTra = 0;
+      let nonRecurringExpenseObj = {
+        financesTotal: 0,
+        livingTotal: 0,
+        healthTotal: 0,
+        leisureTotal: 0,
+        travelTotal: 0
+      }
 
       let nonRecTotal = 0;
 
-      profile.expense.filter((item) => {
+      user.expense.filter((item) => {
         if (item.recurring === false) {
           if (
             moment(item.date).format('MMMM') ===
@@ -42,91 +45,90 @@ const Overview = ({ user }) => {
         setNonRecurringTotal(nonRecTotal);
       });
 
-      profile.expense.map((item) => {
+      user.expense.map((item) => {
         switch (item.category) {
           case 'finances':
-            if (item.monthly === true) return (financesTotal += item.amount);
-            else return (nonMonFin += item.amount);
+            if (item.monthly) return (recurringExpenseObj.financesTotal += item.amount);
+            else return (nonRecurringExpenseObj.financesTotal += item.amount);
           case 'living':
-            if (item.monthly === true) return (livingTotal += item.amount);
-            else return (nonMonLiv += item.amount);
+            if (item.monthly) return (recurringExpenseObj.livingTotal += item.amount);
+            else return (nonRecurringExpenseObj.livingTotal += item.amount);
           case 'health':
-            if (item.monthly === true) return (healthTotal += item.amount);
-            else return (nonMonHea += item.amount);
+            if (item.monthly) return (recurringExpenseObj.healthTotal += item.amount);
+            else return (nonRecurringExpenseObj.healthTotal += item.amount);
           case 'leisure':
-            if (item.monthly === true) return (leisureTotal += item.amount);
-            else return (nonMonLei += item.amount);
+            if (item.monthly) return (recurringExpenseObj.leisureTotal += item.amount);
+            else return (nonRecurringExpenseObj.leisureTotal += item.amount);
           case 'travel':
-            if (item.monthly === true) return (travelTotal += item.amount);
-            else return (nonMonTra += item.amount);
+            if (item.monthly) return (recurringExpenseObj.travelTotal += item.amount);
+            else return (nonRecurringExpenseObj.travelTotal += item.amount);
           default:
             return item;
         }
       });
 
-      let total =
-        financesTotal + livingTotal + healthTotal + leisureTotal + travelTotal;
-      setRecurringTotal(total);
-      let nonMonTotal =
-        nonMonFin + nonMonLiv + nonMonHea + nonMonLei + nonMonTra;
-      setNonRecurringTotal(nonMonTotal);
+      
+      expenseSumHelper(recurringExpenseObj, true);
+      expenseSumHelper(nonRecurringExpenseObj, false);
+      graphInitHelper(recurringExpenseObj, true);
+      graphInitHelper(nonRecurringExpenseObj, false);
+    }
+  }, [user]);
 
-      setDoughnut({
-        labels: ['Finances', 'Living', 'Health', 'Leisure', 'Travel'],
-        datasets: [
-          {
-            label: `Recurring Monthly Expenses - ${total.toLocaleString(
-              'en-US',
-              {
-                style: 'currency',
-                currency: 'USD',
-              }
-            )}`,
-            backgroundColor: ['#5A4218', 'green', 'red', 'gold', 'aquamarine'],
-            data: [
-              financesTotal,
-              livingTotal,
-              healthTotal,
-              leisureTotal,
-              travelTotal,
-            ],
-          },
-        ],
-      });
-
-      setNonMonDoughnut({
-        labels: ['Finances', 'Living', 'Health', 'Leisure', 'Travel'],
-        datasets: [
-          {
-            label: `Msc. Charges - ${nonMonTotal.toLocaleString('en-US', {
+  const graphInitHelper = (expenseObj, recurring)=> {
+    let graph = {
+      labels: ['Finances', 'Living', 'Health', 'Leisure', 'Travel'],
+      datasets: [
+        {
+          label: `Recurring Monthly Expenses - ${expenseSumHelper(expenseObj).toLocaleString(
+            'en-US',
+            {
               style: 'currency',
               currency: 'USD',
-            })}`,
-            backgroundColor: ['#5A4218', 'green', 'red', 'gold', 'aquamarine'],
-            data: [nonMonFin, nonMonLiv, nonMonHea, nonMonLei, nonMonTra],
-          },
-        ],
-      });
+            }
+          )}`,
+          backgroundColor: ['#5A4218', 'green', 'red', 'gold', 'aquamarine'],
+          data: [
+            expenseObj.financesTotal,
+            expenseObj.livingTotal,
+            expenseObj.healthTotal,
+            expenseObj.leisureTotal,
+            expenseObj.travelTotal,
+          ],
+        },
+      ],
     }
-  }, [profile]);
+    recurring ? setMonthlyGraph(graph) : setNonMonthlyGraph(graph);
+  }
 
-  useEffect(() => {
-    API.getHomeDisplay({ id: user }).then((response) => {
-      setProfile(response.data);
-    });
-  }, [user]);
+  const expenseSumHelper = (expenseObj, recurring)=> {
+    let total = 0;
+    for(let prop in expenseObj){
+      total += prop;
+    }
+    expenseObj === recurring ? setRecurringTotal(total) : setNonRecurringTotal(total);
+    return total;
+  }
+
+  //Is this necessary if I'm not modifying the user on this component?
+  // useEffect(() => {
+  //   API.getHomeDisplay({ id: user }).then((response) => {
+  //     setProfile(response.data);
+  //   });
+  // }, [user]);
+
   return (
     <>
       <Grid item xs={12} sm={12} md={6} lg={6} className='pieGridItem'>
-        {doughnut !== null && recurringTotal > 0 ? (
+        {monthlyGraph !== null && recurringTotal > 0 ? (
           <Paper id='recurringPiePaper'>
             <Doughnut
               id='recurringPie'
-              data={doughnut}
+              data={monthlyGraph}
               options={{
                 title: {
                   display: true,
-                  text: doughnut.datasets[0].label,
+                  text: monthlyGraph.datasets[0].label,
                   fontSize: 12,
                 },
                 legend: {
@@ -148,15 +150,15 @@ const Overview = ({ user }) => {
         )}
       </Grid>
       <Grid item xs={12} sm={12} md={6} lg={6} className='pieGridItem'>
-        {nonMonDoughnut !== null && nonRecurringTotal > 0 ? (
+        {nonMonthlyGraph !== null && nonRecurringTotal > 0 ? (
           <Paper id='recurringPiePaper'>
             <Doughnut
               id='recurringPie'
-              data={nonMonDoughnut}
+              data={nonMonthlyGraph}
               options={{
                 title: {
                   display: true,
-                  text: nonMonDoughnut.datasets[0].label,
+                  text: nonMonthlyGraph.datasets[0].label,
                   fontSize: 12,
                 },
                 legend: {
@@ -179,11 +181,11 @@ const Overview = ({ user }) => {
       <Grid container id='mobileOverview'>
         {recurringTotal !== null &&
         nonRecurringTotal !== null &&
-        profile.salary > 0 ? (
+        user.salary > 0 ? (
           <OverviewMobileSub
             rTotal={recurringTotal}
             nrTotal={nonRecurringTotal}
-            profile={profile}
+            user={user}
           />
         ) : (
           <Paper className='ovAlt'>
