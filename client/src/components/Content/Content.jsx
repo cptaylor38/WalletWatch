@@ -8,19 +8,21 @@ import './Content.css';
 import ExpenseForm from '../ExpenseForm/ExpenseForm';
 import ChargeItem from './ChargeItem/ChargeItem';
 import API from '../../clientRoutes/API';
+import { useSelector } from 'react-redux';
 import moment from 'moment';
 
-const Content = ({ display, user }) => {
+const Content = ({ display }) => {
   const [content, setContent] = useState(null);
   const [monthlyCharges, setMonthlyCharges] = useState(null);
   const [oneTime, setOneTime] = useState(null);
   const [retrieve, setRetrieve] = useState(false);
   const [expenseToggle, setExpenseToggle] = useState(false);
   const [totalMonthly, setTotalMonthly] = useState(null);
+  const user = useSelector(state => state.user)
 
   const retrieveContent = () => {
     if (display !== null && user !== null) {
-      API.getCategoryData({ id: user, category: display }).then(response => {
+      API.getCategoryData({ id: user._id, category: display }).then(response => {
         setContent(response.data);
         setRetrieve(false);
       });
@@ -64,7 +66,9 @@ const Content = ({ display, user }) => {
     }
   }, [monthlyCharges]);
 
-  useEffect(retrieveContent, [display, user, retrieve]);
+  useEffect(()=> {
+    if(user._id) retrieveContent();
+  }, [display, user, retrieve]);
   useEffect(sortExpenses, [content]);
 
   return (
@@ -91,7 +95,7 @@ const Content = ({ display, user }) => {
             </Grid>
           </Grid>
           <Grid container id='homeContentGrid'>
-            <Overview user={user} />
+            {user.expense ? (<Overview user={user} />) : null}
           </Grid>
         </>
       ) : (

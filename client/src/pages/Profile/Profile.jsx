@@ -31,19 +31,19 @@ const Profile = () => {
   const contentDisplay = () => {
     switch (chosenCat) {
       case 'Home':
-        return <Content display={'home'} user={selected._id} />;
+        return <Content display={'home'} />;
       case 'Travel':
-        return <Content display={'travel'} user={selected._id} />;
+        return <Content display={'travel'} />;
       case 'Health':
-        return <Content display={'health'} user={selected._id} />;
+        return <Content display={'health'} />;
       case 'Leisure':
-        return <Content display={'leisure'} user={selected._id} />;
+        return <Content display={'leisure'} />;
       case 'Living':
-        return <Content display={'living'} user={selected._id} />;
+        return <Content display={'living'} />;
       case 'Finances':
-        return <Content display={'finances'} user={selected._id} />;
+        return <Content display={'finances'} />;
       default:
-        return <Content displpay={'home'} user={selected._id} />;
+        return <Content displpay={'home'} />;
     }
   };
 

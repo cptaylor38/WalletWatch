@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import './HomeOverview.css';
 import { Doughnut } from 'react-chartjs-2';
-import API from '../../../clientRoutes/API';
 import { Paper, Grid } from '@material-ui/core';
 import OverviewMobileSub from './OverviewMobileSub';
+import { useSelector } from 'react-redux';
 import moment from 'moment';
 
-const Overview = ({ user }) => {
+const Overview = () => {
   const [monthlyGraph, setMonthlyGraph] = useState(null);
   const [nonMonthlyGraph, setNonMonthlyGraph] = useState(null);
   const [recurringTotal, setRecurringTotal] = useState(null);
   const [nonRecurringTotal, setNonRecurringTotal] = useState(null);
-
+  const user = useSelector(state => state.user);
+  
   useEffect(() => {
-    if (user !== null) {
+    if (user.expense) {
       let recurringExpenseObj = {
         financesTotal: 0,
         livingTotal: 0,
@@ -102,6 +103,8 @@ const Overview = ({ user }) => {
   }
 
   const expenseSumHelper = (expenseObj, recurring)=> {
+    console.log('expenseSumHelper', expenseObj, recurring)
+    //logged once and held correct values, logged a second time with recurring variable undefined?
     let total = 0;
     for(let prop in expenseObj){
       total += prop;
