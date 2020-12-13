@@ -21,14 +21,17 @@ import {
 import NumberFormatCustom from './NumberFormatCustom';
 import './ExpenseForm.css';
 import API from '../../clientRoutes/API';
+import {useSelector, useDispatch} from 'react-redux';
+import {getData} from '../../redux/actions';
 
-const ExpenseForm = ({ user, propData, form, toggleForm, setRetrieve, update}) => {
+const ExpenseForm = ({ user, propData, form, toggleForm, setRetrieve}) => {
   const [category, setCategory] = useState('');
   const [radioValue, setRadioValue] = useState('');
   const [monthly, setMonthly] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [amount, setAmount] = useState('');
   const [title, setTitle] = useState('');
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (propData) {
@@ -95,7 +98,7 @@ const ExpenseForm = ({ user, propData, form, toggleForm, setRetrieve, update}) =
       };
 
       API.updateExpense(dataObject).then(response => {
-        setRetrieve(true);
+        console.log(response);
       });
     } else {
       if (

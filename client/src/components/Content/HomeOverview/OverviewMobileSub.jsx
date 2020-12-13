@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, Paper } from '@material-ui/core';
 import moment from 'moment';
 
-const OverviewMobileSub = ({ profile, nrTotal, rTotal }) => {
+const OverviewMobileSub = ({ user, nrTotal, rTotal }) => {
   let format$ = input => {
     return input.toLocaleString('en-US', {
       style: 'currency',
@@ -11,7 +11,7 @@ const OverviewMobileSub = ({ profile, nrTotal, rTotal }) => {
   };
 
   let formatP = input => {
-    let perc = (input / (profile.salary / 12)).toFixed(2) * 100;
+    let perc = (input / (user.salary / 12)).toFixed(2) * 100;
     return (
       <p className='ovPercP'>
         <span className='percSpan'>{perc}%</span> of your income.
@@ -25,7 +25,7 @@ const OverviewMobileSub = ({ profile, nrTotal, rTotal }) => {
         <Paper className='ovP'>
           <header>
             <span className='ovI'>Estimated monthly income: </span>
-            {format$(profile.salary / 12)}
+            {format$(user.salary / 12)}
           </header>
         </Paper>
       </Grid>
@@ -62,7 +62,7 @@ const OverviewMobileSub = ({ profile, nrTotal, rTotal }) => {
         <Paper className='ovP'>
           <header>
             <span>Budget remaining: </span>
-            {format$(profile.salary / 12 - (rTotal + nrTotal))}
+            {format$(user.salary / 12 - (rTotal + nrTotal))}
           </header>
         </Paper>
       </Grid>

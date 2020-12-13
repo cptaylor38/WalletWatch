@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import './HomeOverview.css';
 import { Doughnut } from 'react-chartjs-2';
-import API from '../../../clientRoutes/API';
 import { Paper, Grid } from '@material-ui/core';
 import OverviewMobileSub from './OverviewMobileSub';
 import moment from 'moment';
 
-const Overview = ({ user }) => {
+const Overview = ({user}) => {
   const [monthlyGraph, setMonthlyGraph] = useState(null);
   const [nonMonthlyGraph, setNonMonthlyGraph] = useState(null);
   const [recurringTotal, setRecurringTotal] = useState(null);
   const [nonRecurringTotal, setNonRecurringTotal] = useState(null);
-
+  
   useEffect(() => {
-    if (user !== null) {
+    if (user.expense) {
       let recurringExpenseObj = {
         financesTotal: 0,
         livingTotal: 0,
@@ -76,6 +75,7 @@ const Overview = ({ user }) => {
   }, [user]);
 
   const graphInitHelper = (expenseObj, recurring)=> {
+    console.log('graphinithelper function', expenseObj, recurring)
     let graph = {
       labels: ['Finances', 'Living', 'Health', 'Leisure', 'Travel'],
       datasets: [
@@ -104,23 +104,16 @@ const Overview = ({ user }) => {
   const expenseSumHelper = (expenseObj, recurring)=> {
     let total = 0;
     for(let prop in expenseObj){
-      total += prop;
+      total += expenseObj[prop];
     }
-    expenseObj === recurring ? setRecurringTotal(total) : setNonRecurringTotal(total);
+    recurring ? setRecurringTotal(total) : setNonRecurringTotal(total);
     return total;
   }
-
-  //Is this necessary if I'm not modifying the user on this component?
-  // useEffect(() => {
-  //   API.getHomeDisplay({ id: user }).then((response) => {
-  //     setProfile(response.data);
-  //   });
-  // }, [user]);
 
   return (
     <>
       <Grid item xs={12} sm={12} md={6} lg={6} className='pieGridItem'>
-        {monthlyGraph !== null && recurringTotal > 0 ? (
+        {monthlyGraph && recurringTotal > 0 ? (
           <Paper id='recurringPiePaper'>
             <Doughnut
               id='recurringPie'
@@ -150,7 +143,7 @@ const Overview = ({ user }) => {
         )}
       </Grid>
       <Grid item xs={12} sm={12} md={6} lg={6} className='pieGridItem'>
-        {nonMonthlyGraph !== null && nonRecurringTotal > 0 ? (
+        {nonMonthlyGraph && nonRecurringTotal > 0 ? (
           <Paper id='recurringPiePaper'>
             <Doughnut
               id='recurringPie'
@@ -179,9 +172,7 @@ const Overview = ({ user }) => {
         )}
       </Grid>
       <Grid container id='mobileOverview'>
-        {recurringTotal !== null &&
-        nonRecurringTotal !== null &&
-        user.salary > 0 ? (
+        {recurringTotal > 0 && nonRecurringTotal > 0 && user.salary > 0 ? (
           <OverviewMobileSub
             rTotal={recurringTotal}
             nrTotal={nonRecurringTotal}
