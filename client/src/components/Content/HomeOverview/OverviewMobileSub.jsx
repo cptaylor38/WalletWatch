@@ -1,8 +1,10 @@
 import React from 'react';
 import { Grid, Paper } from '@material-ui/core';
 import moment from 'moment';
+import { useEffect } from 'react';
 
 const OverviewMobileSub = ({ user, nrTotal, rTotal }) => {
+
   let format$ = input => {
     return input.toLocaleString('en-US', {
       style: 'currency',
@@ -13,57 +15,26 @@ const OverviewMobileSub = ({ user, nrTotal, rTotal }) => {
   let formatP = input => {
     let perc = (input / (user.salary / 12)).toFixed(2) * 100;
     return (
-      <p className='ovPercP'>
-        <span className='percSpan'>{perc}%</span> of your income.
-      </p>
+      <span>{Math.round(perc)}%  of your income.</span>
     );
   };
 
   return (
     <Grid container className='ovSubC'>
-      <Grid item xs={12} className='ovSubI'>
-        <Paper className='ovP'>
-          <header>
-            <span className='ovI'>Estimated monthly income: </span>
-            {format$(user.salary / 12)}
-          </header>
+      {/* Mapping new layout */}
+      <Grid item>
+        <Paper>Current user's salary and monthly income</Paper>
+        <Paper>Recurring Charges and Nonrecurring Charge amount = total charges</Paper>
+        <Paper>Income - Total Charges = Budget remaining</Paper>
+      </Grid>
+      <Grid item>
+        <Paper>
+          Material ui dropdown list showing all charges that classify under recurring
         </Paper>
       </Grid>
-      <Grid item xs={12} className='ovSubI'>
-        <Paper className='ovP'>
-          <header>
-            <span className='ovI'>Total monthly charges: </span>
-            {format$(rTotal)}
-          </header>
-          {formatP(rTotal)}
-        </Paper>
-      </Grid>
-      <Grid item xs={12} className='ovSubI'>
-        <Paper className='ovP'>
-          <header>
-            <span className='ovI'>
-              Total msc. Charges from {moment(Date.now()).format('MMMM')}:{' '}
-            </span>
-            {format$(nrTotal)}
-          </header>
-          {formatP(nrTotal)}
-        </Paper>
-      </Grid>
-      <Grid item xs={12} className='ovSubI'>
-        <Paper className='ovP'>
-          <header>
-            <span className='ovI'>Total charges this month: </span>
-            {format$(rTotal + nrTotal)}
-          </header>
-          {formatP(rTotal + nrTotal)}
-        </Paper>
-      </Grid>
-      <Grid item xs={12} className='ovSubI'>
-        <Paper className='ovP'>
-          <header>
-            <span>Budget remaining: </span>
-            {format$(user.salary / 12 - (rTotal + nrTotal))}
-          </header>
+      <Grid item>
+        <Paper>
+          Material ui dropdown list showing all charges that are not recurring
         </Paper>
       </Grid>
     </Grid>
@@ -71,3 +42,38 @@ const OverviewMobileSub = ({ user, nrTotal, rTotal }) => {
 };
 
 export default OverviewMobileSub;
+
+
+
+// <Grid item xs={12} className='ovSubI'>
+//         <Paper>
+//           <p><span className='ovI'>Estimated monthly income: </span> {format$(user.salary / 12)}</p>
+//         </Paper>
+//         <Paper>
+
+//         </Paper>
+//         <Paper>
+
+//         </Paper>
+//       </Grid>
+//       <Grid item xs={12} className='ovSubI'>
+//         <Paper>
+//         <p><span className='ovI'>Total monthly charges: </span>{format$(rTotal)} - {formatP(rTotal)}</p>
+//         </Paper>
+//       </Grid>
+//       <Grid item xs={12} className='ovSubI'>
+//         <span className='ovI'>
+//               Total msc. Charges from {moment(Date.now()).format('MMMM')}:{' '}
+//         </span>
+//         {format$(nrTotal)}
+//         {formatP(nrTotal)}
+//       </Grid>
+//       <Grid item xs={12} className='ovSubI'>
+//         <span className='ovI'>Total charges this month: </span>
+//         {format$(rTotal + nrTotal)}
+//         {formatP(rTotal + nrTotal)}
+//       </Grid>
+//       <Grid item xs={12} className='ovSubI'>
+//         <span>Budget remaining: </span>
+//           {format$(user.salary / 12 - (rTotal + nrTotal))}
+//       </Grid>
