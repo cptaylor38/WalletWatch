@@ -87,10 +87,10 @@ const Overview = () => {
   }, []);
 
   useEffect(()=> {
-    let currentMonthExpenses = user.expense.map(charge =>
-      moment(charge.date).format('MMMM') === moment(Date.now()).format('MMMM'))
+    let currentMonthExpenses = user.expense.filter(charge => {
+      if(moment(charge.date).format('MMMM') === moment(Date.now()).format('MMMM')) return charge;
+    })
     dispatch(filterExpenses(currentMonthExpenses))
-    console.log(currentMonthExpenses, expenseDetails)
     //pausing here, successfully triggered but showing empty objects
   }, [user.expense])
 
