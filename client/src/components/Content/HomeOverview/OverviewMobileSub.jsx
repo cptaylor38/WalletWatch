@@ -3,6 +3,7 @@ import { Grid, Paper } from '@material-ui/core';
 import moment from 'moment';
 import { useEffect } from 'react';
 
+
 const OverviewMobileSub = ({ user, nrTotal, rTotal }) => {
 
   let format$ = input => {
@@ -23,8 +24,17 @@ const OverviewMobileSub = ({ user, nrTotal, rTotal }) => {
     <Grid container className='ovSubC'>
       {/* Mapping new layout */}
       <Grid item>
-        <Paper>Current user's salary and monthly income</Paper>
-        <Paper>Recurring Charges and Nonrecurring Charge amount = total charges</Paper>
+        <Paper>
+          <h3>Your current salary:</h3>
+          <p>{format$(user.salary)}</p>
+          <h3>Projected monthly income:</h3>
+          <p>{format$(user.salary / 12)}</p>
+        </Paper>
+        <Paper>
+          Recurring Charges and Nonrecurring Charge amount = total charges
+        
+        
+        </Paper>
         <Paper>Income - Total Charges = Budget remaining</Paper>
       </Grid>
       <Grid item>

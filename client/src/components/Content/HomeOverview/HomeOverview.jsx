@@ -4,12 +4,26 @@ import { Doughnut } from 'react-chartjs-2';
 import { Paper, Grid } from '@material-ui/core';
 import OverviewMobileSub from './OverviewMobileSub';
 import moment from 'moment';
+import { useSelector, useDispatch} from 'react-redux';
+import {filterExpenses} from '../../../redux/actions';
 
-const Overview = ({user}) => {
+const Overview = () => {
   const [monthlyGraph, setMonthlyGraph] = useState(null);
   const [nonMonthlyGraph, setNonMonthlyGraph] = useState(null);
   const [recurringTotal, setRecurringTotal] = useState(null);
   const [nonRecurringTotal, setNonRecurringTotal] = useState(null);
+  const dispatch = useDispatch();
+  const expenseDetails = useSelector(state => state.expenseDetails);
+  const user = useSelector(state => state.user)
+
+  // function expenseObj(finances, living, health, leisure, travel){
+  //   this.financesTotal = finances,
+  //   this.livingTotal = living,
+  //   this.healthTotal = health,
+  //   this.leisureTotal = leisure,
+  //   this.travelTotal = travel
+  // }
+  //constructor for later - fixing state on child component then circling back
   
   useEffect(() => {
     if (user.expense) {
@@ -65,17 +79,23 @@ const Overview = ({user}) => {
             return item;
         }
       });
-
-      
       expenseSumHelper(recurringExpenseObj, true);
       expenseSumHelper(nonRecurringExpenseObj, false);
       graphInitHelper(recurringExpenseObj, true);
       graphInitHelper(nonRecurringExpenseObj, false);
     }
-  }, [user]);
+  }, []);
+
+  useEffect(()=> {
+    let currentMonthExpenses = user.expense.map(charge =>
+      moment(charge.date).format('MMMM') === moment(Date.now()).format('MMMM'))
+    dispatch(filterExpenses(currentMonthExpenses))
+    console.log(currentMonthExpenses, expenseDetails)
+    //pausing here, successfully triggered but showing empty objects
+  }, [user.expense])
 
   const graphInitHelper = (expenseObj, recurring)=> {
-    console.log('graphinithelper function', expenseObj, recurring)
+    console.log('graphinithelper ran')
     let graph = {
       labels: ['Finances', 'Living', 'Health', 'Leisure', 'Travel'],
       datasets: [
