@@ -27,9 +27,8 @@ export const filterExpenses = (expenses) => {
         this.list = expenseArr;
         this.total = total;
     }
-    
-    let recurring = expenses.filter(expense => expense.recurring);
-    let nonRecurring = expenses.filter(expense => !expense.recurring);
+    let recurring = expenses.filter(expense => expense.monthly);
+    let nonRecurring = expenses.filter(expense => !expense.monthly);
 
     function getTotal(arr){
         let total = 0;
@@ -38,11 +37,10 @@ export const filterExpenses = (expenses) => {
         }
         return total;
     }
-
     return {
         type: 'FilterExpenses',
         payload: {
-            recDetal: new expenseDetail(recurring, getTotal(recurring)),
+            recDetail: new expenseDetail(recurring, getTotal(recurring)),
             nonRecDetail: new expenseDetail(nonRecurring, getTotal(nonRecurring))
         }
     }
