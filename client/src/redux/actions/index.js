@@ -40,7 +40,7 @@ export const filterExpenses = (expenses) => {
     return {
         type: 'FilterExpenses',
         payload: {
-            recDetal: new expenseDetail(recurring, getTotal(recurring)),
+            recDetail: new expenseDetail(recurring, getTotal(recurring)),
             nonRecDetail: new expenseDetail(nonRecurring, getTotal(nonRecurring))
         }
     }

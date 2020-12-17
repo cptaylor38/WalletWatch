@@ -42,3 +42,6 @@ Next up on improvements:
 10. Add default value to expense form category when loaded under specific tabs.
 11. Clean up unnecessary html elements.
 12. Look into redux to clean up some state management/And Redux learning opportunity.
+
+Update 12/16:
+Still working on converting to redux, shifting some component logic to actions, reducing state, cleaning up the profile/overview page currently before shifting back to the layout/looking into other features.

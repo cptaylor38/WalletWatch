@@ -16,48 +16,21 @@ const Overview = () => {
   const expenseDetails = useSelector(state => state.expenseDetails);
   const user = useSelector(state => state.user)
 
-  // function expenseObj(finances, living, health, leisure, travel){
-  //   this.financesTotal = finances,
-  //   this.livingTotal = living,
-  //   this.healthTotal = health,
-  //   this.leisureTotal = leisure,
-  //   this.travelTotal = travel
-  // }
-  //constructor for later - fixing state on child component then circling back
+  function expenseObj(finances, living, health, leisure, travel){
+    this.financesTotal = finances;
+    this.livingTotal = living;
+    this.healthTotal = health;
+    this.leisureTotal = leisure;
+    this.travelTotal = travel;
+  }
   
   useEffect(() => {
     if (user.expense) {
-      let recurringExpenseObj = {
-        financesTotal: 0,
-        livingTotal: 0,
-        healthTotal: 0,
-        leisureTotal: 0,
-        travelTotal: 0
-      }
+      let recurringExpenseObj = new expenseObj(0, 0, 0, 0, 0)
+      let nonRecurringExpenseObj = new expenseObj(0, 0, 0, 0, 0)
 
-      let nonRecurringExpenseObj = {
-        financesTotal: 0,
-        livingTotal: 0,
-        healthTotal: 0,
-        leisureTotal: 0,
-        travelTotal: 0
-      }
 
-      let nonRecTotal = 0;
-
-      user.expense.filter((item) => {
-        if (item.recurring === false) {
-          if (
-            moment(item.date).format('MMMM') ===
-            moment(Date.now()).format('MMMM')
-          ) {
-            nonRecTotal += item.amount;
-            return item;
-          }
-        }
-        setNonRecurringTotal(nonRecTotal);
-      });
-
+      //convert below to action or add to existing action. 
       user.expense.map((item) => {
         switch (item.category) {
           case 'finances':
@@ -91,11 +64,9 @@ const Overview = () => {
       if(moment(charge.date).format('MMMM') === moment(Date.now()).format('MMMM')) return charge;
     })
     dispatch(filterExpenses(currentMonthExpenses))
-    //pausing here, successfully triggered but showing empty objects
   }, [user.expense])
 
   const graphInitHelper = (expenseObj, recurring)=> {
-    console.log('graphinithelper ran')
     let graph = {
       labels: ['Finances', 'Living', 'Health', 'Leisure', 'Travel'],
       datasets: [
@@ -194,8 +165,7 @@ const Overview = () => {
       <Grid container id='mobileOverview'>
         {recurringTotal > 0 && nonRecurringTotal > 0 && user.salary > 0 ? (
           <OverviewMobileSub
-            rTotal={recurringTotal}
-            nrTotal={nonRecurringTotal}
+            expenseDetails={expenseDetails}
             user={user}
           />
         ) : (

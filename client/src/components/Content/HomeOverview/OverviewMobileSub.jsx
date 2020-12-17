@@ -4,7 +4,7 @@ import moment from 'moment';
 import { useEffect } from 'react';
 
 
-const OverviewMobileSub = ({ user, nrTotal, rTotal }) => {
+const OverviewMobileSub = ({ user, expenseDetails }) => {
 
   let format$ = input => {
     return input.toLocaleString('en-US', {
@@ -32,7 +32,8 @@ const OverviewMobileSub = ({ user, nrTotal, rTotal }) => {
         </Paper>
         <Paper>
           Recurring Charges and Nonrecurring Charge amount = total charges
-        
+          Recurring charges total: {expenseDetails.recDetail.total}
+          Non-Recurring charges total: {expenseDetails.nonRecDetail.total}
         
         </Paper>
         <Paper>Income - Total Charges = Budget remaining</Paper>
