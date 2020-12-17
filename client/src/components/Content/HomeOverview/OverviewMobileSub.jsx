@@ -6,6 +6,8 @@ import { useEffect } from 'react';
 
 const OverviewMobileSub = ({ user, expenseDetails }) => {
 
+  const {recDetail, nonRecDetail} = expenseDetails.filteredExpenses
+
   let format$ = input => {
     return input.toLocaleString('en-US', {
       style: 'currency',
@@ -32,8 +34,8 @@ const OverviewMobileSub = ({ user, expenseDetails }) => {
         </Paper>
         <Paper>
           Recurring Charges and Nonrecurring Charge amount = total charges
-          Recurring charges total: {expenseDetails.recDetail.total}
-          Non-Recurring charges total: {expenseDetails.nonRecDetail.total}
+          Recurring charges total: {recDetail.total ? format$(recDetail.total) : 'Calculating..'}
+          Non-Recurring charges total: {nonRecDetail.total ? format$(nonRecDetail.total) : 'Calculating'}
         
         </Paper>
         <Paper>Income - Total Charges = Budget remaining</Paper>

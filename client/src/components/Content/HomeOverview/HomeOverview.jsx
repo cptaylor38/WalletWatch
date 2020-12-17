@@ -101,6 +101,8 @@ const Overview = () => {
     return total;
   }
 
+  useEffect(()=> console.log(expenseDetails), [expenseDetails])
+
   return (
     <>
       <Grid item xs={12} sm={12} md={6} lg={6} className='pieGridItem'>
