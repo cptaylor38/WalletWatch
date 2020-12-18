@@ -32,6 +32,26 @@
   justify-content: center;
 }
 
+#overviewSubHeader {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+}
+
+.ovSubHeaderItem {
+  padding: 2rem;
+}
+
+.expenseDropdownContainer {
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.expenseDropdown {
+  padding: 1rem;
+}
+
 .ovSubI {
   text-align: center;
   margin: 5px 0 !important;

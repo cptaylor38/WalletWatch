@@ -60,10 +60,7 @@ const Overview = () => {
   }, []);
 
   useEffect(()=> {
-    let currentMonthExpenses = user.expense.filter(charge => {
-      if(moment(charge.date).format('MMMM') === moment(Date.now()).format('MMMM')) return charge;
-    })
-    dispatch(filterExpenses(currentMonthExpenses))
+    dispatch(filterExpenses(user.expense))
   }, [user.expense])
 
   const graphInitHelper = (expenseObj, recurring)=> {
