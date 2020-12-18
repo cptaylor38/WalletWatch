@@ -5,14 +5,14 @@ import './Profile.css';
 import Content from '../../components/Content/Content';
 import Navbar from '../../components/Navbar/Nav';
 import { useSelector, useDispatch } from 'react-redux';
-import { getData } from '../../redux/actions';
+import { getData, selectView } from '../../redux/actions';
 
 const Profile = () => {
   const [salarySection, setSalarySection] = useState(false);
-  const [chosenCat, setChosenCat] = useState('Home');
   const userData = useContext(UserProvider.context);
   const dispatch = useDispatch();
   const user = useSelector(state => state.user)
+  const view = useSelector(state => state.content);
 
   useEffect(()=> {
     if(userData) dispatch(getData(userData._id))
@@ -22,12 +22,12 @@ const Profile = () => {
     setSalarySection(true);
   };
 
-  const categoryOnClick = category => {
-    setChosenCat(category);
+  const viewSelector = category => {
+    dispatch(selectView(category))
   };
 
   const contentDisplay = () => {
-    switch (chosenCat) {
+    switch (view) {
       case 'Home':
         return <Content display={'home'} user={user}/>;
       case 'Travel':
@@ -49,11 +49,10 @@ const Profile = () => {
     <>
     <Navbar 
       user={user} 
-      setChosenCat={setChosenCat} 
       showSalaryUpdate={showSalaryUpdate}
       salarySection={salarySection}
       setSalarySection={setSalarySection}
-      categoryOnClick={categoryOnClick}/>
+      viewSelector={viewSelector}/>
     <Container maxWidth='xl' id='profilePage'>
       <Grid container id='chosenCatContainer'>
         <Grid item xs={12} className='chosenCatRegion'>

@@ -83,3 +83,7 @@ export default OverviewMobileSub;
 // Create ability to add multiple expenses at once and possible rework of expense form logic.
 // Also still need to fix update of expense details upon submission of new expense.
 // Remove unnecessary dependencies and tidy up css.
+// Consider switching over to modal for expense addition
+// Look at a way to reduce ChargeItem - if changing to modal for expenses, may need to create reducer
+//    for modal.
+// Switched to reducer for view select, changed profile.jsx and nav.jsx handlers to implement reducer

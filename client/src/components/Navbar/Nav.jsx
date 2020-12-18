@@ -6,7 +6,7 @@ import { FaHome, FaMoneyBill, FaRegLightbulb, FaHeartbeat, FaGamepad, FaCarSide,
 import './Nav.css';
 import moment from 'moment';
 
-const Nav = ({ user, setChosenCat, categoryOnClick, showSalaryUpdate, salarySection, setSalarySection }) => {
+const Nav = ({ user, viewSelector, showSalaryUpdate, salarySection, setSalarySection }) => {
 
     const expenseCategories = [
         { style: { color: 'green' }, name: 'Finances', icon: <FaMoneyBill /> },
@@ -49,7 +49,7 @@ const Nav = ({ user, setChosenCat, categoryOnClick, showSalaryUpdate, salarySect
                         )}
                 </Grid>
                     <Grid item>
-                        <Button className='navBtn' id='homeBtn' variant='contained' onClick={()=> setChosenCat('Home')}><FaHome /></Button>
+                        <Button className='navBtn' id='homeBtn' variant='contained' onClick={()=> viewSelector('Home')}><FaHome /></Button>
                     </Grid>
                     <Grid item>
                         <Button className='navBtn' variant='contained' href='/auth/logout'>
@@ -63,7 +63,7 @@ const Nav = ({ user, setChosenCat, categoryOnClick, showSalaryUpdate, salarySect
                             return (<Button
                                         href='#text-buttons'
                                         style={item.style}
-                                        onClick={() => categoryOnClick(item.name)}
+                                        onClick={() => viewSelector(item.name)}
                                         key={index}
                                         className='categoryBtn'>
                                             <p className='catIcon'>{item.icon}</p>
