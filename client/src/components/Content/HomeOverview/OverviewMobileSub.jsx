@@ -24,30 +24,49 @@ const OverviewMobileSub = ({ user, expenseDetails }) => {
 
   return (
     <Grid container className='ovSubC'>
-      {/* Mapping new layout */}
-      <Grid item>
-        <Paper>
-          <h3>Your current salary:</h3>
-          <p>{format$(user.salary)}</p>
-          <h3>Projected monthly income:</h3>
-          <p>{format$(user.salary / 12)}</p>
+      <Grid item id='overviewSubHeader'>
+        <Paper className='ovSubHeaderItem' id='incomeOverview'>
+          <h3>Income Overview</h3>
+          <p>Current Salary: {format$(user.salary)}</p>
+          <p>Monthly income: {format$(user.salary / 12)}</p>
         </Paper>
-        <Paper>
-          Recurring Charges and Nonrecurring Charge amount = total charges
-          Recurring charges total: {recDetail.total ? format$(recDetail.total) : 'Calculating..'}
-          Non-Recurring charges total: {nonRecDetail.total ? format$(nonRecDetail.total) : 'Calculating'}
-        
+        <Paper className='ovSubHeaderItem' id='chargesOverview'>
+          <h3>Charges for this month:</h3>
+          <p>Monthly: {format$(recDetail.total)}</p>
+          <p>+</p>
+          <p>Miscellaneous: {format$(nonRecDetail.total)}</p>
+          <p>Total: {format$(nonRecDetail.total + recDetail.total)}</p>
         </Paper>
-        <Paper>Income - Total Charges = Budget remaining</Paper>
+        <Paper className='ovSubHeaderItem' id='budgetBreakdown'>
+          <h3>Budget Breakdown:</h3>
+          <p>Income: {format$(user.salary / 12)}</p>
+          <p>-</p>
+          <p>Charges: {format$(nonRecDetail.total + recDetail.total)}</p>
+          <p>Budget Remaining: {format$((user.salary / 12) - (nonRecDetail.total + recDetail.total))}</p>
+        </Paper>
       </Grid>
-      <Grid item>
-        <Paper>
-          Material ui dropdown list showing all charges that classify under recurring
+      <Grid className='expenseDropdownContainer'>
+        <Paper className='expenseDropdown'>
+          <h3>Temporary map of recurring expenses:</h3>
+          {recDetail.list.map((item)=> {
+            return(
+              <p>
+                {item.title} {item.category.toUpperCase()} {moment(item.date).format('MM/DD/YY')} {format$(item.amount)}
+              </p>
+            )
+          })}
         </Paper>
       </Grid>
-      <Grid item>
-        <Paper>
-          Material ui dropdown list showing all charges that are not recurring
+      <Grid className='expenseDropdownContainer'>
+        <Paper className='expenseDropdown'>
+          <h3>Temporary map of non-recurring expenses:</h3>
+          {nonRecDetail.list.map((item)=> {
+            return(
+              <p>
+                {item.title} {item.category.toUpperCase()} {moment(item.date).format('MM/DD/YY')} {format$(item.amount)}
+              </p>
+            )
+          })}
         </Paper>
       </Grid>
     </Grid>
@@ -56,37 +75,11 @@ const OverviewMobileSub = ({ user, expenseDetails }) => {
 
 export default OverviewMobileSub;
 
-
-
-// <Grid item xs={12} className='ovSubI'>
-//         <Paper>
-//           <p><span className='ovI'>Estimated monthly income: </span> {format$(user.salary / 12)}</p>
-//         </Paper>
-//         <Paper>
-
-//         </Paper>
-//         <Paper>
-
-//         </Paper>
-//       </Grid>
-//       <Grid item xs={12} className='ovSubI'>
-//         <Paper>
-//         <p><span className='ovI'>Total monthly charges: </span>{format$(rTotal)} - {formatP(rTotal)}</p>
-//         </Paper>
-//       </Grid>
-//       <Grid item xs={12} className='ovSubI'>
-//         <span className='ovI'>
-//               Total msc. Charges from {moment(Date.now()).format('MMMM')}:{' '}
-//         </span>
-//         {format$(nrTotal)}
-//         {formatP(nrTotal)}
-//       </Grid>
-//       <Grid item xs={12} className='ovSubI'>
-//         <span className='ovI'>Total charges this month: </span>
-//         {format$(rTotal + nrTotal)}
-//         {formatP(rTotal + nrTotal)}
-//       </Grid>
-//       <Grid item xs={12} className='ovSubI'>
-//         <span>Budget remaining: </span>
-//           {format$(user.salary / 12 - (rTotal + nrTotal))}
-//       </Grid>
+// Notes for upcoming changes:
+// Implement dropdown - use icon to indicate category corresponding to category in nav
+// Update action and state object to filter category data to minimize logic in component
+// General style improvements and different color indicator text removing titles, replace operands
+//    with icons?
+// Create ability to add multiple expenses at once and possible rework of expense form logic.
+// Also still need to fix update of expense details upon submission of new expense.
+// Remove unnecessary dependencies and tidy up css.
