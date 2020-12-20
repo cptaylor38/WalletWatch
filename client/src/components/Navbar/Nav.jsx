@@ -10,10 +10,10 @@ const Nav = ({ user, viewSelector, showSalaryUpdate, salarySection, setSalarySec
 
     const expenseCategories = [
         { style: { color: 'green' }, name: 'Finances', icon: <FaMoneyBill /> },
-        { style: { color: 'blue' }, name: 'Living', icon: <FaRegLightbulb /> },
+        { style: { color: 'rgb(51, 51, 155)' }, name: 'Living', icon: <FaRegLightbulb /> },
         { style: { color: 'red' }, name: 'Health', icon: <FaHeartbeat /> },
         { style: { color: 'gold' }, name: 'Leisure', icon: <FaGamepad /> },
-        { style: { color: 'rgb(68, 46, 16)' }, name: 'Travel', icon: <FaCarSide /> }
+        { style: { color: '#5A4218' }, name: 'Travel', icon: <FaCarSide /> }
       ];
 
     return (

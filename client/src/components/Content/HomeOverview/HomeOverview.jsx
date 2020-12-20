@@ -75,7 +75,7 @@ const Overview = () => {
               currency: 'USD',
             }
           )}`,
-          backgroundColor: ['#5A4218', 'green', 'red', 'gold', 'aquamarine'],
+          backgroundColor: ['#5A4218', 'green', 'red', 'gold', 'rgb(51, 51, 155)'],
           data: [
             expenseObj.financesTotal,
             expenseObj.livingTotal,
