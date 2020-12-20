@@ -1,12 +1,10 @@
-const loginReducer = (state = 'Home', action) => {
+const contentReducer = (state = 'Home', action) => {
     switch(action.type){
-        case 'SignIn':
-            return true;
-        case 'SignOut':
-            return false;
+        case 'SelectView':
+            return action.payload;
         default:
-            return state;
+            return 'Home';
     }
 }
 
-export default loginReducer;
+export default contentReducer;

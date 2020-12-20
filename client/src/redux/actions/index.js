@@ -52,3 +52,10 @@ export const filterExpenses = (expenses) => {
     }
 }
 
+export const selectView = (view)=> {
+    return {
+        type: 'SelectView',
+        payload: view
+    }
+}
+
