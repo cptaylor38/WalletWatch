@@ -22,9 +22,9 @@ import NumberFormatCustom from './NumberFormatCustom';
 import './ExpenseForm.css';
 import API from '../../clientRoutes/API';
 import {useSelector, useDispatch} from 'react-redux';
-import {getData} from '../../redux/actions';
+import {getData, updateProfile, filterExpenses} from '../../redux/actions';
 
-const ExpenseForm = ({ user, propData, form, toggleForm, setRetrieve}) => {
+const ExpenseForm = ({ user, propData, form, toggleForm }) => {
   const [category, setCategory] = useState('');
   const [radioValue, setRadioValue] = useState('');
   const [monthly, setMonthly] = useState(false);
@@ -85,20 +85,22 @@ const ExpenseForm = ({ user, propData, form, toggleForm, setRetrieve}) => {
     toggleForm(false);
   };
 
+  function DataObject(id, category, monthly, date, amount, title){
+    this.id = id;
+    this.category = category;
+    this.monthly = monthly;
+    this.date = date;
+    this.amount = amount;
+    this.title = title;
+  }
+
   const handleSubmit = e => {
     e.preventDefault();
     if (form === true) {
-      let dataObject = {
-        id: propData._id,
-        category: category,
-        monthly: monthly,
-        date: selectedDate,
-        amount: amount,
-        title: title
-      };
-
-      API.updateExpense(dataObject).then(response => {
-        console.log(response);
+      let updatedExpenseObj = new DataObject(propData._id, category, monthly, selectedDate, amount, title);
+      API.updateExpense(updatedExpenseObj).then(res=> {
+        console.log(res);
+        dispatch(updateProfile(res.data));
       });
     } else {
       if (
@@ -107,21 +109,16 @@ const ExpenseForm = ({ user, propData, form, toggleForm, setRetrieve}) => {
         amount !== '' &&
         title !== ''
       ) {
-        let dataObject = {
-          id: user,
-          category: category,
-          monthly: monthly,
-          date: selectedDate,
-          amount: amount,
-          title: title
-        };
-        API.createExpense(dataObject).then(res => {
+        let newExpenseObj = new DataObject(user, category, monthly, selectedDate, amount, title);
+        API.createExpense(newExpenseObj).then(res => {
+          console.log(res);
+          dispatch(filterExpenses(res.data.expense))
+          dispatch(updateProfile(res.data));
           setAmount('');
           setRadioValue('');
           setMonthly(false);
           setTitle('');
           setCategory('');
-          setRetrieve(true);
         });
       } else {
         if (category === '') {
