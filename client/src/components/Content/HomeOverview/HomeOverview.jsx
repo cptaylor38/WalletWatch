@@ -29,8 +29,6 @@ const Overview = () => {
       let recurringExpenseObj = new expenseObj(0, 0, 0, 0, 0)
       let nonRecurringExpenseObj = new expenseObj(0, 0, 0, 0, 0)
 
-
-      //convert below to action or add to existing action. 
       user.expense.map((item) => {
         switch (item.category) {
           case 'finances':
@@ -75,7 +73,7 @@ const Overview = () => {
               currency: 'USD',
             }
           )}`,
-          backgroundColor: ['#5A4218', 'green', 'red', 'gold', 'rgb(51, 51, 155)'],
+          backgroundColor: ['green', 'rgb(51, 51, 155)', 'red', 'gold', '#5A4218'],
           data: [
             expenseObj.financesTotal,
             expenseObj.livingTotal,

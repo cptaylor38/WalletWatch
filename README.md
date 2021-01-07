@@ -45,3 +45,8 @@ Next up on improvements:
 
 Update 12/16:
 Still working on converting to redux, shifting some component logic to actions, reducing state, cleaning up the profile/overview page currently before shifting back to the layout/looking into other features.
+
+Update: 1/6:
+Not feeling well, known issues:
+Whole app is refreshing with updateProfile action - check useEffect to see if it can be reworked to not cause component rerender?
+Need to update overview section and category detail view sections to reflect added/deleted/updated expenses.

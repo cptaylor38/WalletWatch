@@ -15,13 +15,6 @@ const OverviewMobileSub = ({ user, expenseDetails }) => {
     });
   };
 
-  let formatP = input => {
-    let perc = (input / (user.salary / 12)).toFixed(2) * 100;
-    return (
-      <span>{Math.round(perc)}%  of your income.</span>
-    );
-  };
-
   let monthlyIncome = format$(user.salary / 12)
   let totalCharges = format$(recDetail.total + nonRecDetail.total)
   let budgetRemaining = format$((user.salary / 12) - (recDetail.total + nonRecDetail.total))
@@ -48,25 +41,25 @@ const OverviewMobileSub = ({ user, expenseDetails }) => {
       <Grid className='expenseDropdownContainer'>
         <Paper className='expenseDropdown'>
           <h3>Temporary map of recurring expenses:</h3>
-          {recDetail.list.map((item)=> {
+          {recDetail ? recDetail.list.map((item)=> {
             return(
               <p>
                 {item.title} {item.category.toUpperCase()} {moment(item.date).format('MM/DD/YY')} {format$(item.amount)}
               </p>
             )
-          })}
+          }) : null}
         </Paper>
       </Grid>
       <Grid className='expenseDropdownContainer'>
         <Paper className='expenseDropdown'>
           <h3>Temporary map of non-recurring expenses:</h3>
-          {nonRecDetail.list.map((item)=> {
+          {nonRecDetail ? nonRecDetail.list.map((item)=> {
             return(
               <p>
                 {item.title} {item.category.toUpperCase()} {moment(item.date).format('MM/DD/YY')} {format$(item.amount)}
               </p>
             )
-          })}
+          }) : null}
         </Paper>
       </Grid>
     </Grid>

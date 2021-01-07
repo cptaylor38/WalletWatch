@@ -5,18 +5,23 @@ import { Grid, Button } from '@material-ui/core';
 import { FaEdit, FaCut } from 'react-icons/fa';
 import ExpenseForm from '../../ExpenseForm/ExpenseForm';
 import API from '../../../clientRoutes/API';
+import { useSelector, useDispatch} from 'react-redux';
+import { getData, updateProfile } from '../../../redux/actions';
 
-const ChargeItem = ({ data, setRetrieve }) => {
+const ChargeItem = ({ data }) => {
   const [form, toggleForm] = useState(false);
+  const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
   const updateField = () => {
     toggleForm(true);
   };
 
   const deleteExpense = () => {
     document.querySelectorAll('.expenseDeleteBtn').disabled = true;
-    API.deleteExpense({ id: data._id }).then(response => {
+    API.deleteExpense({ id: data._id }).then(res => {
       document.querySelectorAll('.expenseDeleteBtn').disabled = false;
-      setRetrieve(true);
+      console.log(res);
+      dispatch(updateProfile(res));
     });
   };
 
@@ -28,7 +33,6 @@ const ChargeItem = ({ data, setRetrieve }) => {
             propData={data}
             form={form}
             toggleForm={toggleForm}
-            setRetrieve={setRetrieve}
           />
         ) : (
           <>
