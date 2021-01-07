@@ -16,10 +16,80 @@ export const initUser = (data) => {
     }
 }
 
-export const updateProfile = (data) => {
+export const categorizeAndFilter = (nonRecurring, recurring) => {
+
+    function CategoryObj(list, total){
+        this.list = list;
+        this.total = total;
+    }
+
+    function FilteredObj(finances, living, health, leisure, travel){
+        this.financesDetails = finances;
+        this.livingDetails = living;
+        this.healthDetails = health;
+        this.leisureDetails = leisure;
+        this.travelDetails = travel;
+    }
+
+    function filterCategories(expenses){
+        let financesObj = new CategoryObj([], 0)
+        let livingObj = new CategoryObj([], 0)
+        let healthObj = new CategoryObj([], 0)
+        let leisureObj = new CategoryObj([], 0)
+        let travelObj = new CategoryObj([], 0)
+
+        expenses.map(item => {
+            switch (item.category) {
+                case 'finances':
+                    financesObj.list.push(item);
+                    financesObj.total += item.amount;
+                    return;
+                case 'living':
+                    livingObj.list.push(item);
+                    livingObj.total += item.amount;
+                    return;
+                case 'health':
+                    healthObj.list.push(item);
+                    healthObj.total += item.amount;
+                    return;
+                case 'leisure':
+                    leisureObj.list.push(item);
+                    leisureObj.total += item.amount;
+                    return;
+                case 'travel':
+                    travelObj.list.push(item);
+                    travelObj.total += item.amount;
+                    return;
+                default:
+                    return item;
+             }
+        })
+
+        return new FilteredObj(financesObj, livingObj, healthObj, leisureObj, travelObj);
+    }
+
     return {
-        type: 'Update',
-        payload: data
+        type: 'categorizeAndFilter',
+        payload: {
+            categorizedNonRecurring: filterCategories(nonRecurring),
+            categorizedRecurring: filterCategories(recurring)
+        }
+    }
+}
+
+export const expenseAdjuster = (expense, action){
+    if(action === 'add'){
+        return {
+            type: 'addExpenseToUser',
+            payload: expense
+        }
+    }
+
+    if(action === 'update'){
+        return {
+            type: 'addExpenseToUser',
+            payload: expense
+        }
     }
 }
 

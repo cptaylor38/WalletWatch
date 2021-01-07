@@ -4,7 +4,7 @@ import API from '../../clientRoutes/API';
 import SalarySub from './SalarySub/SalarySub';
 import HourlySub from './HourlySub/HourlySub';
 import {useDispatch} from 'react-redux';
-import {updateProfile} from '../../redux/actions';
+import {initUser} from '../../redux/actions';
 import './SalaryInput.css';
 
 const SalaryInput = ({ user, setSalarySection }) => {
@@ -26,7 +26,7 @@ const SalaryInput = ({ user, setSalarySection }) => {
                 id: user._id,
                 salary: salary
             }).then(res => { 
-                dispatch(updateProfile(res.data))
+                dispatch(initUser(res.data))
                 setSalarySection(false) 
             })
                 .catch(err => console.log(err));

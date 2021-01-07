@@ -2,10 +2,13 @@ import React, { useContext, useState, useEffect } from 'react';
 import UserProvider from '../../contexts/UserProvider';
 import { Grid, Container} from '@material-ui/core';
 import './Profile.css';
-import Content from '../../components/Content/Content';
 import Navbar from '../../components/Navbar/Nav';
 import { useSelector, useDispatch } from 'react-redux';
 import { getData, selectView } from '../../redux/actions';
+import Content from '../../components/Content/Content';
+import Overview from '../../components/Overview/Overview';
+import Summary from '../../components/Summary/Summary';
+import ExpenseForm from '../../components/ExpenseForm/ExpenseForm';
 
 const Profile = () => {
   const [salarySection, setSalarySection] = useState(false);
@@ -16,7 +19,7 @@ const Profile = () => {
 
   useEffect(()=> {
     if(userData) dispatch(getData(userData._id))
-  }, [userData, dispatch])
+  }, [userData])
 
   const showSalaryUpdate = () => {
     setSalarySection(true);
@@ -54,11 +57,18 @@ const Profile = () => {
       setSalarySection={setSalarySection}
       viewSelector={viewSelector}/>
     <Container maxWidth='xl' id='profilePage'>
-      <Grid container id='chosenCatContainer'>
-        <Grid item xs={12} className='chosenCatRegion'>
-          {user ? contentDisplay() : <p>Loading</p>}
-        </Grid>
+      <Grid item xs={12}>
+        <ExpenseForm />
       </Grid>
+      <Grid item xs={12} id='overviewHeader'>
+          <Overview />
+        </Grid>
+        <Grid item xs={12} className='chosenCatRegion'>
+          {contentDisplay()}
+        </Grid>
+        <Grid item xs={12} id='summary'>
+          <Summary />
+        </Grid>
     </Container>
     </>
   );

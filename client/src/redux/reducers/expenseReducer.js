@@ -8,7 +8,7 @@ const expenseReducer = (state = initialState, action) => {
         case 'FilterExpenses':
             return {...state, filteredExpenses: action.payload};
         case 'GetFilteredCategoryData':
-            return state;
+            return {...state, filteredCategoryData: action.payload};
         default:
             return state;
     }

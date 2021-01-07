@@ -25,33 +25,6 @@
   padding: 10px;
 }
 
-.ovSubC {
-  font-family: 'Roboto Mono', monospace;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-}
-
-#overviewSubHeader {
-  width: 100%;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-evenly;
-}
-
-.ovSubHeaderItem {
-  padding: 2rem;
-}
-
-.expenseDropdownContainer {
-  width: 100%;
-  margin-top: 2rem;
-}
-
-.expenseDropdown {
-  padding: 1rem;
-}
-
 @media (max-width: 620px) {
   .pieGridItem {
     display: none;

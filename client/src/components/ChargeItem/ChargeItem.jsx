@@ -3,10 +3,10 @@ import './ChargeItem.css';
 import moment from 'moment';
 import { Grid, Button } from '@material-ui/core';
 import { FaEdit, FaCut } from 'react-icons/fa';
-import ExpenseForm from '../../ExpenseForm/ExpenseForm';
-import API from '../../../clientRoutes/API';
+import ExpenseForm from '../ExpenseForm/ExpenseForm';
+import API from '../../clientRoutes/API';
 import { useSelector, useDispatch} from 'react-redux';
-import { getData, updateProfile } from '../../../redux/actions';
+import { getData, initUser } from '../../redux/actions';
 
 const ChargeItem = ({ data }) => {
   const [form, toggleForm] = useState(false);
@@ -20,8 +20,7 @@ const ChargeItem = ({ data }) => {
     document.querySelectorAll('.expenseDeleteBtn').disabled = true;
     API.deleteExpense({ id: data._id }).then(res => {
       document.querySelectorAll('.expenseDeleteBtn').disabled = false;
-      console.log(res);
-      dispatch(updateProfile(res));
+      dispatch(getData(user._id));
     });
   };
 

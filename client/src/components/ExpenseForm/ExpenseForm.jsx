@@ -22,7 +22,7 @@ import NumberFormatCustom from './NumberFormatCustom';
 import './ExpenseForm.css';
 import API from '../../clientRoutes/API';
 import {useSelector, useDispatch} from 'react-redux';
-import {getData, updateProfile, filterExpenses} from '../../redux/actions';
+import {getData, initUser, filterExpenses} from '../../redux/actions';
 
 const ExpenseForm = ({ user, propData, form, toggleForm }) => {
   const [category, setCategory] = useState('');
@@ -98,10 +98,7 @@ const ExpenseForm = ({ user, propData, form, toggleForm }) => {
     e.preventDefault();
     if (form === true) {
       let updatedExpenseObj = new DataObject(propData._id, category, monthly, selectedDate, amount, title);
-      API.updateExpense(updatedExpenseObj).then(res=> {
-        console.log(res);
-        dispatch(updateProfile(res.data));
-      });
+      API.updateExpense(updatedExpenseObj).then(res => console.log(res))
     } else {
       if (
         category !== '' &&
@@ -111,9 +108,6 @@ const ExpenseForm = ({ user, propData, form, toggleForm }) => {
       ) {
         let newExpenseObj = new DataObject(user, category, monthly, selectedDate, amount, title);
         API.createExpense(newExpenseObj).then(res => {
-          console.log(res);
-          dispatch(filterExpenses(res.data.expense))
-          dispatch(updateProfile(res.data));
           setAmount('');
           setRadioValue('');
           setMonthly(false);
