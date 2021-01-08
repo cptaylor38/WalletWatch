@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './HomeOverview.css';
 import { Doughnut } from 'react-chartjs-2';
 import { Paper, Grid } from '@material-ui/core';
-import OverviewMobileSub from './OverviewMobileSub';
-import moment from 'moment';
 import { useSelector, useDispatch} from 'react-redux';
-import {filterExpenses} from '../../../redux/actions';
+import {filterExpenses} from '../../redux/actions';
 
 const Overview = () => {
   const [monthlyGraph, setMonthlyGraph] = useState(null);
@@ -154,20 +152,6 @@ const Overview = () => {
               This section evaluates your one-time charges, i.e. meals, gas,
               movie tickets, etc. Click 'Add Expense' above to add an item.
             </p>
-          </Paper>
-        )}
-      </Grid>
-      <Grid container id='mobileOverview'>
-        {recurringTotal > 0 && nonRecurringTotal > 0 && user.salary > 0 ? (
-          <OverviewMobileSub
-            expenseDetails={expenseDetails}
-            user={user}
-          />
-        ) : (
-          <Paper className='ovAlt'>
-            This section provides an overview of your charges and how they
-            affect your monthly income. Please ensure your salary is updated
-            above.
           </Paper>
         )}
       </Grid>

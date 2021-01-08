@@ -3,14 +3,13 @@ import './ChargeItem.css';
 import moment from 'moment';
 import { Grid, Button } from '@material-ui/core';
 import { FaEdit, FaCut } from 'react-icons/fa';
-import ExpenseForm from '../../ExpenseForm/ExpenseForm';
-import API from '../../../clientRoutes/API';
-import { useSelector, useDispatch} from 'react-redux';
-import { getData, updateProfile } from '../../../redux/actions';
+import ExpenseForm from '../ExpenseForm/ExpenseForm';
+import API from '../../clientRoutes/API';
+import { useDispatch} from 'react-redux';
+import { updateProfile } from '../../redux/actions';
 
 const ChargeItem = ({ data }) => {
   const [form, toggleForm] = useState(false);
-  const user = useSelector(state => state.user);
   const dispatch = useDispatch();
   const updateField = () => {
     toggleForm(true);

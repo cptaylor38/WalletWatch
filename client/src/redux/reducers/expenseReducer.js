@@ -1,14 +1,15 @@
 const initialState = {
     filteredExpenses: {},
-    filteredCategoryData: {}
+    categoryData: {}
 }
 
 const expenseReducer = (state = initialState, action) => {
+    console.log(action.payload, action.type)
     switch(action.type){
         case 'FilterExpenses':
             return {...state, filteredExpenses: action.payload};
-        case 'GetFilteredCategoryData':
-            return state;
+        case 'Categorize':
+            return {...state, categoryData: action.payload};
         default:
             return state;
     }

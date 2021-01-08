@@ -5,18 +5,26 @@ import './Profile.css';
 import Content from '../../components/Content/Content';
 import Navbar from '../../components/Navbar/Nav';
 import { useSelector, useDispatch } from 'react-redux';
-import { getData, selectView } from '../../redux/actions';
+import { getData, selectView, categorize } from '../../redux/actions';
 
 const Profile = () => {
   const [salarySection, setSalarySection] = useState(false);
   const userData = useContext(UserProvider.context);
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user)
+  const user = useSelector(state => state.user);
+  const { categoryData, filteredExpenses } = useSelector(state => state.expenseDetails);
+  const { recDetail, nonRecDetail } = filteredExpenses;
   const view = useSelector(state => state.content);
 
   useEffect(()=> {
-    if(userData) dispatch(getData(userData._id))
-  }, [userData, dispatch])
+    if(userData) dispatch(getData(userData._id));
+  }, [userData, dispatch]);
+
+  useEffect(()=> {
+    if(recDetail && nonRecDetail){
+      dispatch(categorize(recDetail.list, nonRecDetail.list))
+    }
+  }, [recDetail, nonRecDetail]);
 
   const showSalaryUpdate = () => {
     setSalarySection(true);
