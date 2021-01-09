@@ -82,8 +82,6 @@ export const categorize = (recurring, nonRecurring) => {
         nonRecurringCategoryData: nonRecurringCategoryList
     }
 
-    let consoleArr = [];
-
     function expenseHelper(objToUpdate, category, expense){
         objToUpdate[category].list.push(expense)
         objToUpdate[category].total += expense.amount
@@ -122,8 +120,6 @@ export const categorize = (recurring, nonRecurring) => {
     else {
         categoryObj.nonRecurringCategoryList = null;
     }
-
-    console.log(consoleArr);
 
     return {
         type: 'Categorize',

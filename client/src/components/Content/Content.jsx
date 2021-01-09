@@ -7,42 +7,14 @@ import HelperText from '../HelperText/HelperText';
 import './Content.css';
 import ExpenseForm from '../ExpenseForm/ExpenseForm';
 import ChargeItem from '../ChargeItem/ChargeItem';
-import API from '../../clientRoutes/API';
 import { useSelector } from 'react-redux';
-import moment from 'moment';
 
 const Content = ({ display }) => {
-  const [content, setContent] = useState(null);
   const [monthlyCharges, setMonthlyCharges] = useState(null);
   const [oneTime, setOneTime] = useState(null);
-  const [retrieve, setRetrieve] = useState(false);
   const [expenseToggle, setExpenseToggle] = useState(false);
   const [totalMonthly, setTotalMonthly] = useState(null);
   const user = useSelector(state => state.user)
-
-  const retrieveContent = () => {
-    if (display !== null && user !== null) {
-      API.getCategoryData({ id: user._id, category: display }).then(response => {
-        setContent(response.data);
-        setRetrieve(false);
-      });
-    }
-  };
-
-  const sortExpenses = () => {
-    if (content !== null && display !== 'home') {
-      let sortedOneTime = content.filter(item => item.monthly === false);
-      let sortedMonthly = content.filter(item => item.monthly === true);
-      let datedOneTime = sortRecent(sortedOneTime);
-      let datedMonthly = sortRecent(sortedMonthly);
-      setMonthlyCharges(datedMonthly);
-      setOneTime(datedOneTime);
-    }
-  };
-
-  const sortRecent = array => {
-    return array.sort((a, b) => moment(b.date).unix() - moment(a.date).unix());
-  };
 
   const expenseInputToggle = () => {
     setExpenseToggle(!expenseToggle);
@@ -66,11 +38,6 @@ const Content = ({ display }) => {
     }
   }, [monthlyCharges]);
 
-  useEffect(()=> {
-    if(user._id) retrieveContent();
-  }, [display, user, retrieve]);
-  useEffect(sortExpenses, [content]);
-
   return (
     <>
       {display === 'home' ? (
@@ -85,11 +52,7 @@ const Content = ({ display }) => {
               </Grid>
               <Grid item xs={12} id='expenseInputSection'>
                   {user ? (
-                    <ExpenseForm
-                      user={user}
-                        update={() => retrieveContent()}
-                        setRetrieve={setRetrieve}
-                    />
+                    <ExpenseForm user={user} />
                   ) : null}
                 </Grid>
             </Grid>
@@ -110,7 +73,7 @@ const Content = ({ display }) => {
               </Grid>
               <Grid item xs={12} id='expenseInputSection'>
                   {user ? (
-                    <ExpenseForm user={user} setRetrieve={setRetrieve}/>
+                    <ExpenseForm user={user} />
                   ) : null}
               </Grid>
             </Grid>
@@ -126,11 +89,7 @@ const Content = ({ display }) => {
                 <Grid container className='expListCont'>
                   {monthlyCharges
                     ? monthlyCharges.map((item, index) => (
-                        <ChargeItem
-                          data={item}
-                          key={index}
-                          setRetrieve={setRetrieve}
-                        />
+                        <ChargeItem data={item} key={index} />
                       ))
                     : null}
                 </Grid>
@@ -146,11 +105,7 @@ const Content = ({ display }) => {
                 <Grid container className='expListCont'>
                   {oneTime !== null && oneTime.length > 0
                     ? oneTime.map((item, index) => (
-                        <ChargeItem
-                          data={item}
-                          key={index}
-                          setRetrieve={setRetrieve}
-                        />
+                        <ChargeItem data={item} key={index} />
                       ))
                     : null}
                 </Grid>
