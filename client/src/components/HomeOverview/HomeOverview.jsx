@@ -12,59 +12,34 @@ const Overview = () => {
   const [nonRecurringTotal, setNonRecurringTotal] = useState(null);
   const dispatch = useDispatch();
   const expenseDetails = useSelector(state => state.expenseDetails);
+  const {nonRecurringCategoryData, recurringCategoryData} = useSelector(state => state.expenseDetails.categoryData)
   const user = useSelector(state => state.user)
 
-  function expenseObj(finances, living, health, leisure, travel){
-    this.financesTotal = finances;
-    this.livingTotal = living;
-    this.healthTotal = health;
-    this.leisureTotal = leisure;
-    this.travelTotal = travel;
-  }
-  
   useEffect(() => {
-    if (user.expense) {
-      let recurringExpenseObj = new expenseObj(0, 0, 0, 0, 0)
-      let nonRecurringExpenseObj = new expenseObj(0, 0, 0, 0, 0)
+    if(nonRecurringCategoryData) setNonRecurringTotal(nonRecurringCategoryData.total)
+    if(recurringCategoryData) setRecurringTotal(recurringCategoryData.total);
+  }, [expenseDetails]);
 
-      user.expense.map((item) => {
-        switch (item.category) {
-          case 'finances':
-            if (item.monthly) return (recurringExpenseObj.financesTotal += item.amount);
-            else return (nonRecurringExpenseObj.financesTotal += item.amount);
-          case 'living':
-            if (item.monthly) return (recurringExpenseObj.livingTotal += item.amount);
-            else return (nonRecurringExpenseObj.livingTotal += item.amount);
-          case 'health':
-            if (item.monthly) return (recurringExpenseObj.healthTotal += item.amount);
-            else return (nonRecurringExpenseObj.healthTotal += item.amount);
-          case 'leisure':
-            if (item.monthly) return (recurringExpenseObj.leisureTotal += item.amount);
-            else return (nonRecurringExpenseObj.leisureTotal += item.amount);
-          case 'travel':
-            if (item.monthly) return (recurringExpenseObj.travelTotal += item.amount);
-            else return (nonRecurringExpenseObj.travelTotal += item.amount);
-          default:
-            return item;
-        }
-      });
-      expenseSumHelper(recurringExpenseObj, true);
-      expenseSumHelper(nonRecurringExpenseObj, false);
-      graphInitHelper(recurringExpenseObj, true);
-      graphInitHelper(nonRecurringExpenseObj, false);
+  useEffect(()=> {
+    if(recurringTotal){
+      graphInitHelper(recurringCategoryData, true);
     }
-  }, []);
+    if(nonRecurringTotal){
+      graphInitHelper(nonRecurringCategoryData, false);
+    }
+  }, [recurringTotal, nonRecurringTotal])
 
   useEffect(()=> {
     dispatch(filterExpenses(user.expense))
   }, [user.expense])
 
   const graphInitHelper = (expenseObj, recurring)=> {
+    console.log(expenseObj);
     let graph = {
       labels: ['Finances', 'Living', 'Health', 'Leisure', 'Travel'],
       datasets: [
         {
-          label: `Recurring Monthly Expenses - ${expenseSumHelper(expenseObj).toLocaleString(
+          label: `Recurring Monthly Expenses - ${expenseObj.total.toLocaleString(
             'en-US',
             {
               style: 'currency',
@@ -73,25 +48,16 @@ const Overview = () => {
           )}`,
           backgroundColor: ['green', 'rgb(51, 51, 155)', 'red', 'gold', '#5A4218'],
           data: [
-            expenseObj.financesTotal,
-            expenseObj.livingTotal,
-            expenseObj.healthTotal,
-            expenseObj.leisureTotal,
-            expenseObj.travelTotal,
+            expenseObj.financesDetails.total,
+            expenseObj.livingDetails.total,
+            expenseObj.healthDetails.total,
+            expenseObj.leisureDetails.total,
+            expenseObj.travelDetails.total,
           ],
         },
       ],
     }
     recurring ? setMonthlyGraph(graph) : setNonMonthlyGraph(graph);
-  }
-
-  const expenseSumHelper = (expenseObj, recurring)=> {
-    let total = 0;
-    for(let prop in expenseObj){
-      total += expenseObj[prop];
-    }
-    recurring ? setRecurringTotal(total) : setNonRecurringTotal(total);
-    return total;
   }
 
   return (

@@ -47,39 +47,66 @@ export const filterExpenses = (expenses) => {
 }
 
 export const categorize = (recurring, nonRecurring) => {
-    function CategoryObj(list, total){
+    function CategoryConstructor(list, total){
         this.list = list;
         this.total = total;
     }
 
-    let financesDetails = new CategoryObj([], 0);
-    let healthDetails = new CategoryObj([], 0);
-    let leisureDetails = new CategoryObj([], 0);
-    let travelDetails = new CategoryObj([], 0);
-    let livingDetails = new CategoryObj([], 0);
+    function CategoryListConstructor(finances, health, leisure, travel, living, total){
+        this.financesDetails = finances;
+        this.healthDetails = health;
+        this.leisureDetails = leisure;
+        this.travelDetails = travel;
+        this.livingDetails = living;
+        this.total = total;
+    }
 
-    function categoryHelper(expenses){
+    let recurringCategoryList = new CategoryListConstructor(
+        new CategoryConstructor([], 0), 
+        new CategoryConstructor([], 0), 
+        new CategoryConstructor([], 0), 
+        new CategoryConstructor([], 0), 
+        new CategoryConstructor([], 0), 
+        0)
+    
+    let nonRecurringCategoryList = new CategoryListConstructor(
+        new CategoryConstructor([], 0), 
+        new CategoryConstructor([], 0), 
+        new CategoryConstructor([], 0), 
+        new CategoryConstructor([], 0), 
+        new CategoryConstructor([], 0), 
+        0)
+
+    let categoryObj = {
+        recurringCategoryData: recurringCategoryList,
+        nonRecurringCategoryData: nonRecurringCategoryList
+    }
+
+    let consoleArr = [];
+
+    function expenseHelper(objToUpdate, category, expense){
+        objToUpdate[category].list.push(expense)
+        objToUpdate[category].total += expense.amount
+        objToUpdate.total += expense.amount
+    }
+
+    function categoryHelper(expenses, objToUpdate){
         expenses.map(expense => {
             switch(expense.category){
                 case 'health':
-                    healthDetails.list.push(expense);
-                    healthDetails.total += expense.amount;
+                    expenseHelper(objToUpdate, 'healthDetails', expense)
                     return expense;
                 case 'leisure':
-                    leisureDetails.list.push(expense);
-                    leisureDetails.total += expense.amount;
+                    expenseHelper(objToUpdate, 'leisureDetails', expense)
                     return expense;
                 case 'travel':
-                    travelDetails.list.push(expense);
-                    travelDetails.total += expense.amount;
+                    expenseHelper(objToUpdate, 'travelDetails', expense)
                     return expense;
                 case 'living':
-                    livingDetails.list.push(expense);
-                    livingDetails.total += expense.amount;
+                    expenseHelper(objToUpdate, 'livingDetails', expense)
                     return expense;
                 case 'finances':
-                    financesDetails.list.push(expense);
-                    financesDetails.total += expense.amount;
+                    expenseHelper(objToUpdate, 'financesDetails', expense)
                     return expense;
                 default:
                     return expense;
@@ -87,16 +114,17 @@ export const categorize = (recurring, nonRecurring) => {
         })
     }
 
-    if(recurring.length > 0) categoryHelper(recurring);
-    if(nonRecurring.length > 0) categoryHelper(nonRecurring);
-
-    let categoryObj = {
-        financesDetails,
-        healthDetails,
-        livingDetails,
-        leisureDetails,
-        travelDetails
+    if(recurring.length > 0) categoryHelper(recurring, recurringCategoryList);
+    else {
+        categoryObj.recurringCategoryList = null;
     }
+    if(nonRecurring.length > 0) categoryHelper(nonRecurring, nonRecurringCategoryList);
+    else {
+        categoryObj.nonRecurringCategoryList = null;
+    }
+
+    console.log(consoleArr);
+
     return {
         type: 'Categorize',
         payload: categoryObj
