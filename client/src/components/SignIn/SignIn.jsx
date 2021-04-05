@@ -5,8 +5,8 @@ import './SignIn.css';
 const SignIn = () => {
   return (
     <div className='loginCont'>
-      <a href='/auth/google' className='loginBtn' id='googleBtn'>
-        <FaGooglePlusG />
+      <a href='/auth/google' className='signin__button'>
+        Login
       </a>
     </div>
   );
