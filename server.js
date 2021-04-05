@@ -101,6 +101,11 @@ app.get('/auth/logout', (req, res) => {
 
 app.use(routes);
 app.use(express.static(path.join(__dirname, 'client/build')));
+// app.get('*', (request, response) => {
+//   response.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+// });
+
+app.use(express.static(path.join(__dirname, 'client/build')));
 app.get('*', (request, response) => {
   response.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
 });
