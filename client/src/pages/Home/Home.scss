@@ -58,14 +58,13 @@
   overflow-x: hidden;
   color: rgb(46, 44, 18);
   p {
-    font-size: 2.2em;
-    max-width: 60%;
+    font-size: 1.5em;
   }
   button {
     background: none;
     border: none;
     outline: none;
-    font-size: 1.8em;
+    font-size: 1.2em;
     color: rgb(46, 44, 18);
   }
   button:hover {
@@ -75,6 +74,47 @@
 }
 
 .landing__overview {
-  padding-top: 20vh;
   min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.landing__salary__tip {
+  padding: 2rem;
+}
+
+.landing__categories {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  margin: 2rem;
+  width: 80%;
+  .landing__cat__header {
+    color: rgb(90, 78, 57);
+    font-size: 2rem;
+  }
+}
+
+.ov__cat {
+  margin: 1em;
+  padding: 1em;
+  background: rgb(248, 246, 232) !important;
+  h3 {
+    margin: auto;
+    color: rgb(133, 94, 21);
+  }
+  span {
+    font-size: 0.7em;
+    opacity: 0.8;
+  }
+}
+
+@media (min-width: 700px) {
+  .landing__salary__tip {
+    max-width: 60%;
+  }
 }
