@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Layout.scss';
 import Nav from '../Navbar/Nav';
 
-const Layout = (props, { user }) => {
+const Layout = (props) => {
   return (
     <>
-      <Nav user={user} />
+      <Nav user={props.user} />
       {props.children}
     </>
   );

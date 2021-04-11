@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import { TimelineMax, Power2 } from 'gsap';
 import { Paper } from '@material-ui/core';
 import './Home.scss';
-import SignIn from '../../components/SignIn/SignIn';
 
 const Home = () => {
   const heroText = useRef(null);
@@ -30,12 +29,6 @@ const Home = () => {
   });
   return (
     <>
-      <div className='landing__nav'>
-        <div>
-          <p>Penny</p>
-        </div>
-        <SignIn />
-      </div>
       <div className='homepage'>
         <main className='landing__main'>
           <section className='landing__hero'>
