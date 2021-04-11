@@ -48,14 +48,7 @@ const Home = () => {
             </button>
           </section>
           <section className='landing__overview' id='landing_overview'>
-            {/* <Paper className='landing__salary__tip'>
-              <h5>Tip:</h5>
-              <p>Enter your annual salary for budget vs spending analysis.</p>
-              <p>
-                If hourly, enter your hourly average and weekly average hours to
-                calculate your projected salary.
-              </p>
-            </Paper> */}
+            <div>How do I use it?</div>
             <div className='landing__categories'>
               <h3 className='landing__cat__header'>
                 Penny is designed to help you organize your expenses based on

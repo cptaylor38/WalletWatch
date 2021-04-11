@@ -1,18 +1,24 @@
 import React from 'react';
 import { Router, Route } from 'react-router-dom';
 import history from './history';
-import UserProvider from './contexts/UserProvider';
 import Home from './pages/Home/Home';
-import Profile from './pages/Profile/Profile';
+import Overview from './pages/Overview/Overview';
 import './App.css';
+import Living from './pages/Living/Living';
+import Leisure from './pages/Leisure/Leisure';
+import Health from './pages/Health/Health';
+import Travel from './pages/Travel/Travel';
+import Finances from './pages/Finances/Finances';
 
 function App() {
   return (
     <Router history={history}>
-      <UserProvider>
-        <Route path='/profile/' component={Profile} />
-      </UserProvider>
-
+      <Route exact path='/profile/' component={Overview} />
+      <Route path='/profile/Health' component={Health} />
+      <Route path='/profile/Leisure' component={Leisure} />
+      <Route path='/profile/Travel' component={Travel} />
+      <Route path='/profile/Living' component={Living} />
+      <Route path='/profile/Finances' component={Finances} />
       <Route exact path='/' component={Home} />
     </Router>
   );
