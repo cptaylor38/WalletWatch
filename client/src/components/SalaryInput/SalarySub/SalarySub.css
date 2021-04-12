@@ -1,10 +1,9 @@
-#salaryContainer {
-  text-align: center;
-  flex-wrap: wrap;
+.salary__sub__cont {
+  display: flex;
   justify-content: center;
-  color: white !important;
+  align-items: center;
 }
 
-#salaryGrid {
-  width: 100%;
+.salary__sub__input {
+  background: green;
 }
