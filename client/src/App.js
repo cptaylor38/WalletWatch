@@ -19,7 +19,7 @@ function App() {
     <Router history={history}>
       <UserProvider>
         <Nav />
-        <Container maxWidth='xl' className='profile__overview'>
+        <Container maxWidth='xl'>
           <ProtectedRoute exact path='/profile' component={Overview} />
           <ProtectedRoute path='/profile/Health' component={Health} />
           <ProtectedRoute path='/profile/Leisure' component={Leisure} />

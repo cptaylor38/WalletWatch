@@ -4,9 +4,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1em;
+  padding: 0.8em 2em;
   background: rgb(107, 103, 47);
   color: #f9e996;
+  h1 {
+    padding: 0;
+    margin: 0;
+  }
 }
 
 .navBtn {
