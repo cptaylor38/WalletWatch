@@ -11,18 +11,22 @@ import Travel from './pages/Travel/Travel';
 import Finances from './pages/Finances/Finances';
 import UserProvider from './contexts/UserProvider';
 import Nav from './components/Navbar/Nav';
+import ProtectedRoute from './contexts/ProtectedRoute';
+import { Container } from '@material-ui/core';
 
 function App() {
   return (
     <Router history={history}>
       <UserProvider>
-        <Nav user={UserProvider.context} />
-        <Route exact path='/profile/' component={Overview} />
-        <Route path='/profile/Health' component={Health} />
-        <Route path='/profile/Leisure' component={Leisure} />
-        <Route path='/profile/Travel' component={Travel} />
-        <Route path='/profile/Living' component={Living} />
-        <Route path='/profile/Finances' component={Finances} />
+        <Nav />
+        <Container maxWidth='xl' className='profile__overview'>
+          <ProtectedRoute exact path='/profile' component={Overview} />
+          <ProtectedRoute path='/profile/Health' component={Health} />
+          <ProtectedRoute path='/profile/Leisure' component={Leisure} />
+          <ProtectedRoute path='/profile/Travel' component={Travel} />
+          <ProtectedRoute path='/profile/Living' component={Living} />
+          <ProtectedRoute path='/profile/Finances' component={Finances} />
+        </Container>
       </UserProvider>
       <Route exact path='/' component={Home} />
     </Router>

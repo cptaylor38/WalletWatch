@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { Grid, Button } from '@material-ui/core';
 import './Nav.scss';
 
-const Nav = ({ showSalaryUpdate, salarySection, setSalarySection }) => {
+const Nav = () => {
   const user = useContext(UserProvider.context);
   const expenseCategories = [
     'Finances',
@@ -15,10 +15,6 @@ const Nav = ({ showSalaryUpdate, salarySection, setSalarySection }) => {
     'Travel',
   ];
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
-
   return (
     <>
       <AppBar position='static' className='landing__nav'>
@@ -27,9 +23,9 @@ const Nav = ({ showSalaryUpdate, salarySection, setSalarySection }) => {
             <h1>Penny</h1>
           </Grid>
           <Grid item>
-            <Button href={user ? '/auth/logout' : '/auth/google'}>
+            <a href={user ? '/auth/logout' : '/auth/google'}>
               {user ? 'Sign Out' : 'Sign In'}
-            </Button>
+            </a>
           </Grid>
         </Grid>
         {user ? (

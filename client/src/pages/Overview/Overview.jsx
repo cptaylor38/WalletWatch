@@ -1,7 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { Container } from '@material-ui/core';
 import './Overview.scss';
-import Layout from '../../components/Layout/Layout';
 import { useSelector, useDispatch } from 'react-redux';
 import UserProvider from '../../contexts/UserProvider';
 import { getData, categorize } from '../../redux/actions';
@@ -16,9 +14,7 @@ const Profile = () => {
 
   return (
     <>
-      <Container maxWidth='xl' className='profile__overview'>
-        <h1>Overview</h1>
-      </Container>
+      <h1>Overview</h1>
     </>
   );
 };

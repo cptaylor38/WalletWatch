@@ -1,8 +1,9 @@
 import React, { createContext, useState, useEffect } from 'react';
+import {} from 'react-router-dom';
 const context = createContext(null);
 
 const UserProvider = ({ children }) => {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     fetch('/user')
