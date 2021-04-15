@@ -48,7 +48,9 @@ const Profile = () => {
                       currency: 'USD',
                     })}
                   </span>
-                  <Button onClick={() => showSalaryUpdate()}>Update</Button>
+                  <Button onClick={() => showSalaryUpdate()}>
+                    <FaEdit />
+                  </Button>
                 </p>
               </div>
             ) : (

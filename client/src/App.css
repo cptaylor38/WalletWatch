@@ -5,9 +5,3 @@ body {
 * {
   box-sizing: border-box;
 }
-
-.app__container {
-  background: rgb(250, 247, 230);
-  min-height: 100vh;
-  padding-top: 2em;
-}
