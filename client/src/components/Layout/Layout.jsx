@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './Layout.scss';
-import Nav from '../Navbar/Nav';
+import { Container, Button } from '@material-ui/core';
+import ChargesTab from '../ChargesTab/ChargesTab';
 
 const Layout = (props) => {
   return (
     <>
-      <Nav user={props.user} />
-      {props.children}
+      <Container maxWidth='xl' className='app__container'>
+        <ChargesTab />
+        {props.children}
+      </Container>
     </>
   );
 };

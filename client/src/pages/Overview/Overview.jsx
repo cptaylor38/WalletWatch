@@ -5,7 +5,8 @@ import { FaEdit } from 'react-icons/fa';
 import SalaryInput from '../../components/SalaryInput/SalaryInput';
 import UserProvider from '../../contexts/UserProvider';
 import { getData, categorize } from '../../redux/actions';
-import { Grid, Button, Paper } from '@material-ui/core';
+import { Grid, Button, Paper, Typography, Container } from '@material-ui/core';
+import Layout from '../../components/Layout/Layout';
 import moment from 'moment';
 
 const Profile = () => {
@@ -22,10 +23,14 @@ const Profile = () => {
     if (userData) dispatch(getData(userData._id));
   }, [userData, dispatch]);
 
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
+
   return (
-    <>
+    <Layout>
       <section>
-        <Paper className='ov__user__info'>
+        <Paper className='ov__section__group ov__user__info'>
           <Grid item>
             <h1>Welcome, {user.username}</h1>
           </Grid>
@@ -43,9 +48,7 @@ const Profile = () => {
                       currency: 'USD',
                     })}
                   </span>
-                  <Button onClick={() => showSalaryUpdate()}>
-                    <FaEdit />
-                  </Button>
+                  <Button onClick={() => showSalaryUpdate()}>Update</Button>
                 </p>
               </div>
             ) : (
@@ -54,7 +57,24 @@ const Profile = () => {
           </Grid>
         </Paper>
       </section>
-    </>
+      <section>
+        <Paper className='ov__section__group'>
+          <Typography className='ov__section__head'>Breakdown</Typography>
+          <div className='bd__outer__cont'>
+            <Container className='bd__cont'>
+              <Typography>Budget Remaining</Typography>
+            </Container>
+            <Container className='bd__cont'>
+              <Typography>Upcoming Charges</Typography>
+            </Container>
+            <Container className='bd__cont'>
+              <Typography>Reccuring Charges</Typography>
+              <Typography>Non-Recurring Charges</Typography>
+            </Container>
+          </div>
+        </Paper>
+      </section>
+    </Layout>
   );
 };
 

@@ -1,12 +1,13 @@
 import React from 'react';
 import './Health.scss';
+import Layout from '../../components/Layout/Layout';
 
 const Health = () => {
   return (
-    <div>
+    <Layout>
       <h1>Health</h1>
       <p>Health</p>
-    </div>
+    </Layout>
   );
 };
 

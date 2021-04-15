@@ -1,12 +1,13 @@
 import React from 'react';
 import './Finances.scss';
+import Layout from '../../components/Layout/Layout';
 
 const Finances = () => {
   return (
-    <div>
+    <Layout>
       <h1>Finances</h1>
       <p>Finances</p>
-    </div>
+    </Layout>
   );
 };
 

@@ -1,12 +1,13 @@
 import React from 'react';
 import './Travel.scss';
+import Layout from '../../components/Layout/Layout';
 
 const Travel = () => {
   return (
-    <div>
+    <Layout>
       <h1>Travel</h1>
       <p>Travel</p>
-    </div>
+    </Layout>
   );
 };
 
