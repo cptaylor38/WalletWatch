@@ -1,9 +1,10 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import UserProvider from '../../contexts/UserProvider';
 import AppBar from '@material-ui/core/AppBar';
 import { Link } from 'react-router-dom';
 import { Grid, Button } from '@material-ui/core';
 import {
+  FaPlus,
   FaHome,
   FaMoneyBill,
   FaRegLightbulb,
@@ -22,6 +23,10 @@ const Nav = () => {
     { icon: <FaGamepad key={'nav-icon-lei'} />, name: 'Leisure' },
     { icon: <FaCarSide key={'nav-icon-tra'} />, name: 'Travel' },
   ];
+  const [add_text_toggle, set_add_text_toggle] = useState('none');
+  const toggleAddText = (toggle_bool) => {
+    set_add_text_toggle(toggle_bool ? 'block' : 'none');
+  };
 
   return (
     <>
@@ -30,6 +35,18 @@ const Nav = () => {
           <Grid item>
             <h1>Penny</h1>
           </Grid>
+          {user ? (
+            <Grid item className='add__expenses'>
+              <Button
+                variant='contained'
+                onMouseEnter={() => toggleAddText(true)}
+                onMouseLeave={() => toggleAddText(false)}
+              >
+                <FaPlus />
+                <span style={{ display: add_text_toggle }}>Add Expenses</span>
+              </Button>
+            </Grid>
+          ) : null}
           <Grid item>
             <a href={user ? '/auth/logout' : '/auth/google'}>
               {user ? 'Sign Out' : 'Sign In'}

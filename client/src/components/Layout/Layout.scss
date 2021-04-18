@@ -5,30 +5,10 @@ $dark: #3d3a2e;
   background: $dark;
   min-height: 100vh;
   padding-top: 20vh;
+  position: relative;
 }
 
 .test {
   min-height: 200vh;
-  min-width: 100vw;
-}
-
-.add__expenses {
-  display: flex;
-  justify-content: center;
   width: 100%;
-  background: $dark;
-  button {
-    background: $light;
-    font-size: 1em;
-  }
-  button:hover {
-    background: $light;
-    color: $dark;
-  }
-}
-
-@media (min-width: 500px) {
-  .add__expenses {
-    justify-content: flex-end;
-  }
 }

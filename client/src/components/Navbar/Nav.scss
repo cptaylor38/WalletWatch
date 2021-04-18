@@ -109,6 +109,20 @@ $dark: #3d3a2e;
   display: none;
 }
 
+.add__expenses {
+  display: flex;
+  justify-content: center;
+  background: $dark;
+  button {
+    background: $light;
+    font-size: 1em;
+  }
+  button:hover {
+    background: $light;
+    color: $dark;
+  }
+}
+
 @media (min-width: 670px) {
   .nav__link {
     display: flex;
@@ -117,5 +131,11 @@ $dark: #3d3a2e;
   }
   .nav__text {
     display: block;
+  }
+}
+
+@media (min-width: 500px) {
+  .add__expenses {
+    justify-content: flex-end;
   }
 }
