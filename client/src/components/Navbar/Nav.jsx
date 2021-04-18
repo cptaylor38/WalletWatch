@@ -25,7 +25,7 @@ const Nav = () => {
 
   return (
     <>
-      <AppBar position='static' className='landing__nav'>
+      <AppBar position='fixed' className='landing__nav'>
         <Grid container id='navTop'>
           <Grid item>
             <h1>Penny</h1>

@@ -23,8 +23,8 @@ const Home = () => {
     landing_tl.fromTo(
       overview_button.current,
       1,
-      { y: '800%' },
-      { y: '0%', ease: Power2.easeInOut }
+      { y: '800%', opacity: 0 },
+      { y: '0%', opacity: 1, ease: Power2.easeInOut }
     );
   });
   return (
