@@ -140,3 +140,9 @@ export const categorize = (recurring, nonRecurring) => {
     payload: categoryObj,
   };
 };
+
+export const expenseFormToggle = () => {
+  return {
+    type: 'ExpenseFormToggle',
+  };
+};

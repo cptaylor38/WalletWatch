@@ -12,11 +12,14 @@ import Finances from './pages/Finances/Finances';
 import UserProvider from './contexts/UserProvider';
 import Nav from './components/Navbar/Nav';
 import ProtectedRoute from './contexts/ProtectedRoute';
-import { Container } from '@material-ui/core';
+import { useSelector } from 'react-redux';
+import ExpenseForm from './components/ExpenseForm/ExpenseForm';
 
 function App() {
+  const formToggle = useSelector((state) => state.formToggle);
   return (
     <Router history={history}>
+      {formToggle ? <ExpenseForm /> : null}
       <UserProvider>
         <Nav />
         <ProtectedRoute exact path='/profile' component={Overview} />

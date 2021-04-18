@@ -13,9 +13,12 @@ import {
   FaCarSide,
 } from 'react-icons/fa';
 import './Nav.scss';
+import { useDispatch } from 'react-redux';
+import { expenseFormToggle } from '../../redux/actions';
 
 const Nav = () => {
   const user = useContext(UserProvider.context);
+  const dispatch = useDispatch();
   const expenseCategories = [
     { icon: <FaMoneyBill key={'nav-icon-fin'} />, name: 'Finances' },
     { icon: <FaRegLightbulb key={'nav-icon-hom'} />, name: 'Living' },
@@ -26,6 +29,9 @@ const Nav = () => {
   const [add_text_toggle, set_add_text_toggle] = useState('none');
   const toggleAddText = (toggle_bool) => {
     set_add_text_toggle(toggle_bool ? 'block' : 'none');
+  };
+  const toggle_expense_form = () => {
+    dispatch(expenseFormToggle());
   };
 
   return (
@@ -39,6 +45,7 @@ const Nav = () => {
             <Grid item className='add__expenses'>
               <Button
                 variant='contained'
+                onClick={toggle_expense_form}
                 onMouseEnter={() => toggleAddText(true)}
                 onMouseLeave={() => toggleAddText(false)}
               >

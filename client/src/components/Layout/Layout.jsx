@@ -7,7 +7,6 @@ const Layout = (props) => {
     <>
       <Container maxWidth='xl' className='app__container'>
         {props.children}
-        <div className='test'>testing</div>
       </Container>
     </>
   );
