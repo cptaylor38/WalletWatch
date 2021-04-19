@@ -41,7 +41,6 @@ const Home = () => {
             </button>
           </section>
           <section className='landing__overview' id='landing_overview'>
-            <div>How do I use it?</div>
             <div className='landing__categories'>
               <h3 className='landing__cat__header'>
                 Penny is designed to help you organize your expenses based on

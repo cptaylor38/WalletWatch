@@ -1,8 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Rochester&display=swap');
+$light: #fdfeed;
+$dark: #3d3a2e;
 
 .homepage {
   display: flex;
-  background: beige;
+  background: rgb(62, 43, 16);
+  background: -moz-radial-gradient(
+    circle,
+    rgba(62, 43, 16, 1) 0%,
+    rgba(66, 64, 60, 1) 100%
+  );
+  background: -webkit-radial-gradient(
+    circle,
+    rgba(62, 43, 16, 1) 0%,
+    rgba(66, 64, 60, 1) 100%
+  );
+  background: radial-gradient(
+    circle,
+    rgba(62, 43, 16, 1) 0%,
+    rgba(66, 64, 60, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#3e2b10",endColorstr="#42403c",GradientType=1);
   min-height: 100vh;
 }
 
@@ -21,7 +39,7 @@
   align-items: center;
   min-width: 100%;
   overflow-x: hidden;
-  color: rgb(46, 44, 18);
+  color: $light;
   p {
     font-size: 1.2em;
     padding: 1em;
@@ -31,10 +49,10 @@
     border: none;
     outline: none;
     font-size: 1.2em;
-    color: rgb(46, 44, 18);
+    color: $light;
   }
   button:hover {
-    color: rgb(155, 144, 0);
+    color: rgb(145, 132, 112);
     cursor: pointer;
   }
 }
