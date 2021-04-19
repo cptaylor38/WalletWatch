@@ -2,43 +2,8 @@
 
 .homepage {
   display: flex;
-  padding: 0 2rem;
   background: beige;
   min-height: 100vh;
-}
-
-.landing__nav {
-  display: flex;
-  max-width: 100%;
-  position: sticky;
-  top: 0;
-  left: 0;
-  padding: 0 2rem;
-  justify-content: space-between;
-  align-items: center;
-  background: rgb(107, 103, 47);
-  font-family: 'Rochester', cursive;
-  color: rgb(255, 248, 170);
-  z-index: 2;
-  div {
-    p {
-      font-size: 2.5em;
-      padding: 10px;
-      margin: 0;
-    }
-  }
-
-  a {
-    color: palegoldenrod;
-    font-size: 1.3em;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    text-decoration: none;
-  }
-
-  a:hover {
-    color: rgb(255, 255, 255);
-  }
 }
 
 .landing__main {
@@ -58,14 +23,14 @@
   overflow-x: hidden;
   color: rgb(46, 44, 18);
   p {
-    font-size: 2.2em;
-    max-width: 60%;
+    font-size: 1.2em;
+    padding: 1em;
   }
   button {
     background: none;
     border: none;
     outline: none;
-    font-size: 1.8em;
+    font-size: 1.2em;
     color: rgb(46, 44, 18);
   }
   button:hover {
@@ -75,6 +40,62 @@
 }
 
 .landing__overview {
-  padding-top: 20vh;
   min-height: 100vh;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.landing__salary__tip {
+  padding: 2rem;
+}
+
+.landing__categories {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: center;
+  padding: 2rem;
+  margin: 2rem;
+  background: rgb(241, 241, 194);
+  width: 100%;
+  .landing__cat__header {
+    color: rgb(107, 103, 47);
+    font-size: 2rem;
+  }
+}
+
+.ov__cat {
+  margin: 1em;
+  padding: 1em;
+  flex: 1;
+  background: rgb(248, 246, 232) !important;
+  h3 {
+    margin: auto;
+    color: rgb(133, 94, 21);
+  }
+  span {
+    font-size: 0.7em;
+    opacity: 0.8;
+  }
+}
+
+@media (min-width: 700px) {
+  .landing__salary__tip {
+    max-width: 60%;
+  }
+}
+
+@media (min-width: 500px) {
+  .homepage {
+    padding: 0 2em;
+  }
+  .landing__hero {
+    p {
+      font-size: 1.5em;
+      padding: 0;
+    }
+  }
 }

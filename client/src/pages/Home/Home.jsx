@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { TimelineMax, Power2 } from 'gsap';
+import { Paper } from '@material-ui/core';
 import './Home.scss';
-import SignIn from '../../components/SignIn/SignIn';
 
 const Home = () => {
   const heroText = useRef(null);
@@ -18,23 +18,17 @@ const Home = () => {
       heroText.current,
       2,
       { x: '-200%', opacity: 0 },
-      { x: '0%', opacity: 1, ease: Power2.easeInOut }
+      { x: '0%', opacity: 0.6, ease: Power2.easeInOut }
     );
     landing_tl.fromTo(
       overview_button.current,
       1,
-      { y: '500%' },
-      { y: '0%', ease: Power2.easeInOut }
+      { y: '800%', opacity: 0 },
+      { y: '0%', opacity: 1, ease: Power2.easeInOut }
     );
-  }, []);
+  });
   return (
     <>
-      <div className='landing__nav'>
-        <div>
-          <p>Penny</p>
-        </div>
-        <SignIn />
-      </div>
       <div className='homepage'>
         <main className='landing__main'>
           <section className='landing__hero'>
@@ -47,16 +41,73 @@ const Home = () => {
             </button>
           </section>
           <section className='landing__overview' id='landing_overview'>
-            <div>
-              <h5>Tip:</h5>
-              <p>Enter your annual salary for budget vs spending analysis.</p>
-              <p>
-                If hourly, enter your hourly average and weekly average hours to
-                calculate your projected salary.
-              </p>
+            <div>How do I use it?</div>
+            <div className='landing__categories'>
+              <h3 className='landing__cat__header'>
+                Penny is designed to help you organize your expenses based on
+                categories that make sense to you.
+              </h3>
+              <Paper className='ov__cat'>
+                <h3>
+                  "Finances" <span>Ex:</span>
+                </h3>
+                <hr />
+                <ul>
+                  <li>Credit Card Payments</li>
+                  <li>Student Loans</li>
+                  <li>Mortgages</li>
+                  <li>Taxes</li>
+                </ul>
+              </Paper>
+              <Paper className='ov__cat'>
+                <h3>
+                  "Travel" <span>Ex:</span>
+                </h3>
+                <hr />
+                <ul>
+                  <li>Car Payments</li>
+                  <li>Car Insurance</li>
+                  <li>Fuel and Maintenance</li>
+                  <li>Hotels and Travel Costs</li>
+                </ul>
+              </Paper>
+              <Paper className='ov__cat'>
+                <h3>
+                  "Leisure" <span>Ex:</span>
+                </h3>
+                <hr />
+                <ul>
+                  <li>Movies</li>
+                  <li>Concerts</li>
+                  <li>Video Games</li>
+                  <li>Spa Dates</li>
+                </ul>
+              </Paper>
+              <Paper className='ov__cat'>
+                <h3>
+                  "Living" <span>Ex:</span>
+                </h3>
+                <hr />
+                <ul>
+                  <li>Electricity</li>
+                  <li>Water</li>
+                  <li>Rent</li>
+                  <li>Phone Bill</li>
+                </ul>
+              </Paper>
+              <Paper className='ov__cat'>
+                <h3>
+                  "Health" <span>Ex:</span>
+                </h3>
+                <hr />
+                <ul>
+                  <li>Health Insurance</li>
+                  <li>Doctor's Visits</li>
+                  <li>Prescriptions</li>
+                  <li>Gym Membership</li>
+                </ul>
+              </Paper>
             </div>
-            <div></div>
-            <div></div>
           </section>
         </main>
       </div>

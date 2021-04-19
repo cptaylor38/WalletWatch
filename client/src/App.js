@@ -1,18 +1,34 @@
 import React from 'react';
 import { Router, Route } from 'react-router-dom';
 import history from './history';
-import UserProvider from './contexts/UserProvider';
 import Home from './pages/Home/Home';
-import Profile from './pages/Profile/Profile';
+import Overview from './pages/Overview/Overview';
 import './App.css';
+import Living from './pages/Living/Living';
+import Leisure from './pages/Leisure/Leisure';
+import Health from './pages/Health/Health';
+import Travel from './pages/Travel/Travel';
+import Finances from './pages/Finances/Finances';
+import UserProvider from './contexts/UserProvider';
+import Nav from './components/Navbar/Nav';
+import ProtectedRoute from './contexts/ProtectedRoute';
+import { useSelector } from 'react-redux';
+import ExpenseForm from './components/ExpenseForm/ExpenseForm';
 
 function App() {
+  const formToggle = useSelector((state) => state.formToggle);
   return (
     <Router history={history}>
+      {formToggle ? <ExpenseForm /> : null}
       <UserProvider>
-        <Route path='/profile/' component={Profile} />
+        <Nav />
+        <ProtectedRoute exact path='/profile' component={Overview} />
+        <ProtectedRoute path='/profile/Health' component={Health} />
+        <ProtectedRoute path='/profile/Leisure' component={Leisure} />
+        <ProtectedRoute path='/profile/Travel' component={Travel} />
+        <ProtectedRoute path='/profile/Living' component={Living} />
+        <ProtectedRoute path='/profile/Finances' component={Finances} />
       </UserProvider>
-
       <Route exact path='/' component={Home} />
     </Router>
   );

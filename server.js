@@ -11,17 +11,16 @@ const cookieSession = require('cookie-session');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('./models/users');
 
-
 mongoose.connect(`${process.env.MONGODB_URI}`, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-  });
+  useNewUrlParser: true,
+  useCreateIndex: true,
+});
 
 passport.serializeUser((user, cb) => {
   cb(null, user);
 });
 passport.deserializeUser((id, cb) => {
-  User.findById(id).then(user => {
+  User.findById(id).then((user) => {
     cb(null, user);
   });
 });
@@ -31,32 +30,29 @@ passport.use(
     {
       clientID: keys.GOOGLE.clientID,
       clientSecret: keys.GOOGLE.clientSecret,
-      callbackURL: '/auth/google/callback'
+      callbackURL: '/auth/google/callback',
     },
     (accessToken, refreshToken, profile, cb) => {
-        User.findOne({ username: profile.displayName })
-            .then(currentUser => 
-              {
-                if (currentUser) {
-                  if (currentUser.googleId !== profile.id) {
-                    User.findOneAndUpdate({ googleId: profile.id })
-                        .then(updatedUser => cb(null, updatedUser))
-                        .catch(err => {
-                          res.send(err);
-                        });
-                  } 
-                  else {
-                    cb(null, currentUser);
-                  }
-                }
-                else {
-                  new User({ username: profile.displayName, googleId: profile.id })
-                          .save()
-                          .then(newUser => cb(null, newUser))
-                          .catch(err => console.log(err));
-                }
-            })
-            .catch((response)=> console.log(response));
+      User.findOne({ username: profile.displayName })
+        .then((currentUser) => {
+          if (currentUser) {
+            if (currentUser.googleId !== profile.id) {
+              User.findOneAndUpdate({ googleId: profile.id })
+                .then((updatedUser) => cb(null, updatedUser))
+                .catch((err) => {
+                  res.send(err);
+                });
+            } else {
+              cb(null, currentUser);
+            }
+          } else {
+            new User({ username: profile.displayName, googleId: profile.id })
+              .save()
+              .then((newUser) => cb(null, newUser))
+              .catch((err) => console.log(err));
+          }
+        })
+        .catch((response) => console.log(response));
     }
   )
 );
@@ -66,7 +62,7 @@ const app = express();
 app.use(
   cookieSession({
     maxAge: 24 * 60 * 60 * 1000,
-    keys: [keys.SESSION.cookieKey]
+    keys: [keys.SESSION.cookieKey],
   })
 );
 
@@ -75,13 +71,15 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.get('/auth/google',
+app.get(
+  '/auth/google',
   passport.authenticate('google', {
     scope: ['profile', 'email'],
   })
 );
 
-app.get('/auth/google/callback',
+app.get(
+  '/auth/google/callback',
   passport.authenticate('google'),
   (req, res) => {
     res.redirect('/profile');
@@ -97,8 +95,6 @@ app.get('/auth/logout', (req, res) => {
   res.redirect('/');
 });
 
-
-
 app.use(routes);
 app.use(express.static(path.join(__dirname, 'client/build')));
 // app.get('*', (request, response) => {
@@ -110,6 +106,6 @@ app.get('*', (request, response) => {
   response.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
 });
 
-app.listen(PORT, function() {
+app.listen(PORT, function () {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });

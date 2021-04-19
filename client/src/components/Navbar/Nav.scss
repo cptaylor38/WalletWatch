@@ -1,0 +1,141 @@
+/*Top nav section*/
+$light: #fdfeed;
+$dark: #3d3a2e;
+
+.landing__nav {
+  display: flex;
+  max-width: 100%;
+  // position: sticky;
+  top: 0;
+  left: 0;
+  justify-content: space-between;
+  align-items: center;
+  background: $dark;
+  font-family: 'Rochester', cursive;
+  z-index: 2;
+  div {
+    p {
+      font-size: 2.5em;
+      padding: 10px;
+      margin: 0;
+    }
+  }
+
+  a {
+    color: $light;
+    font-size: 1.3em;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: rgb(255, 255, 255);
+  }
+}
+
+#navTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8em 2em;
+  background: $dark;
+  color: $light;
+  h1 {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.navBtn {
+  background: none !important;
+  color: #f9e996 !important;
+}
+
+.navBtn:hover {
+  background: rgb(75, 75, 75) !important;
+  color: white;
+}
+
+#homeBtn {
+  font-size: 1.5rem;
+}
+
+/*Top nav section end */
+
+/*Middle nav section */
+
+#navSalary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+  color: black;
+}
+
+#salaryUpdateBtn {
+  font-family: 'Roboto Mono', monospace;
+  margin-left: 1rem;
+  padding: 1em;
+  border: none;
+  font-size: 1.5rem;
+}
+
+#salaryUpdateBtn:hover {
+  background: rgb(75, 75, 75);
+  color: white;
+}
+
+/*Middle Nav section end*/
+
+/*Bottom Nav section */
+
+.nav__bottom {
+  display: flex;
+  justify-content: space-evenly;
+  background: $light;
+  padding: 0.5em 0;
+  a {
+    color: $dark;
+  }
+  a:hover {
+    color: rgb(0, 0, 0) !important;
+    text-decoration: underline;
+  }
+}
+/*Bottom nav section end*/
+
+.nav__text {
+  display: none;
+}
+
+.add__expenses {
+  display: flex;
+  justify-content: center;
+  background: $dark;
+  button {
+    background: $light;
+    font-size: 1em;
+  }
+  button:hover {
+    background: $light;
+    color: $dark;
+  }
+}
+
+@media (min-width: 670px) {
+  .nav__link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .nav__text {
+    display: block;
+  }
+}
+
+@media (min-width: 500px) {
+  .add__expenses {
+    justify-content: flex-end;
+  }
+}
