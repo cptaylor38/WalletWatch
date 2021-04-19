@@ -7,12 +7,37 @@ const userSchema = new Schema({
   username: { type: String },
   googleId: { type: String },
   facebookId: { type: String },
-  expense: [
+  savings: { type: Number, default: 0 },
+  utilities: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Expense'
-    }
-  ]
+      ref: 'Utility',
+    },
+  ],
+  prescriptions: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Prescription',
+    },
+  ],
+  subscriptions: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Subscription',
+    },
+  ],
+  nonRecurring: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'NonRecurring',
+    },
+  ],
+  loans: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Loan',
+    },
+  ],
 });
 
 const User = mongoose.model('User', userSchema);

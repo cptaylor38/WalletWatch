@@ -28,25 +28,5 @@ Attached images - and deployed [site:](http://penny-checkbook.herokuapp.com/)
 
 ![Category tab](./ReadMeImgs/pennyCategory.png 'Category tab')
 
-Next up on improvements:
-
-1. Create controller for google and look into other strategies... figure out how to get facebook auth to work
-2. Implement user created username/password
-3. Change loading screen to be faster and provide more details on the service
-4. Change styling of profile page to look less shabby.
-5. Create better user alerts - i.e. a category not being filled in - charts not being populated.
-6. Look into other content and features, i.e. adds, api's, information pertaining to certain expenses like travel services, email/sms notifications on upcoming payments.
-7. Track payments.
-8. General expansion of functionality and styling improvements required.
-9. Fix data retrieval after expense submission, currently not loading new items.
-10. Add default value to expense form category when loaded under specific tabs.
-11. Clean up unnecessary html elements.
-12. Look into redux to clean up some state management/And Redux learning opportunity.
-
-Update 12/16:
-Still working on converting to redux, shifting some component logic to actions, reducing state, cleaning up the profile/overview page currently before shifting back to the layout/looking into other features.
-
-Update: 1/6:
-Not feeling well, known issues:
-Whole app is refreshing with updateProfile action - check useEffect to see if it can be reworked to not cause component rerender?
-Need to update overview section and category detail view sections to reflect added/deleted/updated expenses.
+4/9/2021
+Currently working on remodeling the database, expanding features, and completely redesigning this app.
