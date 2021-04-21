@@ -4,46 +4,52 @@ module.exports = {
   display: function (req, res) {
     let userId = req.params.id;
     db.User.findOne({ _id: userId })
-      .populate('expense')
+      .populate('loan')
       .then((data) => {
         res.json(data);
       });
   },
 
   delete: function (req, res) {
-    db.Expense.findByIdAndDelete({ _id: req.params.id })
+    db.Loan.findByIdAndDelete({ _id: req.params.id })
       .then((result) => res.json(result))
       .catch((err) => console.log(err));
   },
 
   update: function (req, res) {
-    db.Expense.findOneAndUpdate(
+    db.Loan.findOneAndUpdate(
       { _id: req.body.id },
       {
-        category: req.body.category,
-        monthly: req.body.monthly,
-        date: req.body.date,
-        amount: req.body.amount,
+        servicer: req.body.servicer,
+        due_date: req.body.due_date,
         title: req.body.title,
+        total: req.body.total,
+        notes: req.body.notes,
+        monthly_payment: req.body.monthly_payment,
+        url: req.body.url,
+        interest_rate: req.body.interest_rate,
       },
       { new: true }
     ).then((result) => res.json(result));
   },
 
   create: function (req, res) {
-    const Expense = {
-      category: req.body.category,
-      monthly: req.body.monthly,
-      date: req.body.date,
-      amount: req.body.amount,
+    const Loan = {
+      servicer: req.body.servicer,
+      due_date: req.body.due_date,
       title: req.body.title,
+      total: req.body.total,
+      notes: req.body.notes,
+      monthly_payment: req.body.monthly_payment,
+      url: req.body.url,
+      interest_rate: req.body.interest_rate,
     };
 
-    db.Expense.create(Expense)
-      .then(function (dbExpense) {
+    db.Loan.create(Loan)
+      .then(function (dbLoan) {
         return db.User.findOneAndUpdate(
           { _id: req.body.id },
-          { $push: { expense: dbExpense } },
+          { $push: { loans: dbLoan } },
           { new: true }
         );
       })
