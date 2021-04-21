@@ -1,29 +1,16 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default {
-    adjustSalary: data => {
-        return axios.post('/api/salary/update', data);
-    },
+  adjustSalary: (data) => {
+    return axios.post('/api/salary/update', data);
+  },
 
-    getCategoryData: data => {
-        let id = data.id;
-        return axios.get(`/api/expense/${id}/${data.category}`);
-    },
+  getHomeDisplay: (data) => {
+    let id = data.id;
+    return axios.get(`/api/home/${id}`);
+  },
 
-    getHomeDisplay: data => {
-        let id = data.id;
-        return axios.get(`/api/home/${id}`);
-    },
-
-    createExpense: data => {
-        return axios.post('/api/expense/create', data);
-    },
-
-    updateExpense: data => {
-        return axios.post('/api/expense/update', data);
-    },
-
-    deleteExpense: data => {
-        return axios.put(`/api/expense/delete/${data.id}`);
-    }
+  //probably best to create separate modules for each route -
+  //prescriptions, subscriptions, non-recurring, utility, loans, and need to flesh out idea for what to
+  //do with savings and paid schemas.
 };
