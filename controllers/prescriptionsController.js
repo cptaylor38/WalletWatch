@@ -61,11 +61,25 @@ module.exports = {
   },
 
   display: function (req, res) {
-    let userId = req.params.id;
-    db.User.findOne({ _id: userId })
+    db.User.findOne({ _id: req.params.id })
       .populate('prescriptions')
       .then((data) => {
         res.json(data);
       });
+  },
+
+  create_multiple: async function (req, res) {
+    try {
+      let new_prescriptions = await db.Loan.insertMany(prescriptions_array);
+      let updated_profile = await db.User.findOneAndUpdate(
+        { _id: req.body.id },
+        { $push: { prescriptions: new_prescriptions } },
+        { new: true }
+      );
+      res.json(updated_profile);
+    } catch (err) {
+      console.log(err);
+      res.json(err);
+    }
   },
 };

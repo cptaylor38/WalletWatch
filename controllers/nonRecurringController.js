@@ -2,9 +2,8 @@ const db = require('../models');
 
 module.exports = {
   display: function (req, res) {
-    let userId = req.params.id;
     let category = req.params.category;
-    db.User.findOne({ _id: userId })
+    db.User.findOne({ _id: req.params.id })
       .populate('nonRecurring')
       .then((data) => {
         let filteredData = data.nonRecurring.filter((item) => {
@@ -61,5 +60,20 @@ module.exports = {
     db.NonRecurring.findByIdAndDelete({ _id: req.params.id })
       .then((result) => res.json(result))
       .catch((err) => console.log(err));
+  },
+
+  create_multiple: async function (req, res) {
+    try {
+      let new_charges = await db.NonRecurring.insertMany(charges_array);
+      let updated_profile = await db.User.findOneAndUpdate(
+        { _id: req.body.id },
+        { $push: { nonRecurring: new_charges } },
+        { new: true }
+      );
+      res.json(updated_profile);
+    } catch (err) {
+      console.log(err);
+      res.json(err);
+    }
   },
 };

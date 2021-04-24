@@ -6,8 +6,7 @@ export default {
   },
 
   getHomeDisplay: (data) => {
-    let id = data.id;
-    return axios.get(`/api/home/${id}`);
+    return axios.get(`/api/home/${data.id}`);
   },
 
   //probably best to create separate modules for each route -

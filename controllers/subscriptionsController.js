@@ -51,9 +51,8 @@ module.exports = {
   },
 
   display: function (req, res) {
-    let userId = req.params.id;
     let category = req.params.category;
-    db.User.findOne({ _id: userId })
+    db.User.findOne({ _id: req.params.id })
       .populate('subscriptions')
       .then((data) => {
         let filteredData = data.subscriptions.filter((item) => {
@@ -61,5 +60,20 @@ module.exports = {
         });
         res.json(filteredData);
       });
+  },
+
+  create_multiple: async function (req, res) {
+    try {
+      let new_subscriptions = await db.Loan.insertMany(subscriptions_array);
+      let updated_profile = await db.User.findOneAndUpdate(
+        { _id: req.body.id },
+        { $push: { subscriptions: new_subscriptions } },
+        { new: true }
+      );
+      res.json(updated_profile);
+    } catch (err) {
+      console.log(err);
+      res.json(err);
+    }
   },
 };

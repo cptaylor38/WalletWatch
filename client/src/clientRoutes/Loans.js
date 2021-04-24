@@ -9,17 +9,15 @@ export default {
     return axios.post('/api/loan/update', data);
   },
 
+  deleteLoan: (data) => {
+    return axios.post(`/api/loan/delete/${data.id}`);
+  },
+
   addLoans: (data) => {
-    //data should be array of loan objects
+    //data should be array of loan objects.
+    //also need user id passed in
+    //endpoint expecting object of
+    // {id: user _id, loans_array [{data}, {data}, {data}]}
     return axios.post('/api/loan/createmulti', data);
   },
-
-  getHomeDisplay: (data) => {
-    let id = data.id;
-    return axios.get(`/api/home/${id}`);
-  },
-
-  //probably best to create separate modules for each route -
-  //prescriptions, subscriptions, non-recurring, utility, loans, and need to flesh out idea for what to
-  //do with savings and paid schemas.
 };

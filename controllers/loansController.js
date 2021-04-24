@@ -1,6 +1,15 @@
 const db = require('../models');
 
-function LoanConstructor(servicer, due_date, title, total, notes, monthly_payment, url, interest_rate){
+function LoanConstructor(
+  servicer,
+  due_date,
+  title,
+  total,
+  notes,
+  monthly_payment,
+  url,
+  interest_rate
+) {
   this.servicer = servicer;
   this.due_date = due_date;
   this.title = title;
@@ -12,13 +21,20 @@ function LoanConstructor(servicer, due_date, title, total, notes, monthly_paymen
 }
 
 const loan_init = (body) => {
-  return new LoanConstructor(body.servicer, body.due_date, body.title, body.notes, body.monthly_payment, body.url, body.interest_rate);
-}
+  return new LoanConstructor(
+    body.servicer,
+    body.due_date,
+    body.title,
+    body.notes,
+    body.monthly_payment,
+    body.url,
+    body.interest_rate
+  );
+};
 
 module.exports = {
   display: function (req, res) {
-    let userId = req.params.id;
-    db.User.findOne({ _id: userId })
+    db.User.findOne({ _id: req.params.id })
       .populate('loan')
       .then((data) => {
         res.json(data);
@@ -33,11 +49,9 @@ module.exports = {
 
   update: function (req, res) {
     let Loan = loan_init(req.body);
-    db.Loan.findOneAndUpdate(
-      { _id: req.body.id },
-      Loan,
-      { new: true }
-    ).then((result) => res.json(result));
+    db.Loan.findOneAndUpdate({ _id: req.body.id }, Loan, {
+      new: true,
+    }).then((result) => res.json(result));
   },
 
   create: function (req, res) {
@@ -59,22 +73,18 @@ module.exports = {
       });
   },
 
-  create_multiple: function(req, res){
-    let user;
+  create_multiple: async function (req, res) {
     try {
-      req.loans_array.forEach(loan => {
-        await db.Loan.create(loan_init(loan))
-        user = await db.User.findOneAndUpdate(
-          { _id: req.body.id },
-          { $push: { loans: dbLoan } },
-          { new: true }
-        )
-      })
-      res.json(user);
-    }
-    catch (err){
+      let new_loans = await db.Loan.insertMany(loans_array);
+      let updated_profile = await db.User.findOneAndUpdate(
+        { _id: req.body.id },
+        { $push: { loans: new_loans } },
+        { new: true }
+      );
+      res.json(updated_profile);
+    } catch (err) {
       console.log(err);
       res.json(err);
     }
-  }
+  },
 };
