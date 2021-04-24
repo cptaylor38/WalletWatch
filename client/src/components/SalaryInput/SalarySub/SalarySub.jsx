@@ -15,7 +15,6 @@ const SalarySub = ({ handleChange, onSubmit, clearAlerts, salary }) => {
               label='Salary'
               value={salary !== 0 ? salary : ''}
               onChange={handleChange}
-              className='hourlyWageInput salaryField'
               id='formatted-numberformat-input'
               InputProps={{
                 inputComponent: NumberFormatCustom,

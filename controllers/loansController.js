@@ -1,49 +1,67 @@
 const db = require('../models');
 
+function LoanConstructor(
+  servicer,
+  due_date,
+  title,
+  total,
+  notes,
+  monthly_payment,
+  url,
+  interest_rate
+) {
+  this.servicer = servicer;
+  this.due_date = due_date;
+  this.title = title;
+  this.total = total;
+  this.notes = notes;
+  this.monthly_payment = monthly_payment;
+  this.url = url;
+  this.interest_rate = interest_rate;
+}
+
+const loan_init = (body) => {
+  return new LoanConstructor(
+    body.servicer,
+    body.due_date,
+    body.title,
+    body.notes,
+    body.monthly_payment,
+    body.url,
+    body.interest_rate
+  );
+};
+
 module.exports = {
   display: function (req, res) {
-    let userId = req.params.id;
-    db.User.findOne({ _id: userId })
-      .populate('expense')
+    db.User.findOne({ _id: req.params.id })
+      .populate('loan')
       .then((data) => {
         res.json(data);
       });
   },
 
   delete: function (req, res) {
-    db.Expense.findByIdAndDelete({ _id: req.params.id })
+    db.Loan.findByIdAndDelete({ _id: req.params.id })
       .then((result) => res.json(result))
       .catch((err) => console.log(err));
   },
 
   update: function (req, res) {
-    db.Expense.findOneAndUpdate(
-      { _id: req.body.id },
-      {
-        category: req.body.category,
-        monthly: req.body.monthly,
-        date: req.body.date,
-        amount: req.body.amount,
-        title: req.body.title,
-      },
-      { new: true }
-    ).then((result) => res.json(result));
+    let Loan = loan_init(req.body);
+    db.Loan.findOneAndUpdate({ _id: req.body.id }, Loan, {
+      new: true,
+    }).then((result) => res.json(result));
   },
 
   create: function (req, res) {
-    const Expense = {
-      category: req.body.category,
-      monthly: req.body.monthly,
-      date: req.body.date,
-      amount: req.body.amount,
-      title: req.body.title,
-    };
+    let Loan = loan_init(req.body);
 
-    db.Expense.create(Expense)
-      .then(function (dbExpense) {
+    db.Loan.create(Loan)
+      .then(function (dbLoan) {
         return db.User.findOneAndUpdate(
           { _id: req.body.id },
-          { $push: { expense: dbExpense } },
+          { $push: { loans: dbLoan } },
           { new: true }
         );
       })
@@ -53,5 +71,20 @@ module.exports = {
       .catch(function (err) {
         res.json(err);
       });
+  },
+
+  create_multiple: async function (req, res) {
+    try {
+      let new_loans = await db.Loan.insertMany(loans_array);
+      let updated_profile = await db.User.findOneAndUpdate(
+        { _id: req.body.id },
+        { $push: { loans: new_loans } },
+        { new: true }
+      );
+      res.json(updated_profile);
+    } catch (err) {
+      console.log(err);
+      res.json(err);
+    }
   },
 };

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { FaEdit } from 'react-icons/fa';
 import SalaryInput from '../../components/SalaryInput/SalaryInput';
 import UserProvider from '../../contexts/UserProvider';
-import { getData, categorize } from '../../redux/actions';
+import { getData } from '../../redux/actions';
 import { Grid, Button, Paper, Typography, Container } from '@material-ui/core';
 import Layout from '../../components/Layout/Layout';
 import moment from 'moment';

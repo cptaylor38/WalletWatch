@@ -21,6 +21,15 @@ const PrescriptionSchema = new Schema({
   purchase_date: {
     type: Date,
   },
+  drug_strength: {
+    type: String,
+  },
+  directions: {
+    type: String,
+  },
+  drug_quantity: {
+    type: Number,
+  },
   day_supply: {
     type: Number,
   },
