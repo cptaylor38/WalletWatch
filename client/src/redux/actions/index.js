@@ -14,9 +14,3 @@ export const updateProfile = (data) => {
     payload: data,
   };
 };
-
-export const expenseFormToggle = () => {
-  return {
-    type: 'ExpenseFormToggle',
-  };
-};
