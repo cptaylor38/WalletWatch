@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import {
-  Container,
   FormControl,
   InputLabel,
   Select,
   MenuItem,
+  Paper,
 } from '@material-ui/core';
 
 const ExpenseFormBase = () => {
@@ -14,7 +14,7 @@ const ExpenseFormBase = () => {
   };
 
   return (
-    <Container className='expense__form__base'>
+    <Paper className='expense__form__base'>
       <FormControl variant='outlined' className='e__form--category'>
         <InputLabel id='demo-simple-select-outlined-label'>
           Charge Type
@@ -34,7 +34,7 @@ const ExpenseFormBase = () => {
           <MenuItem value={'nonRecurring'}>Non-Recurring</MenuItem>
         </Select>
       </FormControl>
-    </Container>
+    </Paper>
   );
 };
 

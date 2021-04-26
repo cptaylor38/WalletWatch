@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import UserProvider from '../../contexts/UserProvider';
 import AppBar from '@material-ui/core/AppBar';
 import { Link } from 'react-router-dom';
@@ -16,6 +16,7 @@ import './Nav.scss';
 
 const Nav = () => {
   const user = useContext(UserProvider.context);
+  const [add_helper_text, set_add_helper_text] = useState(false);
   const expenseCategories = [
     { icon: <FaMoneyBill key={'nav-icon-fin'} />, name: 'Finances' },
     { icon: <FaRegLightbulb key={'nav-icon-hom'} />, name: 'Living' },
@@ -23,6 +24,10 @@ const Nav = () => {
     { icon: <FaGamepad key={'nav-icon-lei'} />, name: 'Leisure' },
     { icon: <FaCarSide key={'nav-icon-tra'} />, name: 'Travel' },
   ];
+
+  const addHelperToggle = (bool) => {
+    bool ? set_add_helper_text(true) : set_add_helper_text(false);
+  };
 
   return (
     <>
@@ -32,8 +37,12 @@ const Nav = () => {
             <h1>Penny</h1>
           </Grid>
           {user ? (
-            <Link to='/profile/addcharges'>
-              <FaPlus /> Add Charges
+            <Link
+              to='/profile/addcharges'
+              onMouseEnter={() => addHelperToggle(true)}
+              onMouseLeave={() => addHelperToggle(false)}
+            >
+              <FaPlus /> {add_helper_text ? <span>Add Charges</span> : null}
             </Link>
           ) : null}
           <Grid item>
