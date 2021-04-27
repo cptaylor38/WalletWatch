@@ -1,19 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ExpenseForm.scss';
 import { Container, Button } from '@material-ui/core';
-import { expenseFormToggle } from '../../redux/actions';
-import { useDispatch } from 'react-redux';
+import { FaPlus } from 'react-icons/fa';
+import ExpenseFormBase from './expense_form_sub_components/ExpenseFormBase';
 
 const ExpenseForm = () => {
-  const dispatch = useDispatch();
-  const toggle_expense_form = () => {
-    dispatch(expenseFormToggle());
+  const [form_array, set_form_array] = useState([{}]);
+  const increment_form_count = () => {
+    set_form_array([...form_array, {}]);
   };
   return (
     <Container className='expense__form'>
-      <h1>Form to design goes here</h1>
-      <p>Hello, I'm going to be a form.</p>
-      <Button onClick={() => toggle_expense_form()}>Close</Button>
+      <main className='expense__form--main'>
+        {form_array.map((item) => (
+          <ExpenseFormBase />
+        ))}
+        <Button onClick={increment_form_count}>
+          <FaPlus />
+        </Button>
+      </main>
     </Container>
   );
 };

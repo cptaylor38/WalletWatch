@@ -1,9 +1,33 @@
+$light: #fdfeed;
+$dark: #3d3a2e;
+
 .expense__form {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
+  display: flex;
+  min-height: 100vh;
   min-width: 100%;
-  z-index: 100000000;
-  background: white;
+  background: $light;
+
+  main {
+    display: flex;
+    margin: 20vh 0;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    button {
+      padding: 2em;
+      color: $dark;
+    }
+  }
+}
+
+.expense__form__base {
+  background: $dark;
+  padding: 2em;
+  margin: 1em;
+  header {
+    display: flex;
+    justify-content: flex-start;
+    padding: 1em;
+    background: $dark;
+  }
 }

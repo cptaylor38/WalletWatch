@@ -9,9 +9,6 @@ const SubscriptionSchema = new Schema({
     type: String,
     subscription: { type: Schema.Types.ObjectId, ref: 'User' },
   },
-  name: {
-    type: String,
-  },
   amount: {
     type: Number,
   },
