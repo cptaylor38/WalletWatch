@@ -3,8 +3,6 @@ import {
   FormControl,
   InputLabel,
   Select,
-  FormGroup,
-  TextField,
   MenuItem,
   Paper,
 } from '@material-ui/core';
@@ -63,7 +61,6 @@ const ExpenseFormBase = () => {
             <MenuItem value={'nonRecurring'}>Non-Recurring</MenuItem>
           </Select>
         </FormControl>
-
         {formManager()}
       </form>
     </Paper>
