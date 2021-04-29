@@ -47,7 +47,7 @@ const ExpenseFormBase = () => {
             Charge Type
           </InputLabel>
           <Select
-            labelId='demo-simple-select-outlined-label'
+            labelid='demo-simple-select-outlined-label'
             id='demo-simple-select-outlined'
             value={form_chargeType}
             onChange={handleChargeSelect}

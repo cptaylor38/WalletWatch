@@ -10,7 +10,7 @@ const CategorySelect = ({ value, changeHandler }) => {
       >
         <InputLabel id='demo-simple-select-outlined-label'>Category</InputLabel>
         <Select
-          labelId='demo-simple-select-outlined-label'
+          labelid='demo-simple-select-outlined-label'
           id='demo-simple-select-outlined'
           value={value}
           onChange={changeHandler}

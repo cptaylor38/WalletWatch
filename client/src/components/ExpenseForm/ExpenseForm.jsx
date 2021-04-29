@@ -12,8 +12,8 @@ const ExpenseForm = () => {
   return (
     <Container className='expense__form'>
       <main className='expense__form--main'>
-        {form_array.map((item) => (
-          <ExpenseFormBase />
+        {form_array.map((item, index) => (
+          <ExpenseFormBase key={index} />
         ))}
         <Button onClick={increment_form_count}>
           <FaPlus />
