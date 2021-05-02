@@ -1,0 +1,17 @@
+import React, { useEffect } from 'react';
+
+const GoodRxWidget = () => {
+  useEffect(() => {
+    (function (d, t) {
+      var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+      g.src =
+        '//s3.amazonaws.com/assets.goodrx.com/static/widgets/search.min.js';
+      s.parentNode.insertBefore(g, s);
+    })(document, 'script');
+  }, []);
+
+  return <div id='goodrx_search_widget' />;
+};
+
+export default GoodRxWidget;

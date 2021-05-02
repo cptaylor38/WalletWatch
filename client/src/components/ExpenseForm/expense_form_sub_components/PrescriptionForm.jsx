@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import AmountInput from './Shared/AmountInput';
 import TextInput from './Shared/TextInput';
 import DateInput from './Shared/DateInput';
@@ -36,25 +36,6 @@ const PrescriptionForm = () => {
     set_copay_amount(e.target.value);
   };
 
-  // const handleWidget = (d, t) => {
-  //   let g = d.createElement(t),
-  //     s = d.getElementsByTagName(t)[0];
-  //   g.src = '//s3.amazonaws.com/assets.goodrx.com/static/widgets/search.min.js';
-  //   s.parentNode.insertBefore(g, s);
-  // };
-
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src =
-      '//s3.amazonaws.com/assets.goodrx.com/static/widgets/search.min.js';
-    script.async = true;
-    script.innerHTML = `var _grxdn = "lipitor";
-    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-    g.src="//s3.amazonaws.com/assets.goodrx.com/static/widgets/search.min.js";
-        s.parentNode.insertBefore(g,s)}(document,"script"));`;
-    document.getElementById('goodrx_search_widget').appendChild(script);
-  }, []);
-
   return (
     <>
       <TextInput
@@ -86,7 +67,6 @@ const PrescriptionForm = () => {
         value={purchase_date}
         changeHandler={handleChange}
       />
-      <div id='goodrx_search_widget'></div>
       <div>Drug Strength</div>
       <MultiLineInput
         value={directions}

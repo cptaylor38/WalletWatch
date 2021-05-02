@@ -21,13 +21,14 @@ $dark: #3d3a2e;
 }
 
 .expense__form__base {
+  display: flex;
+  justify-content: space-evenly;
+  flex-flow: row wrap;
   background: $dark;
   padding: 2em;
   margin: 1em;
-  header {
-    display: flex;
-    justify-content: flex-start;
-    padding: 1em;
-    background: $dark;
+
+  .e__form--chargeType {
+    width: 100%;
   }
 }
