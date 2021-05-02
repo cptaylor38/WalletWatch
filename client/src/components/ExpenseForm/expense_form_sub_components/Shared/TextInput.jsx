@@ -6,6 +6,7 @@ const TextInput = ({ labelText, value, changeHandler, name }) => {
     <>
       <TextField
         id='standard-basic'
+        className='e__form--control'
         name={name}
         label={labelText}
         value={value}

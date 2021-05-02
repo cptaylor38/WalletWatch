@@ -12,7 +12,7 @@ import PrescriptionForm from './PrescriptionForm';
 import SubscriptionForm from './SubscriptionForm';
 import LoanForm from './LoanForm';
 
-const ExpenseFormBase = () => {
+const ExpenseFormBase = ({ toggleWidget }) => {
   const [form_chargeType, set_form_chargeType] = useState('nonRecurring');
 
   const handleChargeSelect = (event) => {
@@ -28,7 +28,7 @@ const ExpenseFormBase = () => {
       case 'subscription':
         return <SubscriptionForm />;
       case 'prescription':
-        return <PrescriptionForm />;
+        return <PrescriptionForm toggleWidget={toggleWidget} />;
       case 'utility':
         return <UtilityForm />;
       default:
@@ -47,7 +47,7 @@ const ExpenseFormBase = () => {
             Charge Type
           </InputLabel>
           <Select
-            labelId='demo-simple-select-outlined-label'
+            labelid='demo-simple-select-outlined-label'
             id='demo-simple-select-outlined'
             value={form_chargeType}
             onChange={handleChargeSelect}

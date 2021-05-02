@@ -6,6 +6,7 @@ $dark: #3d3a2e;
   min-height: 100vh;
   min-width: 100%;
   background: $light;
+  position: relative;
 
   main {
     display: flex;
@@ -21,13 +22,28 @@ $dark: #3d3a2e;
 }
 
 .expense__form__base {
+  display: flex;
+  justify-content: space-evenly;
+  flex-flow: row wrap;
   background: $dark;
   padding: 2em;
   margin: 1em;
-  header {
-    display: flex;
-    justify-content: flex-start;
-    padding: 1em;
-    background: $dark;
+
+  .e__form--chargeType {
+    width: 100%;
   }
+
+  .e__form--control {
+    padding: 1em;
+  }
+}
+
+.goodrx__helper {
+  position: fixed;
+  right: 10%;
+  bottom: 10%;
+  z-index: 20;
+  padding: 1em;
+  background: grey;
+  border-radius: 10px;
 }
