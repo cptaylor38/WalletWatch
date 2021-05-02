@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AmountInput from './Shared/AmountInput';
 import TextInput from './Shared/TextInput';
 import DateInput from './Shared/DateInput';
 import MultiLineInput from './Shared/MultiLineInput';
+import { FormControlLabel, Checkbox } from '@material-ui/core';
 
-const PrescriptionForm = () => {
+const PrescriptionForm = ({ toggleWidget }) => {
   const [copay_amount, set_copay_amount] = useState('');
   const [rx_title, set_rx_title] = useState('');
   const [treatment, set_treatment] = useState('');
@@ -12,6 +13,7 @@ const PrescriptionForm = () => {
   const [purchase_date, set_purchase_date] = useState('');
   const [directions, set_directions] = useState('');
   const [url, set_url] = useState('');
+  const [recurring_rx, set_recurring_rx] = useState(false);
 
   const handleChange = (e) => {
     switch (e.target.name) {
@@ -35,6 +37,13 @@ const PrescriptionForm = () => {
   const handleAmount = (e) => {
     set_copay_amount(e.target.value);
   };
+
+  useEffect(() => {
+    toggleWidget(true);
+    return () => {
+      toggleWidget(false);
+    };
+  });
 
   return (
     <>
@@ -76,7 +85,18 @@ const PrescriptionForm = () => {
       />
       <div>Drug Quantity</div>
       <div>Day Supply</div>
-      <div>Recurring Prescription</div>
+      <FormControlLabel
+        control={
+          <Checkbox
+            className='e__form--cbox'
+            checked={recurring_rx}
+            onChange={() => set_recurring_rx(!recurring_rx)}
+            name='recurring'
+            color='primary'
+          />
+        }
+        label='Frequent:'
+      />
       <TextInput
         name={'url'}
         labelText={'url'}

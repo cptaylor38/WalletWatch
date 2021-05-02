@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
 
-const CategorySelect = ({ value, changeHandler }) => {
+const CategorySelect = ({ value, changeHandler, name }) => {
   return (
     <>
       <FormControl
@@ -13,6 +13,7 @@ const CategorySelect = ({ value, changeHandler }) => {
           labelid='demo-simple-select-outlined-label'
           id='demo-simple-select-outlined'
           value={value}
+          name={name}
           onChange={changeHandler}
           label='Charge Type'
           className='e__form--select'

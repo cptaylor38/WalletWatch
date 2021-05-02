@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import AmountInput from './Shared/AmountInput';
 import CategorySelect from './Shared/CategorySelect';
 import TextInput from './Shared/TextInput';
@@ -37,9 +37,6 @@ const NonRecurringForm = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(purchase_date);
-  }, [purchase_date]);
   return (
     <>
       <CategorySelect

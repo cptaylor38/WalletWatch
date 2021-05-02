@@ -10,6 +10,7 @@ const DateInput = ({ labelText, changeHandler, value, name }) => {
   });
   return (
     <TextField
+      className='e__form--control'
       id='date'
       label={labelText}
       type='date'

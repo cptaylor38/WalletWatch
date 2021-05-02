@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-const GoodRxWidget = () => {
+const GoodRxWidget = ({ toggleWidget }) => {
   useEffect(() => {
     (function (d, t) {
       var g = d.createElement(t),
@@ -11,7 +11,15 @@ const GoodRxWidget = () => {
     })(document, 'script');
   }, []);
 
-  return <div id='goodrx_search_widget' />;
+  return (
+    <div className='goodrx__helper'>
+      <header>
+        <p>Is your copay cheaper than GoodRx?</p>
+        <button onClick={() => toggleWidget(false)}>X</button>
+      </header>
+      <div id='goodrx_search_widget' />
+    </div>
+  );
 };
 
 export default GoodRxWidget;
