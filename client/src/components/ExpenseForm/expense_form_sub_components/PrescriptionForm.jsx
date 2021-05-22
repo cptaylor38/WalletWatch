@@ -3,6 +3,7 @@ import AmountInput from './Shared/AmountInput';
 import TextInput from './Shared/TextInput';
 import DateInput from './Shared/DateInput';
 import MultiLineInput from './Shared/MultiLineInput';
+import NumberSelect from './Shared/NumberSelect';
 import { FormControlLabel, Checkbox } from '@material-ui/core';
 
 const PrescriptionForm = ({ toggleWidget }) => {
@@ -14,6 +15,8 @@ const PrescriptionForm = ({ toggleWidget }) => {
   const [directions, set_directions] = useState('');
   const [url, set_url] = useState('');
   const [recurring_rx, set_recurring_rx] = useState(false);
+  const [quantity, set_quantity] = useState('');
+  const [day_supply, set_day_supply] = useState('');
 
   const handleChange = (e) => {
     switch (e.target.name) {
@@ -25,6 +28,10 @@ const PrescriptionForm = ({ toggleWidget }) => {
         return set_pharmacy_name(e.target.value);
       case 'purchase_date':
         return set_purchase_date(e.target.value);
+      case 'quantity':
+        return set_quantity(e.target.value);
+      case 'day_supply':
+        return set_day_supply(e.target.value);
       case 'directions':
         return set_directions(e.target.value);
       case 'url':
@@ -43,7 +50,7 @@ const PrescriptionForm = ({ toggleWidget }) => {
     return () => {
       toggleWidget(false);
     };
-  });
+  }, [toggleWidget]);
 
   return (
     <>
@@ -76,15 +83,29 @@ const PrescriptionForm = ({ toggleWidget }) => {
         value={purchase_date}
         changeHandler={handleChange}
       />
-      <div>Drug Strength</div>
       <MultiLineInput
+        exempt_class={'rx__directions'}
         value={directions}
         name={'directions'}
         changeHandler={handleChange}
-        labelText={"Prescriber's directions:"}
+        labelText={'Directions, Strength, etc: '}
       />
-      <div>Drug Quantity</div>
-      <div>Day Supply</div>
+      <NumberSelect
+        labelText='Quantity: '
+        name='quantity'
+        value={quantity}
+        changeHandler={handleChange}
+        min='1'
+        max='1000'
+      />
+      <NumberSelect
+        labelText='Day Supply: '
+        name='day_supply'
+        value={day_supply}
+        changeHandler={handleChange}
+        min='1'
+        max='360'
+      />
       <FormControlLabel
         control={
           <Checkbox

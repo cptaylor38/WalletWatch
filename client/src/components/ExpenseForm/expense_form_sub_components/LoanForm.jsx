@@ -3,6 +3,7 @@ import AmountInput from './Shared/AmountInput';
 import TextInput from './Shared/TextInput';
 import DateInput from './Shared/DateInput';
 import MultiLineInput from './Shared/MultiLineInput';
+import NumberSelect from './Shared/NumberSelect';
 
 const LoanForm = () => {
   const [loan_amount, set_loan_amount] = useState('');
@@ -11,6 +12,7 @@ const LoanForm = () => {
   const [notes, set_notes] = useState('');
   const [title, set_title] = useState('');
   const [due_date, set_due_date] = useState('');
+  const [interest_rate, set_interest_rate] = useState('');
   const [url, set_url] = useState('');
 
   const handleLoanAmount = (e) => {
@@ -31,6 +33,8 @@ const LoanForm = () => {
         return set_due_date(e.target.value);
       case 'notes':
         return set_notes(e.target.value);
+      case 'interest_rate':
+        return set_interest_rate(e.target.value);
       case 'url':
         return set_url(e.target.value);
       default:
@@ -80,7 +84,14 @@ const LoanForm = () => {
         changeHandler={handleChange}
         labelText={'URL for Servicer:'}
       />
-      <div>Interest Rate</div>
+      <NumberSelect
+        labelText='Interest Rate: '
+        name='interest_rate'
+        value={interest_rate}
+        changeHandler={handleChange}
+        min='0'
+        max='100'
+      />
     </>
   );
 };
